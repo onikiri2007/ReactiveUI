@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>reactiveui-core</id>
-    <version>6.5.0</version>
+    <version>7.0.0</version>
     <description>An MVVM library for .NET that is deeply integrated with the Reactive Extensions</description>
     <authors>Paul Betts</authors>
     <projectUrl>http://www.reactiveui.net</projectUrl>
@@ -65,4 +65,8 @@
       </group>
     </dependencies>
   </metadata>
+  <files>
+    <file src="lib\MonoAndroid\*.dll" target="lib\MonoAndroid" />
+    <file src="lib\Xamarin.iOS10\*.dll" target="lib\Xamarin.iOS10" />
+  </files>
 </package>
