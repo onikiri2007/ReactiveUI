@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Diagnostics;
 using System.Reactive;
+using ReactiveUI.XamForms;
 
 namespace ReactiveUI.XamForms
 {
@@ -14,33 +15,41 @@ namespace ReactiveUI.XamForms
         public static readonly BindableProperty RouterProperty = BindableProperty.Create<RoutedViewHost, RoutingState>(
             x => x.Router, null, BindingMode.OneWay);
 
-        public RoutingState Router {
+        public RoutingState Router
+        {
             get { return (RoutingState)GetValue(RouterProperty); }
             set { SetValue(RouterProperty, value); }
         }
 
-        public RoutedViewHost()
+        public RoutedViewHost() : this(null)
         {
-            this.WhenActivated(new Action<Action<IDisposable>>(d => {
+
+        }
+
+        public RoutedViewHost(RoutingState routingState)
+        {
+            this.WhenActivated(new Action<Action<IDisposable>>(d =>
+            {
                 bool currentlyPopping = false;
                 bool popToRootPending = false;
                 bool userInstigated = false;
 
-                d (this.WhenAnyObservable (x => x.Router.NavigationStack.Changed)
+                d(this.WhenAnyObservable(x => x.Router.NavigationStack.Changed)
                     .Where(_ => Router.NavigationStack.IsEmpty)
-                    .Select(x => {
+                    .Select(x =>
+                    {
                         // Xamarin Forms does not let us completely clear down the navigation stack
                         // instead, we have to delay this request momentarily until we receive the new root view
                         // then, we can insert the new root view first, and then pop to it
                         popToRootPending = true;
                         return x;
                     })
-                    .Subscribe ());
+                    .Subscribe());
 
                 var previousCount = this.WhenAnyObservable(x => x.Router.NavigationStack.CountChanged).StartWith(this.Router.NavigationStack.Count);
                 var currentCount = previousCount.Skip(1);
 
-                d (Observable.Zip(previousCount, currentCount, (previous, current) => new { Delta = previous - current, Current = current })
+                d(Observable.Zip(previousCount, currentCount, (previous, current) => new { Delta = previous - current, Current = current })
                     .Where(_ => !userInstigated)
                     .Where(x => x.Delta > 0)
                     .SelectMany(
@@ -75,12 +84,15 @@ namespace ReactiveUI.XamForms
                         })
                     .Do(_ => ((IViewFor)this.CurrentPage).ViewModel = Router.GetCurrentViewModel())
                     .Subscribe());
-                
+
                 d(this.WhenAnyObservable(x => x.Router.Navigate)
                     .SelectMany(_ => PageForViewModel(Router.GetCurrentViewModel()))
-                    .SelectMany(async x => {
+                    .SelectMany(async x =>
+                    {
+                     
                         if (popToRootPending && this.Navigation.NavigationStack.Count > 0)
                         {
+                           
                             this.Navigation.InsertPageBefore(x, this.Navigation.NavigationStack[0]);
                             await this.PopToRootAsync();
                         }
@@ -100,12 +112,16 @@ namespace ReactiveUI.XamForms
                 // requesting Back via NavigateBack
                 d(poppingEvent
                     .Where(_ => !currentlyPopping && Router != null)
-                    .Subscribe(_ => {
+                    .Subscribe(_ =>
+                    {
                         userInstigated = true;
 
-                        try {
+                        try
+                        {
                             Router.NavigationStack.RemoveAt(Router.NavigationStack.Count - 1);
-                        } finally {
+                        }
+                        finally
+                        {
                             userInstigated = false;
                         }
 
@@ -113,34 +129,45 @@ namespace ReactiveUI.XamForms
                     }));
             }));
 
-            var screen = Locator.Current.GetService<IScreen>();
-            if (screen == null) throw new Exception("You *must* register an IScreen class representing your App's main Screen");
+            Func<IScreen> getScreen = () =>
+            {
+                var screen = Locator.Current.GetService<IScreen>();
+                if (screen == null) throw new Exception("You *must* register an IScreen class representing your App's main Screen");
 
-            Router = screen.Router;
+                return screen;
+            };
+
+            Router = routingState ?? getScreen().Router;
+
+            if (Router == null) throw new Exception("You *must* register an IScreen class representing your App's main Screen r pass the router");
+
 
             this.WhenAnyValue(x => x.Router)
-                .SelectMany(router => {
+                .SelectMany(router =>
+                {
                     return router.NavigationStack.ToObservable()
-                            .Select(x => (Page)ViewLocator.Current.ResolveView(x))
+                            .Select(x =>(Page)ViewLocator.Current.ResolveView(x))
                             .SelectMany(x => this.PushAsync(x).ToObservable())
-                            .Finally(() => {
+                            .Finally(() =>
+                            {
 
-                        var vm = router.GetCurrentViewModel();
-                        if (vm == null) return;
+                                var vm = router.GetCurrentViewModel();
+                                if (vm == null) return;
 
-                        ((IViewFor)this.CurrentPage).ViewModel = vm;
-                        this.CurrentPage.Title = vm.UrlPathSegment;
-                    });
+                                ((IViewFor)this.CurrentPage).ViewModel = vm;
+                                this.CurrentPage.Title = vm.UrlPathSegment;
+                            });
                 })
                 .Subscribe();
         }
 
-        protected IObservable<Page> PageForViewModel(IRoutableViewModel vm) 
+        protected IObservable<Page> PageForViewModel(IRoutableViewModel vm)
         {
             if (vm == null) return Observable.Empty<Page>();
 
             var ret = ViewLocator.Current.ResolveView(vm);
-            if (ret == null) {
+            if (ret == null)
+            {
                 var msg = String.Format(
                     "Couldn't find a View for ViewModel. You probably need to register an IViewFor<{0}>",
                     vm.GetType().Name);
@@ -154,6 +181,10 @@ namespace ReactiveUI.XamForms
             pg.Title = vm.UrlPathSegment;
             return Observable.Return(pg);
         }
+
+     
     }
 }
+
+
 

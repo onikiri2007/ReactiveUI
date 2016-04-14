@@ -32,7 +32,7 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\Xamarin.iOS10\</OutputPath>
     <IntermediateOutputPath>obj\Release\Xamarin.iOS10</IntermediateOutputPath>
-    <DefineConstants>UNIFIED</DefineConstants>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;MONO;UIKIT;COCOA;UNIFIED</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -44,7 +44,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Events.cs" />
+    <Compile Include="Events_iOS.cs" />
     <Compile Include="SingleAwaitSubject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,5 +87,8 @@ del "$(ProjectDir)Mono.Cecil.pdb" 1&gt; nul 2&gt;&amp;1
   <!-- Xamarin Studio -->
   <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
     <PreBuildEvent>/usr/bin/env ruby "$(ProjectDir)/generate_events.rb" "/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Xamarin.iOS.dll" &amp;&amp; mv Events.cs ../../..</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent />
   </PropertyGroup>
 </Project>
