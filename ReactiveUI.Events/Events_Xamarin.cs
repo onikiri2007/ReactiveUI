@@ -18,6 +18,22 @@ namespace Xamarin.Forms
         {
             return new EntryCellEvents(This);
         }
+        public static ColumnDefinitionEvents Events(this ColumnDefinition This)
+        {
+            return new ColumnDefinitionEvents(This);
+        }
+        public static IDefinitionEvents Events(this IDefinition This)
+        {
+            return new IDefinitionEvents(This);
+        }
+        public static IOpenGlViewControllerEvents Events(this IOpenGlViewController This)
+        {
+            return new IOpenGlViewControllerEvents(This);
+        }
+        public static IScrollViewControllerEvents Events(this IScrollViewController This)
+        {
+            return new IScrollViewControllerEvents(This);
+        }
         public static MenuItemEvents Events(this MenuItem This)
         {
             return new MenuItemEvents(This);
@@ -29,6 +45,14 @@ namespace Xamarin.Forms
         public static BindableObjectEvents Events(this BindableObject This)
         {
             return new BindableObjectEvents(This);
+        }
+        public static RowDefinitionEvents Events(this RowDefinition This)
+        {
+            return new RowDefinitionEvents(This);
+        }
+        public static SpanEvents Events(this Span This)
+        {
+            return new SpanEvents(This);
         }
         public static TapGestureRecognizerEvents Events(this TapGestureRecognizer This)
         {
@@ -82,14 +106,6 @@ namespace Xamarin.Forms
         {
             return new MasterDetailPageEvents(This);
         }
-        public static IOpenGLViewControllerEvents Events(this IOpenGLViewController This)
-        {
-            return new IOpenGLViewControllerEvents(This);
-        }
-        public static IScrollViewControllerEvents Events(this IScrollViewController This)
-        {
-            return new IScrollViewControllerEvents(This);
-        }
         public static ScrollViewEvents Events(this ScrollView This)
         {
             return new ScrollViewEvents(This);
@@ -114,18 +130,6 @@ namespace Xamarin.Forms
         {
             return new WebViewEvents(This);
         }
-        public static IDefinitionEvents Events(this IDefinition This)
-        {
-            return new IDefinitionEvents(This);
-        }
-        public static RowDefinitionEvents Events(this RowDefinition This)
-        {
-            return new RowDefinitionEvents(This);
-        }
-        public static ColumnDefinitionEvents Events(this ColumnDefinition This)
-        {
-            return new ColumnDefinitionEvents(This);
-        }
         public static ElementEvents Events(this Element This)
         {
             return new ElementEvents(This);
@@ -145,10 +149,6 @@ namespace Xamarin.Forms
         public static PickerEvents Events(this Picker This)
         {
             return new PickerEvents(This);
-        }
-        public static SpanEvents Events(this Span This)
-        {
-            return new SpanEvents(This);
         }
         public static FormattedStringEvents Events(this FormattedString This)
         {
@@ -171,20 +171,20 @@ namespace Xamarin.Forms
             this.This = This;
         }
 
-        public IObservable<Xamarin.Forms.ModalPushedEventArgs> ModalPushed {
-            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ModalPushedEventArgs>, Xamarin.Forms.ModalPushedEventArgs>(x => This.ModalPushed += x, x => This.ModalPushed -= x).Select(x => x.EventArgs); }
-        }
-
         public IObservable<Xamarin.Forms.ModalPoppedEventArgs> ModalPopped {
             get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ModalPoppedEventArgs>, Xamarin.Forms.ModalPoppedEventArgs>(x => This.ModalPopped += x, x => This.ModalPopped -= x).Select(x => x.EventArgs); }
         }
 
-        public IObservable<Xamarin.Forms.ModalPushingEventArgs> ModalPushing {
-            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ModalPushingEventArgs>, Xamarin.Forms.ModalPushingEventArgs>(x => This.ModalPushing += x, x => This.ModalPushing -= x).Select(x => x.EventArgs); }
-        }
-
         public IObservable<Xamarin.Forms.ModalPoppingEventArgs> ModalPopping {
             get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ModalPoppingEventArgs>, Xamarin.Forms.ModalPoppingEventArgs>(x => This.ModalPopping += x, x => This.ModalPopping -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<Xamarin.Forms.ModalPushedEventArgs> ModalPushed {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ModalPushedEventArgs>, Xamarin.Forms.ModalPushedEventArgs>(x => This.ModalPushed += x, x => This.ModalPushed -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<Xamarin.Forms.ModalPushingEventArgs> ModalPushing {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ModalPushingEventArgs>, Xamarin.Forms.ModalPushingEventArgs>(x => This.ModalPushing += x, x => This.ModalPushing -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -201,6 +201,64 @@ namespace Xamarin.Forms
 
         public IObservable<System.EventArgs> Completed {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Completed += x, x => This.Completed -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class ColumnDefinitionEvents
+        : Xamarin.Forms.BindableObjectEvents
+    {
+        ColumnDefinition This;
+
+        public ColumnDefinitionEvents(ColumnDefinition This)
+            : base(This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> SizeChanged {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SizeChanged += x, x => This.SizeChanged -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class IDefinitionEvents
+    {
+        IDefinition This;
+
+        public IDefinitionEvents(IDefinition This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> SizeChanged {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SizeChanged += x, x => This.SizeChanged -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class IOpenGlViewControllerEvents
+    {
+        IOpenGlViewController This;
+
+        public IOpenGlViewControllerEvents(IOpenGlViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> DisplayRequested {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DisplayRequested += x, x => This.DisplayRequested -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class IScrollViewControllerEvents
+    {
+        IScrollViewController This;
+
+        public IScrollViewControllerEvents(IScrollViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<Xamarin.Forms.ScrollToRequestedEventArgs> ScrollToRequested {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ScrollToRequestedEventArgs>, Xamarin.Forms.ScrollToRequestedEventArgs>(x => This.ScrollToRequested += x, x => This.ScrollToRequested -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -245,16 +303,46 @@ namespace Xamarin.Forms
             this.This = This;
         }
 
-        public IObservable<Xamarin.Forms.PropertyChangingEventArgs> PropertyChanging {
-            get { return Observable.FromEventPattern<Xamarin.Forms.PropertyChangingEventHandler, Xamarin.Forms.PropertyChangingEventArgs>(x => This.PropertyChanging += x, x => This.PropertyChanging -= x).Select(x => x.EventArgs); }
-        }
-
         public IObservable<System.ComponentModel.PropertyChangedEventArgs> PropertyChanged {
             get { return Observable.FromEventPattern<System.ComponentModel.PropertyChangedEventHandler, System.ComponentModel.PropertyChangedEventArgs>(x => This.PropertyChanged += x, x => This.PropertyChanged -= x).Select(x => x.EventArgs); }
         }
 
         public IObservable<System.EventArgs> BindingContextChanged {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.BindingContextChanged += x, x => This.BindingContextChanged -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<Xamarin.Forms.PropertyChangingEventArgs> PropertyChanging {
+            get { return Observable.FromEventPattern<Xamarin.Forms.PropertyChangingEventHandler, Xamarin.Forms.PropertyChangingEventArgs>(x => This.PropertyChanging += x, x => This.PropertyChanging -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class RowDefinitionEvents
+        : Xamarin.Forms.BindableObjectEvents
+    {
+        RowDefinition This;
+
+        public RowDefinitionEvents(RowDefinition This)
+            : base(This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> SizeChanged {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SizeChanged += x, x => This.SizeChanged -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class SpanEvents
+    {
+        Span This;
+
+        public SpanEvents(Span This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.ComponentModel.PropertyChangedEventArgs> PropertyChanged {
+            get { return Observable.FromEventPattern<System.ComponentModel.PropertyChangedEventHandler, System.ComponentModel.PropertyChangedEventArgs>(x => This.PropertyChanged += x, x => This.PropertyChanged -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -285,16 +373,16 @@ namespace Xamarin.Forms
             this.This = This;
         }
 
-        public IObservable<Xamarin.Forms.NavigationEventArgs> Pushed {
-            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.NavigationEventArgs>, Xamarin.Forms.NavigationEventArgs>(x => This.Pushed += x, x => This.Pushed -= x).Select(x => x.EventArgs); }
-        }
-
         public IObservable<Xamarin.Forms.NavigationEventArgs> Popped {
             get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.NavigationEventArgs>, Xamarin.Forms.NavigationEventArgs>(x => This.Popped += x, x => This.Popped -= x).Select(x => x.EventArgs); }
         }
 
         public IObservable<Xamarin.Forms.NavigationEventArgs> PoppedToRoot {
             get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.NavigationEventArgs>, Xamarin.Forms.NavigationEventArgs>(x => This.PoppedToRoot += x, x => This.PoppedToRoot -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<Xamarin.Forms.NavigationEventArgs> Pushed {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.NavigationEventArgs>, Xamarin.Forms.NavigationEventArgs>(x => This.Pushed += x, x => This.Pushed -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -349,16 +437,16 @@ namespace Xamarin.Forms
             this.This = This;
         }
 
-        public IObservable<System.EventArgs> Tapped {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Tapped += x, x => This.Tapped -= x).Select(x => x.EventArgs); }
-        }
-
         public IObservable<System.EventArgs> Appearing {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Appearing += x, x => This.Appearing -= x).Select(x => x.EventArgs); }
         }
 
         public IObservable<System.EventArgs> Disappearing {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Disappearing += x, x => This.Disappearing -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> Tapped {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Tapped += x, x => This.Tapped -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -512,34 +600,6 @@ namespace Xamarin.Forms
         }
 
     }
-    public class IOpenGLViewControllerEvents
-    {
-        IOpenGLViewController This;
-
-        public IOpenGLViewControllerEvents(IOpenGLViewController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> DisplayRequested {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DisplayRequested += x, x => This.DisplayRequested -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class IScrollViewControllerEvents
-    {
-        IScrollViewController This;
-
-        public IScrollViewControllerEvents(IScrollViewController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<Xamarin.Forms.ScrollToRequestedEventArgs> ScrollToRequested {
-            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ScrollToRequestedEventArgs>, Xamarin.Forms.ScrollToRequestedEventArgs>(x => This.ScrollToRequested += x, x => This.ScrollToRequested -= x).Select(x => x.EventArgs); }
-        }
-
-    }
     public class ScrollViewEvents
         : Xamarin.Forms.LayoutEvents
     {
@@ -635,58 +695,12 @@ namespace Xamarin.Forms
             this.This = This;
         }
 
-        public IObservable<Xamarin.Forms.WebNavigatingEventArgs> Navigating {
-            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.WebNavigatingEventArgs>, Xamarin.Forms.WebNavigatingEventArgs>(x => This.Navigating += x, x => This.Navigating -= x).Select(x => x.EventArgs); }
-        }
-
         public IObservable<Xamarin.Forms.WebNavigatedEventArgs> Navigated {
             get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.WebNavigatedEventArgs>, Xamarin.Forms.WebNavigatedEventArgs>(x => This.Navigated += x, x => This.Navigated -= x).Select(x => x.EventArgs); }
         }
 
-    }
-    public class IDefinitionEvents
-    {
-        IDefinition This;
-
-        public IDefinitionEvents(IDefinition This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> SizeChanged {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SizeChanged += x, x => This.SizeChanged -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class RowDefinitionEvents
-        : Xamarin.Forms.BindableObjectEvents
-    {
-        RowDefinition This;
-
-        public RowDefinitionEvents(RowDefinition This)
-            : base(This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> SizeChanged {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SizeChanged += x, x => This.SizeChanged -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class ColumnDefinitionEvents
-        : Xamarin.Forms.BindableObjectEvents
-    {
-        ColumnDefinition This;
-
-        public ColumnDefinitionEvents(ColumnDefinition This)
-            : base(This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> SizeChanged {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SizeChanged += x, x => This.SizeChanged -= x).Select(x => x.EventArgs); }
+        public IObservable<Xamarin.Forms.WebNavigatingEventArgs> Navigating {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.WebNavigatingEventArgs>, Xamarin.Forms.WebNavigatingEventArgs>(x => This.Navigating += x, x => This.Navigating -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -763,16 +777,16 @@ namespace Xamarin.Forms
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.ChildrenReordered += x, x => This.ChildrenReordered -= x).Select(x => x.EventArgs); }
         }
 
-        public IObservable<System.EventArgs> SizeChanged {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SizeChanged += x, x => This.SizeChanged -= x).Select(x => x.EventArgs); }
+        public IObservable<Xamarin.Forms.FocusEventArgs> Focused {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.FocusEventArgs>, Xamarin.Forms.FocusEventArgs>(x => This.Focused += x, x => This.Focused -= x).Select(x => x.EventArgs); }
         }
 
         public IObservable<System.EventArgs> MeasureInvalidated {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.MeasureInvalidated += x, x => This.MeasureInvalidated -= x).Select(x => x.EventArgs); }
         }
 
-        public IObservable<Xamarin.Forms.FocusEventArgs> Focused {
-            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.FocusEventArgs>, Xamarin.Forms.FocusEventArgs>(x => This.Focused += x, x => This.Focused -= x).Select(x => x.EventArgs); }
+        public IObservable<System.EventArgs> SizeChanged {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SizeChanged += x, x => This.SizeChanged -= x).Select(x => x.EventArgs); }
         }
 
         public IObservable<Xamarin.Forms.FocusEventArgs> Unfocused {
@@ -793,20 +807,6 @@ namespace Xamarin.Forms
 
         public IObservable<System.EventArgs> SelectedIndexChanged {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SelectedIndexChanged += x, x => This.SelectedIndexChanged -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class SpanEvents
-    {
-        Span This;
-
-        public SpanEvents(Span This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.ComponentModel.PropertyChangedEventArgs> PropertyChanged {
-            get { return Observable.FromEventPattern<System.ComponentModel.PropertyChangedEventHandler, System.ComponentModel.PropertyChangedEventArgs>(x => This.PropertyChanged += x, x => This.PropertyChanged -= x).Select(x => x.EventArgs); }
         }
 
     }
