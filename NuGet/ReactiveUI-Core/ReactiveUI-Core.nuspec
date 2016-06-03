@@ -66,7 +66,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="lib\Monoandroid\*.dll" target="lib\MonoAndroid" />
     <file src="lib\Xamarin.iOS10\*.dll" target="lib\Xamarin.iOS10" />
   </files>
 </package>
