@@ -12,8 +12,11 @@ namespace ReactiveUI.XamForms
 {
     public class RoutedViewHost : NavigationPage, IActivatable
     {
-        public static readonly BindableProperty RouterProperty = BindableProperty.Create<RoutedViewHost, RoutingState>(
-            x => x.Router, null, BindingMode.OneWay);
+        public static readonly BindableProperty RouterProperty = BindableProperty.Create(nameof(Router),
+                                                                                            typeof(RoutingState),
+                                                                                            typeof(RoutedViewHost));
+
+   
 
         public RoutingState Router
         {

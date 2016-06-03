@@ -6,10 +6,8 @@ namespace ReactiveUI.XamForms
     public class ReactiveSwitchCell<TViewModel> : SwitchCell, IViewFor<TViewModel>
         where TViewModel : class
     {
-        public static readonly BindableProperty ViewModelProperty = BindableProperty.Create<ReactiveSwitchCell<TViewModel>, TViewModel>(
-            x => x.ViewModel,
-            null,
-            BindingMode.OneWay);
+
+        public static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(TViewModel), typeof(ReactiveSwitchCell<TViewModel>), default(TViewModel));
 
         public TViewModel ViewModel
         {

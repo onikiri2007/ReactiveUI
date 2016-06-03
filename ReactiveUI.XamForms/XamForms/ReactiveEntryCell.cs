@@ -6,11 +6,8 @@ namespace ReactiveUI.XamForms
     public class ReactiveEntryCell<TViewModel> : EntryCell, IViewFor<TViewModel>
         where TViewModel : class
     {
-        public static readonly BindableProperty ViewModelProperty = BindableProperty.Create<ReactiveEntryCell<TViewModel>, TViewModel>(
-            x => x.ViewModel,
-            null,
-            BindingMode.OneWay);
-
+        public static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(TViewModel), typeof(ReactiveEntryCell<TViewModel>), default(TViewModel));
+    
         public TViewModel ViewModel
         {
             get { return (TViewModel)GetValue(ViewModelProperty); }
