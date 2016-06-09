@@ -2121,30 +2121,12 @@ namespace Android.Webkit
 {
     public static class EventsMixin
     {
-        public static CallbackProxyEvents Events(this CallbackProxy This)
-        {
-            return new CallbackProxyEvents(This);
-        }
         public static WebViewEvents Events(this WebView This)
         {
             return new WebViewEvents(This);
         }
     }
 
-    public class CallbackProxyEvents
-    {
-        CallbackProxy This;
-
-        public CallbackProxyEvents(CallbackProxy This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<Android.Webkit.DownloadEventArgs> Download {
-            get { return Observable.FromEventPattern<System.EventHandler<Android.Webkit.DownloadEventArgs>, Android.Webkit.DownloadEventArgs>(x => This.Download += x, x => This.Download -= x).Select(x => x.EventArgs); }
-        }
-
-    }
     public class WebViewEvents
         : Android.Views.ViewGroupEvents
     {
