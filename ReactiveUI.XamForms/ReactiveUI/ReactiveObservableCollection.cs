@@ -105,5 +105,12 @@ namespace ReactiveUI.XamForms
             base.AddRange(collection);
 
         }
+
+        
+        public override void Clear()
+        {
+            base.Clear();
+            this.ItemSource.Clear();
+        }
     }
 }
