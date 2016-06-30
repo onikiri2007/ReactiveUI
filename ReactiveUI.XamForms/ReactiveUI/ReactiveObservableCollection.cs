@@ -45,19 +45,33 @@ namespace ReactiveUI.XamForms
     {
         private readonly CompositeDisposable disposables = new CompositeDisposable();
         private bool isAddedByRange;
-        private IDisposable itemAddedDisposable;
+        private int itemsAddedCount = 0;
         public ReactiveObservableCollection() : this(new ObservableCollectionExtended<T>())
         {
-           
+
         }
 
         public ReactiveObservableCollection(ObservableCollection<T> collection)
         {
             this.ItemSource = collection;
-            itemAddedDisposable = ItemsAdded.Subscribe(x => {
-                ItemSource.Add(x);
+            ItemsAdded
+                 .Subscribe(x =>
+                 {
+                     itemsAddedCount--;
 
-            }).DisposeWith(disposables);
+                     if (!isAddedByRange)
+                     {
+                         ItemSource.Add(x);
+                     }
+
+
+                     if (isAddedByRange && itemsAddedCount <= 0)
+                     {
+                         isAddedByRange = false;
+                         itemsAddedCount = 0;
+                     }
+
+                 }).DisposeWith(disposables);
 
             ItemsRemoved.Subscribe((x) => ItemSource.Remove(x)).DisposeWith(disposables);
             ItemsMoved.Subscribe((x) => ItemSource.Move(x.From, x.To)).DisposeWith(disposables);
@@ -65,7 +79,7 @@ namespace ReactiveUI.XamForms
                 var index = ItemSource.IndexOf(x.Sender);
                 ItemSource[index] = x.Sender;
             }).DisposeWith(disposables);
-            
+
         }
 
         public ObservableCollection<T> ItemSource { get; }
@@ -76,27 +90,20 @@ namespace ReactiveUI.XamForms
             disposables.Clear();
         }
 
-    
+
         public void AddRange(IEnumerable<T> collection, bool bulkUpdate)
         {
-            var isExtendedList = (this.ItemSource is ObservableCollectionExtended<T>);
+            isAddedByRange = bulkUpdate;
 
-            if (isExtendedList && bulkUpdate)
+            var items = this.ItemSource as ObservableCollectionExtended<T>;
+            if (isAddedByRange && items != null)
             {
-                using (itemAddedDisposable)
-                {
-                    (this.ItemSource as ObservableCollectionExtended<T>).AddRange(collection);
-                }
+                items.AddRange(collection);
+                itemsAddedCount = collection.Count();
             }
 
             base.AddRange(collection);
 
-            if (isExtendedList && bulkUpdate)
-            {
-                itemAddedDisposable = ItemsAdded.Subscribe(x => {
-                    ItemSource.Add(x);
-                });
-            }
         }
     }
 }
