@@ -27,10 +27,12 @@ namespace ReactiveUI.XamForms
                 Items.Add(item);
             }
 
-            this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
-            this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            if (range.Any()) {
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
+                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
+            }
         }
 
         public void Reset(IEnumerable<T> range)
@@ -46,7 +48,7 @@ namespace ReactiveUI.XamForms
         private readonly CompositeDisposable disposables = new CompositeDisposable();
         private bool isAddedByRange;
         private int itemsAddedCount = 0;
-        public ReactiveObservableCollection() : this(new ObservableCollectionExtended<T>())
+        public ReactiveObservableCollection() : this(new ObservableCollection<T>())
         {
 
         }
@@ -75,10 +77,7 @@ namespace ReactiveUI.XamForms
 
             ItemsRemoved.Subscribe((x) => ItemSource.Remove(x)).DisposeWith(disposables);
             ItemsMoved.Subscribe((x) => ItemSource.Move(x.From, x.To)).DisposeWith(disposables);
-            ItemChanged.Subscribe(x => {
-                var index = ItemSource.IndexOf(x.Sender);
-                ItemSource[index] = x.Sender;
-            }).DisposeWith(disposables);
+           
 
         }
 
