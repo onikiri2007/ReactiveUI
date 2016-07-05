@@ -12,43 +12,41 @@ using ReactiveUI.XamForms;
 
 namespace ReactiveUI.XamForms
 {
-    public class ObservableCollectionExtended<T> : ObservableCollection<T>
-    {
-        public ObservableCollectionExtended() : base() { }
+    //public class ObservableCollectionExtended<T> : ObservableCollection<T>
+    //{
+    //    public ObservableCollectionExtended() : base() { }
 
-        public ObservableCollectionExtended(IEnumerable<T> collection) : base(collection) { }
+    //    public ObservableCollectionExtended(IEnumerable<T> collection) : base(collection) { }
 
-        public ObservableCollectionExtended(List<T> list) : base(list) { }
+    //    public ObservableCollectionExtended(List<T> list) : base(list) { }
 
-        public void AddRange(IEnumerable<T> range)
-        {
-            foreach (var item in range)
-            {
-                Items.Add(item);
-            }
+    //    public void AddRange(IEnumerable<T> range)
+    //    {
+    //        foreach (var item in range)
+    //        {
+    //            Items.Add(item);
+    //        }
 
-            if (range.Any()) {
-                this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
-                this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
-                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+    //        if (range.Any()) {
+    //            this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
+    //            this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
+    //            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
-            }
-        }
+    //        }
+    //    }
 
-        public void Reset(IEnumerable<T> range)
-        {
-            this.Items.Clear();
+    //    public void Reset(IEnumerable<T> range)
+    //    {
+    //        this.Items.Clear();
 
-            AddRange(range);
-        }
-    }
+    //        AddRange(range);
+    //    }
+    //}
 
     public class ReactiveObservableCollection<T> : ReactiveList<T>, IDisposable
     {
         private readonly CompositeDisposable disposables = new CompositeDisposable();
-        private bool isAddedByRange;
-        private int itemsAddedCount = 0;
-        public ReactiveObservableCollection() : this(new ObservableCollection<T>())
+       public ReactiveObservableCollection() : this(new ObservableCollection<T>())
         {
 
         }
@@ -59,19 +57,7 @@ namespace ReactiveUI.XamForms
             ItemsAdded
                  .Subscribe(x =>
                  {
-                     itemsAddedCount--;
-
-                     if (!isAddedByRange)
-                     {
-                         ItemSource.Add(x);
-                     }
-
-
-                     if (isAddedByRange && itemsAddedCount <= 0)
-                     {
-                         isAddedByRange = false;
-                         itemsAddedCount = 0;
-                     }
+                     ItemSource.Add(x);
 
                  }).DisposeWith(disposables);
 
@@ -90,20 +76,6 @@ namespace ReactiveUI.XamForms
         }
 
 
-        public void AddRange(IEnumerable<T> collection, bool bulkUpdate)
-        {
-            isAddedByRange = bulkUpdate;
-
-            var items = this.ItemSource as ObservableCollectionExtended<T>;
-            if (isAddedByRange && items != null)
-            {
-                items.AddRange(collection);
-                itemsAddedCount = collection.Count();
-            }
-
-            base.AddRange(collection);
-
-        }
 
         
         public override void Clear()
