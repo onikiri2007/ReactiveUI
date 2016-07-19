@@ -12,59 +12,39 @@ using ReactiveUI.XamForms;
 
 namespace ReactiveUI.XamForms
 {
-    //public class ObservableCollectionExtended<T> : ObservableCollection<T>
-    //{
-    //    public ObservableCollectionExtended() : base() { }
-
-    //    public ObservableCollectionExtended(IEnumerable<T> collection) : base(collection) { }
-
-    //    public ObservableCollectionExtended(List<T> list) : base(list) { }
-
-    //    public void AddRange(IEnumerable<T> range)
-    //    {
-    //        foreach (var item in range)
-    //        {
-    //            Items.Add(item);
-    //        }
-
-    //        if (range.Any()) {
-    //            this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
-    //            this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
-    //            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-
-    //        }
-    //    }
-
-    //    public void Reset(IEnumerable<T> range)
-    //    {
-    //        this.Items.Clear();
-
-    //        AddRange(range);
-    //    }
-    //}
-
     public class ReactiveObservableCollection<T> : ReactiveList<T>, IDisposable
     {
         private readonly CompositeDisposable disposables = new CompositeDisposable();
        public ReactiveObservableCollection() : this(new ObservableCollection<T>())
-        {
-
-        }
+       {
+          
+       }
 
         public ReactiveObservableCollection(ObservableCollection<T> collection)
         {
             this.ItemSource = collection;
             ItemsAdded
-                 .Subscribe(x =>
-                 {
-                     ItemSource.Add(x);
+                 .Subscribe(x => {
+
+                     if (!this.Any()) return;
+
+                     var lastItem = this.LastOrDefault();
+
+                     if (x.Equals(lastItem))
+                     {
+                         ItemSource.Add(x);
+                     }
+                     else
+                     {
+                         var indexOf = this.IndexOf(x);
+                         this.ItemSource.Insert(indexOf, x);
+                     }
 
                  }).DisposeWith(disposables);
 
-            ItemsRemoved.Subscribe((x) => ItemSource.Remove(x)).DisposeWith(disposables);
+            ItemsRemoved.Subscribe((x) => { ItemSource.Remove(x); }).DisposeWith(disposables);
             ItemsMoved.Subscribe((x) => ItemSource.Move(x.From, x.To)).DisposeWith(disposables);
-           
-
+            
         }
 
         public ObservableCollection<T> ItemSource { get; }
