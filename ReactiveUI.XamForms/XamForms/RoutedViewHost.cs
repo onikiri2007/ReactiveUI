@@ -148,6 +148,12 @@ namespace ReactiveUI.XamForms
 
 
             this.WhenAnyValue(x => x.Router)
+                .Do(router => {
+                    if(this.CurrentPage != null) {
+                        var vm = ((IViewFor) this.CurrentPage).ViewModel as IRoutableViewModel;
+                        if(vm != null) this.CurrentPage.Title = vm.UrlPathSegment;
+                    }
+                })
                 .Where(m => this.CurrentPage == null)
                 .SelectMany(router => {
                     return router.NavigationStack.ToObservable()
