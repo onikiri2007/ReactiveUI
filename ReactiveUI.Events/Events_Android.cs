@@ -169,6 +169,10 @@ namespace Android.App
         {
             return new ActionBarEvents(This);
         }
+        public static DatePickerDialogEvents Events(this DatePickerDialog This)
+        {
+            return new DatePickerDialogEvents(This);
+        }
         public static DialogEvents Events(this Dialog This)
         {
             return new DialogEvents(This);
@@ -210,6 +214,22 @@ namespace Android.App
 
         public IObservable<Android.App.ActionBar.MenuVisibilityEventArgs> MenuVisibility {
             get { return Observable.FromEventPattern<System.EventHandler<Android.App.ActionBar.MenuVisibilityEventArgs>, Android.App.ActionBar.MenuVisibilityEventArgs>(x => This.MenuVisibility += x, x => This.MenuVisibility -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class DatePickerDialogEvents
+        : Android.App.DialogEvents
+    {
+        DatePickerDialog This;
+
+        public DatePickerDialogEvents(DatePickerDialog This)
+            : base(This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<Android.App.DatePickerDialog.DateSetEventArgs> DateSet {
+            get { return Observable.FromEventPattern<System.EventHandler<Android.App.DatePickerDialog.DateSetEventArgs>, Android.App.DatePickerDialog.DateSetEventArgs>(x => This.DateSet += x, x => This.DateSet -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -637,6 +657,10 @@ namespace Android.Views
         {
             return new ViewTreeObserverEvents(This);
         }
+        public static WindowEvents Events(this Window This)
+        {
+            return new WindowEvents(This);
+        }
         public static ActionProviderEvents Events(this ActionProvider This)
         {
             return new ActionProviderEvents(This);
@@ -772,6 +796,20 @@ namespace Android.Views
 
         public IObservable<Android.Views.ViewTreeObserver.WindowFocusChangeEventArgs> WindowFocusChange {
             get { return Observable.FromEventPattern<System.EventHandler<Android.Views.ViewTreeObserver.WindowFocusChangeEventArgs>, Android.Views.ViewTreeObserver.WindowFocusChangeEventArgs>(x => This.WindowFocusChange += x, x => This.WindowFocusChange -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class WindowEvents
+    {
+        Window This;
+
+        public WindowEvents(Window This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<Android.Views.Window.RestrictedCaptionAreaChangedEventArgs> RestrictedCaptionArea {
+            get { return Observable.FromEventPattern<System.EventHandler<Android.Views.Window.RestrictedCaptionAreaChangedEventArgs>, Android.Views.Window.RestrictedCaptionAreaChangedEventArgs>(x => This.RestrictedCaptionArea += x, x => This.RestrictedCaptionArea -= x).Select(x => x.EventArgs); }
         }
 
     }

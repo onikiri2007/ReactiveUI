@@ -5,6 +5,7 @@ using System.Reactive.Subjects;
 using ReactiveUI.Events;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Xamarin.Forms
 {
@@ -18,13 +19,33 @@ namespace Xamarin.Forms
         {
             return new EntryCellEvents(This);
         }
+        public static ICellControllerEvents Events(this ICellController This)
+        {
+            return new ICellControllerEvents(This);
+        }
         public static ColumnDefinitionEvents Events(this ColumnDefinition This)
         {
             return new ColumnDefinitionEvents(This);
         }
+        public static IListProxyEvents Events(this IListProxy This)
+        {
+            return new IListProxyEvents(This);
+        }
+        public static INavigationPageControllerEvents Events(this INavigationPageController This)
+        {
+            return new INavigationPageControllerEvents(This);
+        }
+        public static IMasterDetailPageControllerEvents Events(this IMasterDetailPageController This)
+        {
+            return new IMasterDetailPageControllerEvents(This);
+        }
         public static IDefinitionEvents Events(this IDefinition This)
         {
             return new IDefinitionEvents(This);
+        }
+        public static IListViewControllerEvents Events(this IListViewController This)
+        {
+            return new IListViewControllerEvents(This);
         }
         public static IOpenGlViewControllerEvents Events(this IOpenGlViewController This)
         {
@@ -33,6 +54,10 @@ namespace Xamarin.Forms
         public static IScrollViewControllerEvents Events(this IScrollViewController This)
         {
             return new IScrollViewControllerEvents(This);
+        }
+        public static ITableViewControllerEvents Events(this ITableViewController This)
+        {
+            return new ITableViewControllerEvents(This);
         }
         public static MenuItemEvents Events(this MenuItem This)
         {
@@ -204,6 +229,20 @@ namespace Xamarin.Forms
         }
 
     }
+    public class ICellControllerEvents
+    {
+        ICellController This;
+
+        public ICellControllerEvents(ICellController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> ForceUpdateSizeRequested {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.ForceUpdateSizeRequested += x, x => This.ForceUpdateSizeRequested -= x).Select(x => x.EventArgs); }
+        }
+
+    }
     public class ColumnDefinitionEvents
         : Xamarin.Forms.BindableObjectEvents
     {
@@ -220,6 +259,64 @@ namespace Xamarin.Forms
         }
 
     }
+    public class IListProxyEvents
+    {
+        IListProxy This;
+
+        public IListProxyEvents(IListProxy This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.Collections.Specialized.NotifyCollectionChangedEventArgs> CollectionChanged {
+            get { return Observable.FromEventPattern<System.Collections.Specialized.NotifyCollectionChangedEventHandler, System.Collections.Specialized.NotifyCollectionChangedEventArgs>(x => This.CollectionChanged += x, x => This.CollectionChanged -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class INavigationPageControllerEvents
+    {
+        INavigationPageController This;
+
+        public INavigationPageControllerEvents(INavigationPageController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<Xamarin.Forms.Internals.NavigationRequestedEventArgs> InsertPageBeforeRequested {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.Internals.NavigationRequestedEventArgs>, Xamarin.Forms.Internals.NavigationRequestedEventArgs>(x => This.InsertPageBeforeRequested += x, x => This.InsertPageBeforeRequested -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<Xamarin.Forms.Internals.NavigationRequestedEventArgs> PopRequested {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.Internals.NavigationRequestedEventArgs>, Xamarin.Forms.Internals.NavigationRequestedEventArgs>(x => This.PopRequested += x, x => This.PopRequested -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<Xamarin.Forms.Internals.NavigationRequestedEventArgs> PopToRootRequested {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.Internals.NavigationRequestedEventArgs>, Xamarin.Forms.Internals.NavigationRequestedEventArgs>(x => This.PopToRootRequested += x, x => This.PopToRootRequested -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<Xamarin.Forms.Internals.NavigationRequestedEventArgs> PushRequested {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.Internals.NavigationRequestedEventArgs>, Xamarin.Forms.Internals.NavigationRequestedEventArgs>(x => This.PushRequested += x, x => This.PushRequested -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<Xamarin.Forms.Internals.NavigationRequestedEventArgs> RemovePageRequested {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.Internals.NavigationRequestedEventArgs>, Xamarin.Forms.Internals.NavigationRequestedEventArgs>(x => This.RemovePageRequested += x, x => This.RemovePageRequested -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class IMasterDetailPageControllerEvents
+    {
+        IMasterDetailPageController This;
+
+        public IMasterDetailPageControllerEvents(IMasterDetailPageController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<Xamarin.Forms.BackButtonPressedEventArgs> BackButtonPressed {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.BackButtonPressedEventArgs>, Xamarin.Forms.BackButtonPressedEventArgs>(x => This.BackButtonPressed += x, x => This.BackButtonPressed -= x).Select(x => x.EventArgs); }
+        }
+
+    }
     public class IDefinitionEvents
     {
         IDefinition This;
@@ -231,6 +328,20 @@ namespace Xamarin.Forms
 
         public IObservable<System.EventArgs> SizeChanged {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SizeChanged += x, x => This.SizeChanged -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class IListViewControllerEvents
+    {
+        IListViewController This;
+
+        public IListViewControllerEvents(IListViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<Xamarin.Forms.ScrollToRequestedEventArgs> ScrollToRequested {
+            get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ScrollToRequestedEventArgs>, Xamarin.Forms.ScrollToRequestedEventArgs>(x => This.ScrollToRequested += x, x => This.ScrollToRequested -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -259,6 +370,20 @@ namespace Xamarin.Forms
 
         public IObservable<Xamarin.Forms.ScrollToRequestedEventArgs> ScrollToRequested {
             get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.ScrollToRequestedEventArgs>, Xamarin.Forms.ScrollToRequestedEventArgs>(x => This.ScrollToRequested += x, x => This.ScrollToRequested -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class ITableViewControllerEvents
+    {
+        ITableViewController This;
+
+        public ITableViewControllerEvents(ITableViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> ModelChanged {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.ModelChanged += x, x => This.ModelChanged -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -837,6 +962,31 @@ namespace Xamarin.Forms
 
         public IObservable<Xamarin.Forms.PinchGestureUpdatedEventArgs> PinchUpdated {
             get { return Observable.FromEventPattern<System.EventHandler<Xamarin.Forms.PinchGestureUpdatedEventArgs>, Xamarin.Forms.PinchGestureUpdatedEventArgs>(x => This.PinchUpdated += x, x => This.PinchUpdated -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+}
+namespace Xamarin.Forms.Internals
+{
+    public static class EventsMixin
+    {
+        public static ToolbarTrackerEvents Events(this ToolbarTracker This)
+        {
+            return new ToolbarTrackerEvents(This);
+        }
+    }
+
+    public class ToolbarTrackerEvents
+    {
+        ToolbarTracker This;
+
+        public ToolbarTrackerEvents(ToolbarTracker This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> CollectionChanged {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.CollectionChanged += x, x => This.CollectionChanged -= x).Select(x => x.EventArgs); }
         }
 
     }
