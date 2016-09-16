@@ -169,10 +169,7 @@ namespace Android.App
         {
             return new ActionBarEvents(This);
         }
-        public static DatePickerDialogEvents Events(this DatePickerDialog This)
-        {
-            return new DatePickerDialogEvents(This);
-        }
+    
         public static DialogEvents Events(this Dialog This)
         {
             return new DialogEvents(This);
@@ -217,22 +214,7 @@ namespace Android.App
         }
 
     }
-    public class DatePickerDialogEvents
-        : Android.App.DialogEvents
-    {
-        DatePickerDialog This;
-
-        public DatePickerDialogEvents(DatePickerDialog This)
-            : base(This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<Android.App.DatePickerDialog.DateSetEventArgs> DateSet {
-            get { return Observable.FromEventPattern<System.EventHandler<Android.App.DatePickerDialog.DateSetEventArgs>, Android.App.DatePickerDialog.DateSetEventArgs>(x => This.DateSet += x, x => This.DateSet -= x).Select(x => x.EventArgs); }
-        }
-
-    }
+  
     public class DialogEvents
     {
         Dialog This;
@@ -657,10 +639,7 @@ namespace Android.Views
         {
             return new ViewTreeObserverEvents(This);
         }
-        public static WindowEvents Events(this Window This)
-        {
-            return new WindowEvents(This);
-        }
+     
         public static ActionProviderEvents Events(this ActionProvider This)
         {
             return new ActionProviderEvents(This);
@@ -799,20 +778,7 @@ namespace Android.Views
         }
 
     }
-    public class WindowEvents
-    {
-        Window This;
 
-        public WindowEvents(Window This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<Android.Views.Window.RestrictedCaptionAreaChangedEventArgs> RestrictedCaptionArea {
-            get { return Observable.FromEventPattern<System.EventHandler<Android.Views.Window.RestrictedCaptionAreaChangedEventArgs>, Android.Views.Window.RestrictedCaptionAreaChangedEventArgs>(x => This.RestrictedCaptionArea += x, x => This.RestrictedCaptionArea -= x).Select(x => x.EventArgs); }
-        }
-
-    }
     public class ActionProviderEvents
     {
         ActionProvider This;

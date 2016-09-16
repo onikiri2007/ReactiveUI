@@ -7753,9 +7753,9 @@ namespace PassKit.Rx
             _DidSelectPaymentMethod.OnNext(Tuple.Create(controller, paymentMethod, completion));
         }
 
-        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationController, PassKit.PKContact, System.Action`3<PassKit.PKPaymentAuthorizationStatus,PassKit.PKShippingMethod[],PassKit.PKPaymentSummaryItem[]>>> _DidSelectShippingContact = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationController, PassKit.PKContact, System.Action`3<PassKit.PKPaymentAuthorizationStatus,PassKit.PKShippingMethod[],PassKit.PKPaymentSummaryItem[]>>>();
-        public IObservable<Tuple<PassKit.PKPaymentAuthorizationController, PassKit.PKContact, System.Action`3<PassKit.PKPaymentAuthorizationStatus,PassKit.PKShippingMethod[],PassKit.PKPaymentSummaryItem[]>>> DidSelectShippingContactObs { get { return _DidSelectShippingContact; } }
-        public override void DidSelectShippingContact(PassKit.PKPaymentAuthorizationController controller, PassKit.PKContact contact, System.Action`3<PassKit.PKPaymentAuthorizationStatus,PassKit.PKShippingMethod[],PassKit.PKPaymentSummaryItem[]> completion)
+        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationController, PassKit.PKContact, System.Action<PassKit.PKPaymentAuthorizationStatus,PassKit.PKShippingMethod[],PassKit.PKPaymentSummaryItem[]>>> _DidSelectShippingContact = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationController, PassKit.PKContact, System.Action<PassKit.PKPaymentAuthorizationStatus,PassKit.PKShippingMethod[],PassKit.PKPaymentSummaryItem[]>>>();
+        public IObservable<Tuple<PassKit.PKPaymentAuthorizationController, PassKit.PKContact, System.Action<PassKit.PKPaymentAuthorizationStatus,PassKit.PKShippingMethod[],PassKit.PKPaymentSummaryItem[]>>> DidSelectShippingContactObs { get { return _DidSelectShippingContact; } }
+        public override void DidSelectShippingContact(PassKit.PKPaymentAuthorizationController controller, PassKit.PKContact contact, System.Action<PassKit.PKPaymentAuthorizationStatus,PassKit.PKShippingMethod[],PassKit.PKPaymentSummaryItem[]> completion)
         {
             _DidSelectShippingContact.OnNext(Tuple.Create(controller, contact, completion));
         }
