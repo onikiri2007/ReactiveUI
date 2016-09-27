@@ -103,5 +103,26 @@ namespace ReactiveUI.XamForms
             AddRange(collection, NotifyCollectionChangedAction.Reset);
         }
 
+
+        /// <summary> 
+        /// Removes the first occurence of each item in the specified collection from ObservableCollection(Of T). 
+        /// </summary> 
+        public void InsertRange(int index, IEnumerable<T> collection)
+        {
+            if (collection == null)
+                throw new ArgumentNullException("collection");
+
+            var changedItems = collection is List<T> ? (List<T>)collection : new List<T>(collection);
+            for (var i = index; i < changedItems.Count; i++)
+            {
+                Items.Insert(i, changedItems[i]);
+            }
+
+
+            OnPropertyChanged(new PropertyChangedEventArgs("Count"));
+            OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, collection, index));
+
+        }
     }
 }

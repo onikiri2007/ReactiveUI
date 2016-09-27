@@ -24,94 +24,79 @@ namespace ReactiveUI.XamForms
             this.ItemSource = new ObservableRangeCollection<T>(collection);
         }
 
+        private ObservableRangeCollection<T> Items => this.ItemSource as ObservableRangeCollection<T>;
+
         public ObservableCollection<T> ItemSource { get; }
         
         public override void Clear()
         {
             base.Clear();
-            this.ItemSource.Clear();
+            Items.Clear();
         }
 
         public override void Add(T item)
         {
             base.Add(item);
-            this.ItemSource.Add(item);
+            Items.Add(item);
         }
 
         public override void AddRange(IEnumerable<T> collection)
         {
             base.AddRange(collection);
 
-            var r = this.ItemSource as ObservableRangeCollection<T>;
-
-            if (r != null) {
-                r.AddRange(collection);
-            }
-            else {
-                collection.ForEach(m => this.ItemSource.Add(m));
-            }
+            Items.AddRange(collection);
         }
 
         public override void Insert(int index, T item)
         {
             base.Insert(index, item);
-            this.ItemSource.Insert(index, item);
+            Items.Insert(index, item);
         }
 
         public override void InsertRange(int index, IEnumerable<T> collection)
         {
             base.InsertRange(index, collection);
-            collection.ForEach(m => this.ItemSource.Insert(index, m));
-           
+            Items.InsertRange(index, collection);
+
         }
 
         public override void Move(int oldIndex, int newIndex)
         {
             base.Move(oldIndex, newIndex);
-            this.ItemSource.Move(oldIndex,newIndex);
+            Items.Move(oldIndex,newIndex);
         }
 
         public override bool Remove(T item)
         {
-            this.ItemSource.Remove(item);
+            Items.Remove(item);
             return base.Remove(item);
         }
 
         public override void RemoveAll(IEnumerable<T> items)
         {
             base.RemoveAll(items);
-            var r = this.ItemSource as ObservableRangeCollection<T>;
-
-            if (r != null)
-            {
-                r.RemoveRange(items);
-            }
-            else
-            {
-                items.ForEach(m => this.ItemSource.Add(m));
-            }
+            Items.RemoveRange(items);
         }
 
         public override void RemoveAt(int index)
         {
             base.RemoveAt(index);
-            this.ItemSource.RemoveAt(index);
+            Items.RemoveAt(index);
         }
 
         public override void RemoveRange(int index, int count)
         {
             base.RemoveRange(index, count);
-            for (var i = index; i < count; i++) {
-                this.ItemSource.RemoveAt(i);
+            var items = new List<T>();
+            for (var i = index; i < count; i++)
+            {
+                items.Add(this[i]);
             }
-        }
 
-        public override void Reset()
-        {
-            base.Reset();
-            this.ItemSource.Clear();
-        }
+            Items.RemoveRange(items);
 
+
+        }
       
         /// <summary> 
         /// Clears the current collection and replaces it with the specified item. 
@@ -129,8 +114,10 @@ namespace ReactiveUI.XamForms
             if (collection == null)
                 throw new ArgumentNullException("collection");
 
-            this.Clear();
-            AddRange(collection);
+            base.Clear();
+            base.AddRange(collection);
+            Items.ReplaceRange(collection);
+
         }
     }
 }
