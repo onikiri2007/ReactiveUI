@@ -12,56 +12,125 @@ using ReactiveUI.XamForms;
 
 namespace ReactiveUI.XamForms
 {
-    public class ReactiveObservableCollection<T> : ReactiveList<T>, IDisposable
+    public class ReactiveObservableCollection<T> : ReactiveList<T>
     {
-        private readonly CompositeDisposable disposables = new CompositeDisposable();
-       public ReactiveObservableCollection() : this(new ObservableCollection<T>())
+        public ReactiveObservableCollection() : this(new List<T>())
        {
           
        }
 
-        public ReactiveObservableCollection(ObservableCollection<T> collection)
+        public ReactiveObservableCollection(IEnumerable<T> collection) : base(collection)
         {
-            this.ItemSource = collection;
-            ItemsAdded
-                 .Subscribe(x => {
-
-                     if (!this.Any()) return;
-
-                     var lastItem = this.LastOrDefault();
-
-                     if (x.Equals(lastItem))
-                     {
-                         ItemSource.Add(x);
-                     }
-                     else
-                     {
-                         var indexOf = this.IndexOf(x);
-                         this.ItemSource.Insert(indexOf, x);
-                     }
-
-                 }).DisposeWith(disposables);
-
-            ItemsRemoved.Subscribe((x) => { ItemSource.Remove(x); }).DisposeWith(disposables);
-            ItemsMoved.Subscribe((x) => ItemSource.Move(x.From, x.To)).DisposeWith(disposables);
-            
+            this.ItemSource = new ObservableRangeCollection<T>(collection);
         }
 
         public ObservableCollection<T> ItemSource { get; }
-        public void Dispose()
-        {
-            if (disposables.IsDisposed) return;
-            disposables.Dispose();
-            disposables.Clear();
-        }
-
-
-
         
         public override void Clear()
         {
             base.Clear();
             this.ItemSource.Clear();
+        }
+
+        public override void Add(T item)
+        {
+            base.Add(item);
+            this.ItemSource.Add(item);
+        }
+
+        public override void AddRange(IEnumerable<T> collection)
+        {
+            base.AddRange(collection);
+
+            var r = this.ItemSource as ObservableRangeCollection<T>;
+
+            if (r != null) {
+                r.AddRange(collection);
+            }
+            else {
+                collection.ForEach(m => this.ItemSource.Add(m));
+            }
+        }
+
+        public override void Insert(int index, T item)
+        {
+            base.Insert(index, item);
+            this.ItemSource.Insert(index, item);
+        }
+
+        public override void InsertRange(int index, IEnumerable<T> collection)
+        {
+            base.InsertRange(index, collection);
+            collection.ForEach(m => this.ItemSource.Insert(index, m));
+           
+        }
+
+        public override void Move(int oldIndex, int newIndex)
+        {
+            base.Move(oldIndex, newIndex);
+            this.ItemSource.Move(oldIndex,newIndex);
+        }
+
+        public override bool Remove(T item)
+        {
+            this.ItemSource.Remove(item);
+            return base.Remove(item);
+        }
+
+        public override void RemoveAll(IEnumerable<T> items)
+        {
+            base.RemoveAll(items);
+            var r = this.ItemSource as ObservableRangeCollection<T>;
+
+            if (r != null)
+            {
+                r.RemoveRange(items);
+            }
+            else
+            {
+                items.ForEach(m => this.ItemSource.Add(m));
+            }
+        }
+
+        public override void RemoveAt(int index)
+        {
+            base.RemoveAt(index);
+            this.ItemSource.RemoveAt(index);
+        }
+
+        public override void RemoveRange(int index, int count)
+        {
+            base.RemoveRange(index, count);
+            for (var i = index; i < count; i++) {
+                this.ItemSource.RemoveAt(i);
+            }
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            this.ItemSource.Clear();
+        }
+
+      
+        /// <summary> 
+        /// Clears the current collection and replaces it with the specified item. 
+        /// </summary> 
+        public void Replace(T item)
+        {
+            ReplaceRange(new T[] { item });
+        }
+
+        /// <summary> 
+        /// Clears the current collection and replaces it with the specified collection. 
+        /// </summary> 
+        public void ReplaceRange(IEnumerable<T> collection)
+        {
+            if (collection == null)
+                throw new ArgumentNullException("collection");
+
+            this.Clear();
+            AddRange(collection);
         }
     }
 }
