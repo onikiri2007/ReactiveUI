@@ -87,6 +87,7 @@
     <Compile Include="ReactiveUI\DisposableBase.cs" />
     <Compile Include="ReactiveUI\DisposableReactiveObject.cs" />
     <Compile Include="ReactiveUI\Ensure.cs" />
+    <Compile Include="ReactiveUI\ObservableRangeCollection.cs" />
     <Compile Include="ReactiveUI\ReactiveObservableCollection.cs" />
     <Compile Include="XamForms\ActivationForViewFetcher.cs" />
     <Compile Include="XamForms\ReactiveCarouselPage.cs" />
