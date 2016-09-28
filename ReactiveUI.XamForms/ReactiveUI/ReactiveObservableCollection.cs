@@ -19,10 +19,17 @@ namespace ReactiveUI.XamForms
           
        }
 
+        public ReactiveObservableCollection(ObservableRangeCollection<T> collection) : base(collection)
+        {
+            this.ItemSource = collection;
+        }
+
         public ReactiveObservableCollection(IEnumerable<T> collection) : base(collection)
         {
-            this.ItemSource = new ObservableRangeCollection<T>(collection);
+            var r = collection as ObservableRangeCollection<T>;
+            this.ItemSource = r ?? new ObservableRangeCollection<T>(collection);
         }
+
 
         private ObservableRangeCollection<T> Items => this.ItemSource as ObservableRangeCollection<T>;
 
