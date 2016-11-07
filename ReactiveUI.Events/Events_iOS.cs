@@ -5,64 +5,64 @@ using System.Reactive.Subjects;
 using ReactiveUI.Events;
 
 using AVFoundation;
-using GameKit;
-using QuickLook;
 using CoreFoundation;
 using Foundation;
+using GameKit;
 using AddressBookUI;
 using AddressBook;
 using AudioToolbox;
 using CoreAnimation;
+using QuickLook;
 using CoreBluetooth;
-using SceneKit;
-using HomeKit;
 using CoreLocation;
+using HomeKit;
 using MessageUI;
 using UIKit;
-using SpriteKit;
 using CoreMidi;
+using SceneKit;
+using SpriteKit;
 using StoreKit;
-using MapKit;
-using ExternalAccessory;
 using EventKitUI;
-using MediaPlayer;
+using ExternalAccessory;
+using MapKit;
 using GLKit;
+using MediaPlayer;
 using PassKit;
 using iAd;
 using AVFoundation;
 using GameKit;
+using AVKit;
 using PhotosUI;
 using PushKit;
 using QuickLook;
-using ReplayKit;
-using GameplayKit;
-using SafariServices;
-using AVKit;
 using AddressBookUI;
-using SceneKit;
-using CallKit;
+using ReplayKit;
 using CoreAnimation;
-using HomeKit;
+using SafariServices;
+using CallKit;
+using GameplayKit;
 using MediaPlayer;
 using UIKit;
-using Speech;
+using SceneKit;
+using HomeKit;
 using ContactsUI;
-using SpriteKit;
+using Speech;
 using CoreBluetooth;
-using StoreKit;
+using SpriteKit;
 using CoreData;
-using MapKit;
-using CoreSpotlight;
+using StoreKit;
 using CoreLocation;
-using Foundation;
+using CoreSpotlight;
 using EventKitUI;
 using ExternalAccessory;
-using MessageUI;
+using Foundation;
+using MapKit;
 using GLKit;
+using MessageUI;
 using MetalKit;
 using MultipeerConnectivity;
-using PassKit;
 using NetworkExtension;
+using PassKit;
 using UserNotifications;
 using WatchConnectivity;
 using VideoSubscriberAccount;
@@ -77,13 +77,13 @@ namespace AVFoundation
         {
             return new AVAudioPlayerEvents(This);
         }
-        public static AVAudioRecorderEvents Events(this AVAudioRecorder This)
-        {
-            return new AVAudioRecorderEvents(This);
-        }
         public static AVAudioSessionEvents Events(this AVAudioSession This)
         {
             return new AVAudioSessionEvents(This);
+        }
+        public static AVAudioRecorderEvents Events(this AVAudioRecorder This)
+        {
+            return new AVAudioRecorderEvents(This);
         }
         public static AVSpeechSynthesizerEvents Events(this AVSpeechSynthesizer This)
         {
@@ -106,32 +106,6 @@ namespace AVFoundation
 
         public IObservable<AVFoundation.AVErrorEventArgs> DecoderError {
             get { return Observable.FromEventPattern<System.EventHandler<AVFoundation.AVErrorEventArgs>, AVFoundation.AVErrorEventArgs>(x => This.DecoderError += x, x => This.DecoderError -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> BeginInterruption {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.BeginInterruption += x, x => This.BeginInterruption -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> EndInterruption {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.EndInterruption += x, x => This.EndInterruption -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class AVAudioRecorderEvents
-    {
-        AVAudioRecorder This;
-
-        public AVAudioRecorderEvents(AVAudioRecorder This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<AVFoundation.AVStatusEventArgs> FinishedRecording {
-            get { return Observable.FromEventPattern<System.EventHandler<AVFoundation.AVStatusEventArgs>, AVFoundation.AVStatusEventArgs>(x => This.FinishedRecording += x, x => This.FinishedRecording -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<AVFoundation.AVErrorEventArgs> EncoderError {
-            get { return Observable.FromEventPattern<System.EventHandler<AVFoundation.AVErrorEventArgs>, AVFoundation.AVErrorEventArgs>(x => This.EncoderError += x, x => This.EncoderError -= x).Select(x => x.EventArgs); }
         }
 
         public IObservable<System.EventArgs> BeginInterruption {
@@ -181,6 +155,32 @@ namespace AVFoundation
         }
 
     }
+    public class AVAudioRecorderEvents
+    {
+        AVAudioRecorder This;
+
+        public AVAudioRecorderEvents(AVAudioRecorder This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<AVFoundation.AVStatusEventArgs> FinishedRecording {
+            get { return Observable.FromEventPattern<System.EventHandler<AVFoundation.AVStatusEventArgs>, AVFoundation.AVStatusEventArgs>(x => This.FinishedRecording += x, x => This.FinishedRecording -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<AVFoundation.AVErrorEventArgs> EncoderError {
+            get { return Observable.FromEventPattern<System.EventHandler<AVFoundation.AVErrorEventArgs>, AVFoundation.AVErrorEventArgs>(x => This.EncoderError += x, x => This.EncoderError -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> BeginInterruption {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.BeginInterruption += x, x => This.BeginInterruption -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> EndInterruption {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.EndInterruption += x, x => This.EndInterruption -= x).Select(x => x.EventArgs); }
+        }
+
+    }
     public class AVSpeechSynthesizerEvents
     {
         AVSpeechSynthesizer This;
@@ -212,262 +212,6 @@ namespace AVFoundation
 
         public IObservable<AVFoundation.AVSpeechSynthesizerWillSpeakEventArgs> WillSpeakRangeOfSpeechString {
             get { return Observable.FromEventPattern<System.EventHandler<AVFoundation.AVSpeechSynthesizerWillSpeakEventArgs>, AVFoundation.AVSpeechSynthesizerWillSpeakEventArgs>(x => This.WillSpeakRangeOfSpeechString += x, x => This.WillSpeakRangeOfSpeechString -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-}
-namespace GameKit
-{
-    public static class EventsMixin
-    {
-        public static GKMatchmakerViewControllerEvents Events(this GKMatchmakerViewController This)
-        {
-            return new GKMatchmakerViewControllerEvents(This);
-        }
-        public static GKSessionEvents Events(this GKSession This)
-        {
-            return new GKSessionEvents(This);
-        }
-        public static GKMatchEvents Events(this GKMatch This)
-        {
-            return new GKMatchEvents(This);
-        }
-        public static GKFriendRequestComposeViewControllerEvents Events(this GKFriendRequestComposeViewController This)
-        {
-            return new GKFriendRequestComposeViewControllerEvents(This);
-        }
-        public static GKGameCenterViewControllerEvents Events(this GKGameCenterViewController This)
-        {
-            return new GKGameCenterViewControllerEvents(This);
-        }
-        public static GKLeaderboardViewControllerEvents Events(this GKLeaderboardViewController This)
-        {
-            return new GKLeaderboardViewControllerEvents(This);
-        }
-        public static GKAchievementViewControllerEvents Events(this GKAchievementViewController This)
-        {
-            return new GKAchievementViewControllerEvents(This);
-        }
-        public static GKChallengeEventHandlerEvents Events(this GKChallengeEventHandler This)
-        {
-            return new GKChallengeEventHandlerEvents(This);
-        }
-    }
-
-    public class GKMatchmakerViewControllerEvents
-    {
-        GKMatchmakerViewController This;
-
-        public GKMatchmakerViewControllerEvents(GKMatchmakerViewController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<GameKit.GKErrorEventArgs> DidFailWithError {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKErrorEventArgs>, GameKit.GKErrorEventArgs>(x => This.DidFailWithError += x, x => This.DidFailWithError -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKMatchmakingPlayersEventArgs> DidFindHostedPlayers {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchmakingPlayersEventArgs>, GameKit.GKMatchmakingPlayersEventArgs>(x => This.DidFindHostedPlayers += x, x => This.DidFindHostedPlayers -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKMatchEventArgs> DidFindMatch {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchEventArgs>, GameKit.GKMatchEventArgs>(x => This.DidFindMatch += x, x => This.DidFindMatch -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKPlayersEventArgs> DidFindPlayers {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPlayersEventArgs>, GameKit.GKPlayersEventArgs>(x => This.DidFindPlayers += x, x => This.DidFindPlayers -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKMatchmakingPlayerEventArgs> HostedPlayerDidAccept {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchmakingPlayerEventArgs>, GameKit.GKMatchmakingPlayerEventArgs>(x => This.HostedPlayerDidAccept += x, x => This.HostedPlayerDidAccept -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKPlayerEventArgs> ReceivedAcceptFromHostedPlayer {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPlayerEventArgs>, GameKit.GKPlayerEventArgs>(x => This.ReceivedAcceptFromHostedPlayer += x, x => This.ReceivedAcceptFromHostedPlayer -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> WasCancelled {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.WasCancelled += x, x => This.WasCancelled -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class GKSessionEvents
-    {
-        GKSession This;
-
-        public GKSessionEvents(GKSession This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<GameKit.GKDataReceivedEventArgs> ReceiveData {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKDataReceivedEventArgs>, GameKit.GKDataReceivedEventArgs>(x => This.ReceiveData += x, x => This.ReceiveData -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKPeerChangedStateEventArgs> PeerChanged {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPeerChangedStateEventArgs>, GameKit.GKPeerChangedStateEventArgs>(x => This.PeerChanged += x, x => This.PeerChanged -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKPeerConnectionEventArgs> ConnectionRequest {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPeerConnectionEventArgs>, GameKit.GKPeerConnectionEventArgs>(x => This.ConnectionRequest += x, x => This.ConnectionRequest -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKPeerConnectionEventArgs> ConnectionFailed {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPeerConnectionEventArgs>, GameKit.GKPeerConnectionEventArgs>(x => This.ConnectionFailed += x, x => This.ConnectionFailed -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKPeerConnectionEventArgs> Failed {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPeerConnectionEventArgs>, GameKit.GKPeerConnectionEventArgs>(x => This.Failed += x, x => This.Failed -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class GKMatchEvents
-    {
-        GKMatch This;
-
-        public GKMatchEvents(GKMatch This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<GameKit.GKDataEventArgs> DataReceived {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKDataEventArgs>, GameKit.GKDataEventArgs>(x => This.DataReceived += x, x => This.DataReceived -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKDataReceivedForRecipientEventArgs> DataReceivedForRecipient {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKDataReceivedForRecipientEventArgs>, GameKit.GKDataReceivedForRecipientEventArgs>(x => This.DataReceivedForRecipient += x, x => This.DataReceivedForRecipient -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKMatchReceivedDataFromRemotePlayerEventArgs> DataReceivedFromPlayer {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchReceivedDataFromRemotePlayerEventArgs>, GameKit.GKMatchReceivedDataFromRemotePlayerEventArgs>(x => This.DataReceivedFromPlayer += x, x => This.DataReceivedFromPlayer -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKErrorEventArgs> Failed {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKErrorEventArgs>, GameKit.GKErrorEventArgs>(x => This.Failed += x, x => This.Failed -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKStateEventArgs> StateChanged {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKStateEventArgs>, GameKit.GKStateEventArgs>(x => This.StateChanged += x, x => This.StateChanged -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<GameKit.GKMatchConnectionChangedEventArgs> StateChangedForPlayer {
-            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchConnectionChangedEventArgs>, GameKit.GKMatchConnectionChangedEventArgs>(x => This.StateChangedForPlayer += x, x => This.StateChangedForPlayer -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class GKFriendRequestComposeViewControllerEvents
-    {
-        GKFriendRequestComposeViewController This;
-
-        public GKFriendRequestComposeViewControllerEvents(GKFriendRequestComposeViewController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> DidFinish {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidFinish += x, x => This.DidFinish -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class GKGameCenterViewControllerEvents
-    {
-        GKGameCenterViewController This;
-
-        public GKGameCenterViewControllerEvents(GKGameCenterViewController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> Finished {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Finished += x, x => This.Finished -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class GKLeaderboardViewControllerEvents
-        : GameKit.GKGameCenterViewControllerEvents
-    {
-        GKLeaderboardViewController This;
-
-        public GKLeaderboardViewControllerEvents(GKLeaderboardViewController This)
-            : base(This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> DidFinish {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidFinish += x, x => This.DidFinish -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class GKAchievementViewControllerEvents
-        : GameKit.GKGameCenterViewControllerEvents
-    {
-        GKAchievementViewController This;
-
-        public GKAchievementViewControllerEvents(GKAchievementViewController This)
-            : base(This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> DidFinish {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidFinish += x, x => This.DidFinish -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class GKChallengeEventHandlerEvents
-    {
-        GKChallengeEventHandler This;
-
-        public GKChallengeEventHandlerEvents(GKChallengeEventHandler This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> LocalPlayerCompletedChallenge {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocalPlayerCompletedChallenge += x, x => This.LocalPlayerCompletedChallenge -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> LocalPlayerReceivedChallenge {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocalPlayerReceivedChallenge += x, x => This.LocalPlayerReceivedChallenge -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> LocalPlayerSelectedChallenge {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocalPlayerSelectedChallenge += x, x => This.LocalPlayerSelectedChallenge -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> RemotePlayerCompletedChallenge {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.RemotePlayerCompletedChallenge += x, x => This.RemotePlayerCompletedChallenge -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-}
-namespace QuickLook
-{
-    public static class EventsMixin
-    {
-        public static QLPreviewControllerEvents Events(this QLPreviewController This)
-        {
-            return new QLPreviewControllerEvents(This);
-        }
-    }
-
-    public class QLPreviewControllerEvents
-    {
-        QLPreviewController This;
-
-        public QLPreviewControllerEvents(QLPreviewController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> DidDismiss {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidDismiss += x, x => This.DidDismiss -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> WillDismiss {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.WillDismiss += x, x => This.WillDismiss -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -738,6 +482,233 @@ namespace Foundation
 
     }
 }
+namespace GameKit
+{
+    public static class EventsMixin
+    {
+        public static GKSessionEvents Events(this GKSession This)
+        {
+            return new GKSessionEvents(This);
+        }
+        public static GKMatchEvents Events(this GKMatch This)
+        {
+            return new GKMatchEvents(This);
+        }
+        public static GKAchievementViewControllerEvents Events(this GKAchievementViewController This)
+        {
+            return new GKAchievementViewControllerEvents(This);
+        }
+        public static GKGameCenterViewControllerEvents Events(this GKGameCenterViewController This)
+        {
+            return new GKGameCenterViewControllerEvents(This);
+        }
+        public static GKChallengeEventHandlerEvents Events(this GKChallengeEventHandler This)
+        {
+            return new GKChallengeEventHandlerEvents(This);
+        }
+        public static GKFriendRequestComposeViewControllerEvents Events(this GKFriendRequestComposeViewController This)
+        {
+            return new GKFriendRequestComposeViewControllerEvents(This);
+        }
+        public static GKLeaderboardViewControllerEvents Events(this GKLeaderboardViewController This)
+        {
+            return new GKLeaderboardViewControllerEvents(This);
+        }
+        public static GKMatchmakerViewControllerEvents Events(this GKMatchmakerViewController This)
+        {
+            return new GKMatchmakerViewControllerEvents(This);
+        }
+    }
+
+    public class GKSessionEvents
+    {
+        GKSession This;
+
+        public GKSessionEvents(GKSession This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<GameKit.GKDataReceivedEventArgs> ReceiveData {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKDataReceivedEventArgs>, GameKit.GKDataReceivedEventArgs>(x => This.ReceiveData += x, x => This.ReceiveData -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKPeerChangedStateEventArgs> PeerChanged {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPeerChangedStateEventArgs>, GameKit.GKPeerChangedStateEventArgs>(x => This.PeerChanged += x, x => This.PeerChanged -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKPeerConnectionEventArgs> ConnectionRequest {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPeerConnectionEventArgs>, GameKit.GKPeerConnectionEventArgs>(x => This.ConnectionRequest += x, x => This.ConnectionRequest -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKPeerConnectionEventArgs> ConnectionFailed {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPeerConnectionEventArgs>, GameKit.GKPeerConnectionEventArgs>(x => This.ConnectionFailed += x, x => This.ConnectionFailed -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKPeerConnectionEventArgs> Failed {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPeerConnectionEventArgs>, GameKit.GKPeerConnectionEventArgs>(x => This.Failed += x, x => This.Failed -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class GKMatchEvents
+    {
+        GKMatch This;
+
+        public GKMatchEvents(GKMatch This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<GameKit.GKDataEventArgs> DataReceived {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKDataEventArgs>, GameKit.GKDataEventArgs>(x => This.DataReceived += x, x => This.DataReceived -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKDataReceivedForRecipientEventArgs> DataReceivedForRecipient {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKDataReceivedForRecipientEventArgs>, GameKit.GKDataReceivedForRecipientEventArgs>(x => This.DataReceivedForRecipient += x, x => This.DataReceivedForRecipient -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKMatchReceivedDataFromRemotePlayerEventArgs> DataReceivedFromPlayer {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchReceivedDataFromRemotePlayerEventArgs>, GameKit.GKMatchReceivedDataFromRemotePlayerEventArgs>(x => This.DataReceivedFromPlayer += x, x => This.DataReceivedFromPlayer -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKErrorEventArgs> Failed {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKErrorEventArgs>, GameKit.GKErrorEventArgs>(x => This.Failed += x, x => This.Failed -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKStateEventArgs> StateChanged {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKStateEventArgs>, GameKit.GKStateEventArgs>(x => This.StateChanged += x, x => This.StateChanged -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKMatchConnectionChangedEventArgs> StateChangedForPlayer {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchConnectionChangedEventArgs>, GameKit.GKMatchConnectionChangedEventArgs>(x => This.StateChangedForPlayer += x, x => This.StateChangedForPlayer -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class GKAchievementViewControllerEvents
+        : GameKit.GKGameCenterViewControllerEvents
+    {
+        GKAchievementViewController This;
+
+        public GKAchievementViewControllerEvents(GKAchievementViewController This)
+            : base(This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> DidFinish {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidFinish += x, x => This.DidFinish -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class GKGameCenterViewControllerEvents
+    {
+        GKGameCenterViewController This;
+
+        public GKGameCenterViewControllerEvents(GKGameCenterViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> Finished {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Finished += x, x => This.Finished -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class GKChallengeEventHandlerEvents
+    {
+        GKChallengeEventHandler This;
+
+        public GKChallengeEventHandlerEvents(GKChallengeEventHandler This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> LocalPlayerCompletedChallenge {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocalPlayerCompletedChallenge += x, x => This.LocalPlayerCompletedChallenge -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> LocalPlayerReceivedChallenge {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocalPlayerReceivedChallenge += x, x => This.LocalPlayerReceivedChallenge -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> LocalPlayerSelectedChallenge {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocalPlayerSelectedChallenge += x, x => This.LocalPlayerSelectedChallenge -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> RemotePlayerCompletedChallenge {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.RemotePlayerCompletedChallenge += x, x => This.RemotePlayerCompletedChallenge -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class GKFriendRequestComposeViewControllerEvents
+    {
+        GKFriendRequestComposeViewController This;
+
+        public GKFriendRequestComposeViewControllerEvents(GKFriendRequestComposeViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> DidFinish {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidFinish += x, x => This.DidFinish -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class GKLeaderboardViewControllerEvents
+        : GameKit.GKGameCenterViewControllerEvents
+    {
+        GKLeaderboardViewController This;
+
+        public GKLeaderboardViewControllerEvents(GKLeaderboardViewController This)
+            : base(This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> DidFinish {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidFinish += x, x => This.DidFinish -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class GKMatchmakerViewControllerEvents
+    {
+        GKMatchmakerViewController This;
+
+        public GKMatchmakerViewControllerEvents(GKMatchmakerViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<GameKit.GKErrorEventArgs> DidFailWithError {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKErrorEventArgs>, GameKit.GKErrorEventArgs>(x => This.DidFailWithError += x, x => This.DidFailWithError -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKMatchmakingPlayersEventArgs> DidFindHostedPlayers {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchmakingPlayersEventArgs>, GameKit.GKMatchmakingPlayersEventArgs>(x => This.DidFindHostedPlayers += x, x => This.DidFindHostedPlayers -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKMatchEventArgs> DidFindMatch {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchEventArgs>, GameKit.GKMatchEventArgs>(x => This.DidFindMatch += x, x => This.DidFindMatch -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKPlayersEventArgs> DidFindPlayers {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPlayersEventArgs>, GameKit.GKPlayersEventArgs>(x => This.DidFindPlayers += x, x => This.DidFindPlayers -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKMatchmakingPlayerEventArgs> HostedPlayerDidAccept {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKMatchmakingPlayerEventArgs>, GameKit.GKMatchmakingPlayerEventArgs>(x => This.HostedPlayerDidAccept += x, x => This.HostedPlayerDidAccept -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<GameKit.GKPlayerEventArgs> ReceivedAcceptFromHostedPlayer {
+            get { return Observable.FromEventPattern<System.EventHandler<GameKit.GKPlayerEventArgs>, GameKit.GKPlayerEventArgs>(x => This.ReceivedAcceptFromHostedPlayer += x, x => This.ReceivedAcceptFromHostedPlayer -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> WasCancelled {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.WasCancelled += x, x => This.WasCancelled -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+}
 namespace AddressBookUI
 {
     public static class EventsMixin
@@ -866,10 +837,6 @@ namespace AudioToolbox
 {
     public static class EventsMixin
     {
-        public static AudioConverterEvents Events(this AudioConverter This)
-        {
-            return new AudioConverterEvents(This);
-        }
         public static OutputAudioQueueEvents Events(this OutputAudioQueue This)
         {
             return new OutputAudioQueueEvents(This);
@@ -878,22 +845,12 @@ namespace AudioToolbox
         {
             return new InputAudioQueueEvents(This);
         }
-    }
-
-    public class AudioConverterEvents
-    {
-        AudioConverter This;
-
-        public AudioConverterEvents(AudioConverter This)
+        public static AudioConverterEvents Events(this AudioConverter This)
         {
-            this.This = This;
+            return new AudioConverterEvents(This);
         }
-
-        public IObservable<AudioToolbox.AudioBuffers> InputData {
-            get { return Observable.FromEventPattern<AudioToolbox.AudioConverterComplexInputData, AudioToolbox.AudioBuffers>(x => This.InputData += x, x => This.InputData -= x).Select(x => x.EventArgs); }
-        }
-
     }
+
     public class OutputAudioQueueEvents
     {
         OutputAudioQueue This;
@@ -919,6 +876,20 @@ namespace AudioToolbox
 
         public IObservable<AudioToolbox.InputCompletedEventArgs> InputCompleted {
             get { return Observable.FromEventPattern<System.EventHandler<AudioToolbox.InputCompletedEventArgs>, AudioToolbox.InputCompletedEventArgs>(x => This.InputCompleted += x, x => This.InputCompleted -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class AudioConverterEvents
+    {
+        AudioConverter This;
+
+        public AudioConverterEvents(AudioConverter This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<AudioToolbox.AudioBuffers> InputData {
+            get { return Observable.FromEventPattern<AudioToolbox.AudioConverterComplexInputData, AudioToolbox.AudioBuffers>(x => This.InputData += x, x => This.InputData -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -948,6 +919,35 @@ namespace CoreAnimation
 
         public IObservable<CoreAnimation.CAAnimationStateEventArgs> AnimationStopped {
             get { return Observable.FromEventPattern<System.EventHandler<CoreAnimation.CAAnimationStateEventArgs>, CoreAnimation.CAAnimationStateEventArgs>(x => This.AnimationStopped += x, x => This.AnimationStopped -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+}
+namespace QuickLook
+{
+    public static class EventsMixin
+    {
+        public static QLPreviewControllerEvents Events(this QLPreviewController This)
+        {
+            return new QLPreviewControllerEvents(This);
+        }
+    }
+
+    public class QLPreviewControllerEvents
+    {
+        QLPreviewController This;
+
+        public QLPreviewControllerEvents(QLPreviewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> DidDismiss {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidDismiss += x, x => This.DidDismiss -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> WillDismiss {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.WillDismiss += x, x => This.WillDismiss -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -1125,35 +1125,87 @@ namespace CoreBluetooth
 
     }
 }
-namespace SceneKit
+namespace CoreLocation
 {
     public static class EventsMixin
     {
-        public static SCNPhysicsWorldEvents Events(this SCNPhysicsWorld This)
+        public static CLLocationManagerEvents Events(this CLLocationManager This)
         {
-            return new SCNPhysicsWorldEvents(This);
+            return new CLLocationManagerEvents(This);
         }
     }
 
-    public class SCNPhysicsWorldEvents
+    public class CLLocationManagerEvents
     {
-        SCNPhysicsWorld This;
+        CLLocationManager This;
 
-        public SCNPhysicsWorldEvents(SCNPhysicsWorld This)
+        public CLLocationManagerEvents(CLLocationManager This)
         {
             this.This = This;
         }
 
-        public IObservable<SceneKit.SCNPhysicsContactEventArgs> DidBeginContact {
-            get { return Observable.FromEventPattern<System.EventHandler<SceneKit.SCNPhysicsContactEventArgs>, SceneKit.SCNPhysicsContactEventArgs>(x => This.DidBeginContact += x, x => This.DidBeginContact -= x).Select(x => x.EventArgs); }
+        public IObservable<CoreLocation.CLAuthorizationChangedEventArgs> AuthorizationChanged {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLAuthorizationChangedEventArgs>, CoreLocation.CLAuthorizationChangedEventArgs>(x => This.AuthorizationChanged += x, x => This.AuthorizationChanged -= x).Select(x => x.EventArgs); }
         }
 
-        public IObservable<SceneKit.SCNPhysicsContactEventArgs> DidEndContact {
-            get { return Observable.FromEventPattern<System.EventHandler<SceneKit.SCNPhysicsContactEventArgs>, SceneKit.SCNPhysicsContactEventArgs>(x => This.DidEndContact += x, x => This.DidEndContact -= x).Select(x => x.EventArgs); }
+        public IObservable<Foundation.NSErrorEventArgs> DeferredUpdatesFinished {
+            get { return Observable.FromEventPattern<System.EventHandler<Foundation.NSErrorEventArgs>, Foundation.NSErrorEventArgs>(x => This.DeferredUpdatesFinished += x, x => This.DeferredUpdatesFinished -= x).Select(x => x.EventArgs); }
         }
 
-        public IObservable<SceneKit.SCNPhysicsContactEventArgs> DidUpdateContact {
-            get { return Observable.FromEventPattern<System.EventHandler<SceneKit.SCNPhysicsContactEventArgs>, SceneKit.SCNPhysicsContactEventArgs>(x => This.DidUpdateContact += x, x => This.DidUpdateContact -= x).Select(x => x.EventArgs); }
+        public IObservable<CoreLocation.CLRegionStateDeterminedEventArgs> DidDetermineState {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionStateDeterminedEventArgs>, CoreLocation.CLRegionStateDeterminedEventArgs>(x => This.DidDetermineState += x, x => This.DidDetermineState -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLRegionBeaconsRangedEventArgs> DidRangeBeacons {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionBeaconsRangedEventArgs>, CoreLocation.CLRegionBeaconsRangedEventArgs>(x => This.DidRangeBeacons += x, x => This.DidRangeBeacons -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLRegionEventArgs> DidStartMonitoringForRegion {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionEventArgs>, CoreLocation.CLRegionEventArgs>(x => This.DidStartMonitoringForRegion += x, x => This.DidStartMonitoringForRegion -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLVisitedEventArgs> DidVisit {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLVisitedEventArgs>, CoreLocation.CLVisitedEventArgs>(x => This.DidVisit += x, x => This.DidVisit -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<Foundation.NSErrorEventArgs> Failed {
+            get { return Observable.FromEventPattern<System.EventHandler<Foundation.NSErrorEventArgs>, Foundation.NSErrorEventArgs>(x => This.Failed += x, x => This.Failed -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLLocationsUpdatedEventArgs> LocationsUpdated {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLLocationsUpdatedEventArgs>, CoreLocation.CLLocationsUpdatedEventArgs>(x => This.LocationsUpdated += x, x => This.LocationsUpdated -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> LocationUpdatesPaused {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocationUpdatesPaused += x, x => This.LocationUpdatesPaused -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> LocationUpdatesResumed {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocationUpdatesResumed += x, x => This.LocationUpdatesResumed -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLRegionErrorEventArgs> MonitoringFailed {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionErrorEventArgs>, CoreLocation.CLRegionErrorEventArgs>(x => This.MonitoringFailed += x, x => This.MonitoringFailed -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLRegionBeaconsFailedEventArgs> RangingBeaconsDidFailForRegion {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionBeaconsFailedEventArgs>, CoreLocation.CLRegionBeaconsFailedEventArgs>(x => This.RangingBeaconsDidFailForRegion += x, x => This.RangingBeaconsDidFailForRegion -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLRegionEventArgs> RegionEntered {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionEventArgs>, CoreLocation.CLRegionEventArgs>(x => This.RegionEntered += x, x => This.RegionEntered -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLRegionEventArgs> RegionLeft {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionEventArgs>, CoreLocation.CLRegionEventArgs>(x => This.RegionLeft += x, x => This.RegionLeft -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLHeadingUpdatedEventArgs> UpdatedHeading {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLHeadingUpdatedEventArgs>, CoreLocation.CLHeadingUpdatedEventArgs>(x => This.UpdatedHeading += x, x => This.UpdatedHeading -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<CoreLocation.CLLocationUpdatedEventArgs> UpdatedLocation {
+            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLLocationUpdatedEventArgs>, CoreLocation.CLLocationUpdatedEventArgs>(x => This.UpdatedLocation += x, x => This.UpdatedLocation -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -1162,6 +1214,10 @@ namespace HomeKit
 {
     public static class EventsMixin
     {
+        public static HMHomeEvents Events(this HMHome This)
+        {
+            return new HMHomeEvents(This);
+        }
         public static HMAccessoryEvents Events(this HMAccessory This)
         {
             return new HMAccessoryEvents(This);
@@ -1170,68 +1226,12 @@ namespace HomeKit
         {
             return new HMAccessoryBrowserEvents(This);
         }
-        public static HMHomeEvents Events(this HMHome This)
-        {
-            return new HMHomeEvents(This);
-        }
         public static HMHomeManagerEvents Events(this HMHomeManager This)
         {
             return new HMHomeManagerEvents(This);
         }
     }
 
-    public class HMAccessoryEvents
-    {
-        HMAccessory This;
-
-        public HMAccessoryEvents(HMAccessory This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<HomeKit.HMAccessoryUpdateEventArgs> DidUpdateAssociatedServiceType {
-            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryUpdateEventArgs>, HomeKit.HMAccessoryUpdateEventArgs>(x => This.DidUpdateAssociatedServiceType += x, x => This.DidUpdateAssociatedServiceType -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> DidUpdateName {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidUpdateName += x, x => This.DidUpdateName -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<HomeKit.HMAccessoryUpdateEventArgs> DidUpdateNameForService {
-            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryUpdateEventArgs>, HomeKit.HMAccessoryUpdateEventArgs>(x => This.DidUpdateNameForService += x, x => This.DidUpdateNameForService -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> DidUpdateReachability {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidUpdateReachability += x, x => This.DidUpdateReachability -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> DidUpdateServices {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidUpdateServices += x, x => This.DidUpdateServices -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<HomeKit.HMAccessoryServiceUpdateCharacteristicEventArgs> DidUpdateValueForCharacteristic {
-            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryServiceUpdateCharacteristicEventArgs>, HomeKit.HMAccessoryServiceUpdateCharacteristicEventArgs>(x => This.DidUpdateValueForCharacteristic += x, x => This.DidUpdateValueForCharacteristic -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class HMAccessoryBrowserEvents
-    {
-        HMAccessoryBrowser This;
-
-        public HMAccessoryBrowserEvents(HMAccessoryBrowser This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<HomeKit.HMAccessoryBrowserEventArgs> DidFindNewAccessory {
-            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryBrowserEventArgs>, HomeKit.HMAccessoryBrowserEventArgs>(x => This.DidFindNewAccessory += x, x => This.DidFindNewAccessory -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<HomeKit.HMAccessoryBrowserEventArgs> DidRemoveNewAccessory {
-            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryBrowserEventArgs>, HomeKit.HMAccessoryBrowserEventArgs>(x => This.DidRemoveNewAccessory += x, x => This.DidRemoveNewAccessory -= x).Select(x => x.EventArgs); }
-        }
-
-    }
     public class HMHomeEvents
     {
         HMHome This;
@@ -1358,6 +1358,58 @@ namespace HomeKit
         }
 
     }
+    public class HMAccessoryEvents
+    {
+        HMAccessory This;
+
+        public HMAccessoryEvents(HMAccessory This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<HomeKit.HMAccessoryUpdateEventArgs> DidUpdateAssociatedServiceType {
+            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryUpdateEventArgs>, HomeKit.HMAccessoryUpdateEventArgs>(x => This.DidUpdateAssociatedServiceType += x, x => This.DidUpdateAssociatedServiceType -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> DidUpdateName {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidUpdateName += x, x => This.DidUpdateName -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<HomeKit.HMAccessoryUpdateEventArgs> DidUpdateNameForService {
+            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryUpdateEventArgs>, HomeKit.HMAccessoryUpdateEventArgs>(x => This.DidUpdateNameForService += x, x => This.DidUpdateNameForService -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> DidUpdateReachability {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidUpdateReachability += x, x => This.DidUpdateReachability -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> DidUpdateServices {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidUpdateServices += x, x => This.DidUpdateServices -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<HomeKit.HMAccessoryServiceUpdateCharacteristicEventArgs> DidUpdateValueForCharacteristic {
+            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryServiceUpdateCharacteristicEventArgs>, HomeKit.HMAccessoryServiceUpdateCharacteristicEventArgs>(x => This.DidUpdateValueForCharacteristic += x, x => This.DidUpdateValueForCharacteristic -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class HMAccessoryBrowserEvents
+    {
+        HMAccessoryBrowser This;
+
+        public HMAccessoryBrowserEvents(HMAccessoryBrowser This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<HomeKit.HMAccessoryBrowserEventArgs> DidFindNewAccessory {
+            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryBrowserEventArgs>, HomeKit.HMAccessoryBrowserEventArgs>(x => This.DidFindNewAccessory += x, x => This.DidFindNewAccessory -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<HomeKit.HMAccessoryBrowserEventArgs> DidRemoveNewAccessory {
+            get { return Observable.FromEventPattern<System.EventHandler<HomeKit.HMAccessoryBrowserEventArgs>, HomeKit.HMAccessoryBrowserEventArgs>(x => This.DidRemoveNewAccessory += x, x => This.DidRemoveNewAccessory -= x).Select(x => x.EventArgs); }
+        }
+
+    }
     public class HMHomeManagerEvents
     {
         HMHomeManager This;
@@ -1381,91 +1433,6 @@ namespace HomeKit
 
         public IObservable<System.EventArgs> DidUpdatePrimaryHome {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidUpdatePrimaryHome += x, x => This.DidUpdatePrimaryHome -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-}
-namespace CoreLocation
-{
-    public static class EventsMixin
-    {
-        public static CLLocationManagerEvents Events(this CLLocationManager This)
-        {
-            return new CLLocationManagerEvents(This);
-        }
-    }
-
-    public class CLLocationManagerEvents
-    {
-        CLLocationManager This;
-
-        public CLLocationManagerEvents(CLLocationManager This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<CoreLocation.CLAuthorizationChangedEventArgs> AuthorizationChanged {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLAuthorizationChangedEventArgs>, CoreLocation.CLAuthorizationChangedEventArgs>(x => This.AuthorizationChanged += x, x => This.AuthorizationChanged -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<Foundation.NSErrorEventArgs> DeferredUpdatesFinished {
-            get { return Observable.FromEventPattern<System.EventHandler<Foundation.NSErrorEventArgs>, Foundation.NSErrorEventArgs>(x => This.DeferredUpdatesFinished += x, x => This.DeferredUpdatesFinished -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLRegionStateDeterminedEventArgs> DidDetermineState {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionStateDeterminedEventArgs>, CoreLocation.CLRegionStateDeterminedEventArgs>(x => This.DidDetermineState += x, x => This.DidDetermineState -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLRegionBeaconsRangedEventArgs> DidRangeBeacons {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionBeaconsRangedEventArgs>, CoreLocation.CLRegionBeaconsRangedEventArgs>(x => This.DidRangeBeacons += x, x => This.DidRangeBeacons -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLRegionEventArgs> DidStartMonitoringForRegion {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionEventArgs>, CoreLocation.CLRegionEventArgs>(x => This.DidStartMonitoringForRegion += x, x => This.DidStartMonitoringForRegion -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLVisitedEventArgs> DidVisit {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLVisitedEventArgs>, CoreLocation.CLVisitedEventArgs>(x => This.DidVisit += x, x => This.DidVisit -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<Foundation.NSErrorEventArgs> Failed {
-            get { return Observable.FromEventPattern<System.EventHandler<Foundation.NSErrorEventArgs>, Foundation.NSErrorEventArgs>(x => This.Failed += x, x => This.Failed -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLLocationsUpdatedEventArgs> LocationsUpdated {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLLocationsUpdatedEventArgs>, CoreLocation.CLLocationsUpdatedEventArgs>(x => This.LocationsUpdated += x, x => This.LocationsUpdated -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> LocationUpdatesPaused {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocationUpdatesPaused += x, x => This.LocationUpdatesPaused -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> LocationUpdatesResumed {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.LocationUpdatesResumed += x, x => This.LocationUpdatesResumed -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLRegionErrorEventArgs> MonitoringFailed {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionErrorEventArgs>, CoreLocation.CLRegionErrorEventArgs>(x => This.MonitoringFailed += x, x => This.MonitoringFailed -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLRegionBeaconsFailedEventArgs> RangingBeaconsDidFailForRegion {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionBeaconsFailedEventArgs>, CoreLocation.CLRegionBeaconsFailedEventArgs>(x => This.RangingBeaconsDidFailForRegion += x, x => This.RangingBeaconsDidFailForRegion -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLRegionEventArgs> RegionEntered {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionEventArgs>, CoreLocation.CLRegionEventArgs>(x => This.RegionEntered += x, x => This.RegionEntered -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLRegionEventArgs> RegionLeft {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLRegionEventArgs>, CoreLocation.CLRegionEventArgs>(x => This.RegionLeft += x, x => This.RegionLeft -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLHeadingUpdatedEventArgs> UpdatedHeading {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLHeadingUpdatedEventArgs>, CoreLocation.CLHeadingUpdatedEventArgs>(x => This.UpdatedHeading += x, x => This.UpdatedHeading -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<CoreLocation.CLLocationUpdatedEventArgs> UpdatedLocation {
-            get { return Observable.FromEventPattern<System.EventHandler<CoreLocation.CLLocationUpdatedEventArgs>, CoreLocation.CLLocationUpdatedEventArgs>(x => This.UpdatedLocation += x, x => This.UpdatedLocation -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -1517,21 +1484,25 @@ namespace UIKit
 {
     public static class EventsMixin
     {
-        public static UIActionSheetEvents Events(this UIActionSheet This)
-        {
-            return new UIActionSheetEvents(This);
-        }
-        public static UIAlertViewEvents Events(this UIAlertView This)
-        {
-            return new UIAlertViewEvents(This);
-        }
         public static UIBarButtonItemEvents Events(this UIBarButtonItem This)
         {
             return new UIBarButtonItemEvents(This);
         }
+        public static UIImagePickerControllerEvents Events(this UIImagePickerController This)
+        {
+            return new UIImagePickerControllerEvents(This);
+        }
+        public static UIPageViewControllerEvents Events(this UIPageViewController This)
+        {
+            return new UIPageViewControllerEvents(This);
+        }
         public static UIControlEvents Events(this UIControl This)
         {
             return new UIControlEvents(This);
+        }
+        public static UIActionSheetEvents Events(this UIActionSheet This)
+        {
+            return new UIActionSheetEvents(This);
         }
         public static UIDocumentMenuViewControllerEvents Events(this UIDocumentMenuViewController This)
         {
@@ -1549,25 +1520,21 @@ namespace UIKit
         {
             return new UIPopoverPresentationControllerEvents(This);
         }
-        public static UISearchBarEvents Events(this UISearchBar This)
-        {
-            return new UISearchBarEvents(This);
-        }
         public static UITextFieldEvents Events(this UITextField This)
         {
             return new UITextFieldEvents(This);
+        }
+        public static UIAlertViewEvents Events(this UIAlertView This)
+        {
+            return new UIAlertViewEvents(This);
         }
         public static UITextViewEvents Events(this UITextView This)
         {
             return new UITextViewEvents(This);
         }
-        public static UIImagePickerControllerEvents Events(this UIImagePickerController This)
+        public static UISearchBarEvents Events(this UISearchBar This)
         {
-            return new UIImagePickerControllerEvents(This);
-        }
-        public static UIPageViewControllerEvents Events(this UIPageViewController This)
-        {
-            return new UIPageViewControllerEvents(This);
+            return new UISearchBarEvents(This);
         }
         public static UIPrintInteractionControllerEvents Events(this UIPrintInteractionController This)
         {
@@ -1589,13 +1556,13 @@ namespace UIKit
         {
             return new UIDocumentInteractionControllerEvents(This);
         }
-        public static UIScrollViewEvents Events(this UIScrollView This)
-        {
-            return new UIScrollViewEvents(This);
-        }
         public static UIPreviewInteractionEvents Events(this UIPreviewInteraction This)
         {
             return new UIPreviewInteractionEvents(This);
+        }
+        public static UIScrollViewEvents Events(this UIScrollView This)
+        {
+            return new UIScrollViewEvents(This);
         }
         public static UITabBarEvents Events(this UITabBar This)
         {
@@ -1619,74 +1586,6 @@ namespace UIKit
         }
     }
 
-    public class UIActionSheetEvents
-    {
-        UIActionSheet This;
-
-        public UIActionSheetEvents(UIActionSheet This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> Canceled {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Canceled += x, x => This.Canceled -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.UIButtonEventArgs> Clicked {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.Clicked += x, x => This.Clicked -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.UIButtonEventArgs> Dismissed {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.Dismissed += x, x => This.Dismissed -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> Presented {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Presented += x, x => This.Presented -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.UIButtonEventArgs> WillDismiss {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.WillDismiss += x, x => This.WillDismiss -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> WillPresent {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.WillPresent += x, x => This.WillPresent -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class UIAlertViewEvents
-    {
-        UIAlertView This;
-
-        public UIAlertViewEvents(UIAlertView This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> Canceled {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Canceled += x, x => This.Canceled -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.UIButtonEventArgs> Clicked {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.Clicked += x, x => This.Clicked -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.UIButtonEventArgs> Dismissed {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.Dismissed += x, x => This.Dismissed -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> Presented {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Presented += x, x => This.Presented -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.UIButtonEventArgs> WillDismiss {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.WillDismiss += x, x => This.WillDismiss -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> WillPresent {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.WillPresent += x, x => This.WillPresent -= x).Select(x => x.EventArgs); }
-        }
-
-    }
     public class UIBarButtonItemEvents
     {
         UIBarButtonItem This;
@@ -1698,6 +1597,46 @@ namespace UIKit
 
         public IObservable<System.EventArgs> Clicked {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Clicked += x, x => This.Clicked -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class UIImagePickerControllerEvents
+    {
+        UIImagePickerController This;
+
+        public UIImagePickerControllerEvents(UIImagePickerController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> Canceled {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Canceled += x, x => This.Canceled -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.UIImagePickerImagePickedEventArgs> FinishedPickingImage {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIImagePickerImagePickedEventArgs>, UIKit.UIImagePickerImagePickedEventArgs>(x => This.FinishedPickingImage += x, x => This.FinishedPickingImage -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.UIImagePickerMediaPickedEventArgs> FinishedPickingMedia {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIImagePickerMediaPickedEventArgs>, UIKit.UIImagePickerMediaPickedEventArgs>(x => This.FinishedPickingMedia += x, x => This.FinishedPickingMedia -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class UIPageViewControllerEvents
+    {
+        UIPageViewController This;
+
+        public UIPageViewControllerEvents(UIPageViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<UIKit.UIPageViewFinishedAnimationEventArgs> DidFinishAnimating {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIPageViewFinishedAnimationEventArgs>, UIKit.UIPageViewFinishedAnimationEventArgs>(x => This.DidFinishAnimating += x, x => This.DidFinishAnimating -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.UIPageViewControllerTransitionEventArgs> WillTransition {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIPageViewControllerTransitionEventArgs>, UIKit.UIPageViewControllerTransitionEventArgs>(x => This.WillTransition += x, x => This.WillTransition -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -1783,6 +1722,40 @@ namespace UIKit
         }
 
     }
+    public class UIActionSheetEvents
+    {
+        UIActionSheet This;
+
+        public UIActionSheetEvents(UIActionSheet This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> Canceled {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Canceled += x, x => This.Canceled -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.UIButtonEventArgs> Clicked {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.Clicked += x, x => This.Clicked -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.UIButtonEventArgs> Dismissed {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.Dismissed += x, x => This.Dismissed -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> Presented {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Presented += x, x => This.Presented -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.UIButtonEventArgs> WillDismiss {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.WillDismiss += x, x => This.WillDismiss -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> WillPresent {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.WillPresent += x, x => This.WillPresent -= x).Select(x => x.EventArgs); }
+        }
+
+    }
     public class UIDocumentMenuViewControllerEvents
     {
         UIDocumentMenuViewController This;
@@ -1859,6 +1832,88 @@ namespace UIKit
         }
 
     }
+    public class UITextFieldEvents
+        : UIKit.UIControlEvents
+    {
+        UITextField This;
+
+        public UITextFieldEvents(UITextField This)
+            : base(This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> Ended {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Ended += x, x => This.Ended -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> Started {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Started += x, x => This.Started -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class UIAlertViewEvents
+    {
+        UIAlertView This;
+
+        public UIAlertViewEvents(UIAlertView This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> Canceled {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Canceled += x, x => This.Canceled -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.UIButtonEventArgs> Clicked {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.Clicked += x, x => This.Clicked -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.UIButtonEventArgs> Dismissed {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.Dismissed += x, x => This.Dismissed -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> Presented {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Presented += x, x => This.Presented -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.UIButtonEventArgs> WillDismiss {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIButtonEventArgs>, UIKit.UIButtonEventArgs>(x => This.WillDismiss += x, x => This.WillDismiss -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> WillPresent {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.WillPresent += x, x => This.WillPresent -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class UITextViewEvents
+        : UIKit.UIScrollViewEvents
+    {
+        UITextView This;
+
+        public UITextViewEvents(UITextView This)
+            : base(This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> Changed {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Changed += x, x => This.Changed -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> Ended {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Ended += x, x => This.Ended -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> Started {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Started += x, x => This.Started -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> SelectionChanged {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SelectionChanged += x, x => This.SelectionChanged -= x).Select(x => x.EventArgs); }
+        }
+
+    }
     public class UISearchBarEvents
     {
         UISearchBar This;
@@ -1898,94 +1953,6 @@ namespace UIKit
 
         public IObservable<UIKit.UISearchBarTextChangedEventArgs> TextChanged {
             get { return Observable.FromEventPattern<System.EventHandler<UIKit.UISearchBarTextChangedEventArgs>, UIKit.UISearchBarTextChangedEventArgs>(x => This.TextChanged += x, x => This.TextChanged -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class UITextFieldEvents
-        : UIKit.UIControlEvents
-    {
-        UITextField This;
-
-        public UITextFieldEvents(UITextField This)
-            : base(This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> Ended {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Ended += x, x => This.Ended -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> Started {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Started += x, x => This.Started -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class UITextViewEvents
-        : UIKit.UIScrollViewEvents
-    {
-        UITextView This;
-
-        public UITextViewEvents(UITextView This)
-            : base(This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> Changed {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Changed += x, x => This.Changed -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> Ended {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Ended += x, x => This.Ended -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> Started {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Started += x, x => This.Started -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> SelectionChanged {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SelectionChanged += x, x => This.SelectionChanged -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class UIImagePickerControllerEvents
-    {
-        UIImagePickerController This;
-
-        public UIImagePickerControllerEvents(UIImagePickerController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> Canceled {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Canceled += x, x => This.Canceled -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.UIImagePickerImagePickedEventArgs> FinishedPickingImage {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIImagePickerImagePickedEventArgs>, UIKit.UIImagePickerImagePickedEventArgs>(x => This.FinishedPickingImage += x, x => This.FinishedPickingImage -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.UIImagePickerMediaPickedEventArgs> FinishedPickingMedia {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIImagePickerMediaPickedEventArgs>, UIKit.UIImagePickerMediaPickedEventArgs>(x => This.FinishedPickingMedia += x, x => This.FinishedPickingMedia -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class UIPageViewControllerEvents
-    {
-        UIPageViewController This;
-
-        public UIPageViewControllerEvents(UIPageViewController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<UIKit.UIPageViewFinishedAnimationEventArgs> DidFinishAnimating {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIPageViewFinishedAnimationEventArgs>, UIKit.UIPageViewFinishedAnimationEventArgs>(x => This.DidFinishAnimating += x, x => This.DidFinishAnimating -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.UIPageViewControllerTransitionEventArgs> WillTransition {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIPageViewControllerTransitionEventArgs>, UIKit.UIPageViewControllerTransitionEventArgs>(x => This.WillTransition += x, x => This.WillTransition -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -2123,6 +2090,28 @@ namespace UIKit
         }
 
     }
+    public class UIPreviewInteractionEvents
+    {
+        UIPreviewInteraction This;
+
+        public UIPreviewInteractionEvents(UIPreviewInteraction This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> DidCancel {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidCancel += x, x => This.DidCancel -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.NSPreviewInteractionPreviewUpdateEventArgs> DidUpdateCommit {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.NSPreviewInteractionPreviewUpdateEventArgs>, UIKit.NSPreviewInteractionPreviewUpdateEventArgs>(x => This.DidUpdateCommit += x, x => This.DidUpdateCommit -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<UIKit.NSPreviewInteractionPreviewUpdateEventArgs> DidUpdatePreviewTransition {
+            get { return Observable.FromEventPattern<System.EventHandler<UIKit.NSPreviewInteractionPreviewUpdateEventArgs>, UIKit.NSPreviewInteractionPreviewUpdateEventArgs>(x => This.DidUpdatePreviewTransition += x, x => This.DidUpdatePreviewTransition -= x).Select(x => x.EventArgs); }
+        }
+
+    }
     public class UIScrollViewEvents
     {
         UIScrollView This;
@@ -2174,28 +2163,6 @@ namespace UIKit
 
         public IObservable<UIKit.UIScrollViewZoomingEventArgs> ZoomingStarted {
             get { return Observable.FromEventPattern<System.EventHandler<UIKit.UIScrollViewZoomingEventArgs>, UIKit.UIScrollViewZoomingEventArgs>(x => This.ZoomingStarted += x, x => This.ZoomingStarted -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class UIPreviewInteractionEvents
-    {
-        UIPreviewInteraction This;
-
-        public UIPreviewInteractionEvents(UIPreviewInteraction This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> DidCancel {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidCancel += x, x => This.DidCancel -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.NSPreviewInteractionPreviewUpdateEventArgs> DidUpdateCommit {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.NSPreviewInteractionPreviewUpdateEventArgs>, UIKit.NSPreviewInteractionPreviewUpdateEventArgs>(x => This.DidUpdateCommit += x, x => This.DidUpdateCommit -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<UIKit.NSPreviewInteractionPreviewUpdateEventArgs> DidUpdatePreviewTransition {
-            get { return Observable.FromEventPattern<System.EventHandler<UIKit.NSPreviewInteractionPreviewUpdateEventArgs>, UIKit.NSPreviewInteractionPreviewUpdateEventArgs>(x => This.DidUpdatePreviewTransition += x, x => This.DidUpdatePreviewTransition -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -2326,35 +2293,6 @@ namespace UIKit
 
     }
 }
-namespace SpriteKit
-{
-    public static class EventsMixin
-    {
-        public static SKPhysicsWorldEvents Events(this SKPhysicsWorld This)
-        {
-            return new SKPhysicsWorldEvents(This);
-        }
-    }
-
-    public class SKPhysicsWorldEvents
-    {
-        SKPhysicsWorld This;
-
-        public SKPhysicsWorldEvents(SKPhysicsWorld This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> DidBeginContact {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidBeginContact += x, x => This.DidBeginContact -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> DidEndContact {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidEndContact += x, x => This.DidEndContact -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-}
 namespace CoreMidi
 {
     public static class EventsMixin
@@ -2440,6 +2378,68 @@ namespace CoreMidi
 
     }
 }
+namespace SceneKit
+{
+    public static class EventsMixin
+    {
+        public static SCNPhysicsWorldEvents Events(this SCNPhysicsWorld This)
+        {
+            return new SCNPhysicsWorldEvents(This);
+        }
+    }
+
+    public class SCNPhysicsWorldEvents
+    {
+        SCNPhysicsWorld This;
+
+        public SCNPhysicsWorldEvents(SCNPhysicsWorld This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<SceneKit.SCNPhysicsContactEventArgs> DidBeginContact {
+            get { return Observable.FromEventPattern<System.EventHandler<SceneKit.SCNPhysicsContactEventArgs>, SceneKit.SCNPhysicsContactEventArgs>(x => This.DidBeginContact += x, x => This.DidBeginContact -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<SceneKit.SCNPhysicsContactEventArgs> DidEndContact {
+            get { return Observable.FromEventPattern<System.EventHandler<SceneKit.SCNPhysicsContactEventArgs>, SceneKit.SCNPhysicsContactEventArgs>(x => This.DidEndContact += x, x => This.DidEndContact -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<SceneKit.SCNPhysicsContactEventArgs> DidUpdateContact {
+            get { return Observable.FromEventPattern<System.EventHandler<SceneKit.SCNPhysicsContactEventArgs>, SceneKit.SCNPhysicsContactEventArgs>(x => This.DidUpdateContact += x, x => This.DidUpdateContact -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+}
+namespace SpriteKit
+{
+    public static class EventsMixin
+    {
+        public static SKPhysicsWorldEvents Events(this SKPhysicsWorld This)
+        {
+            return new SKPhysicsWorldEvents(This);
+        }
+    }
+
+    public class SKPhysicsWorldEvents
+    {
+        SKPhysicsWorld This;
+
+        public SKPhysicsWorldEvents(SKPhysicsWorld This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> DidBeginContact {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidBeginContact += x, x => This.DidBeginContact -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> DidEndContact {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.DidEndContact += x, x => This.DidEndContact -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+}
 namespace StoreKit
 {
     public static class EventsMixin
@@ -2503,6 +2503,130 @@ namespace StoreKit
 
         public IObservable<System.EventArgs> Finished {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Finished += x, x => This.Finished -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+}
+namespace EventKitUI
+{
+    public static class EventsMixin
+    {
+        public static EKCalendarChooserEvents Events(this EKCalendarChooser This)
+        {
+            return new EKCalendarChooserEvents(This);
+        }
+        public static EKEventEditViewControllerEvents Events(this EKEventEditViewController This)
+        {
+            return new EKEventEditViewControllerEvents(This);
+        }
+        public static EKEventViewControllerEvents Events(this EKEventViewController This)
+        {
+            return new EKEventViewControllerEvents(This);
+        }
+    }
+
+    public class EKCalendarChooserEvents
+    {
+        EKCalendarChooser This;
+
+        public EKCalendarChooserEvents(EKCalendarChooser This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> Cancelled {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Cancelled += x, x => This.Cancelled -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> Finished {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Finished += x, x => This.Finished -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<System.EventArgs> SelectionChanged {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SelectionChanged += x, x => This.SelectionChanged -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class EKEventEditViewControllerEvents
+    {
+        EKEventEditViewController This;
+
+        public EKEventEditViewControllerEvents(EKEventEditViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<EventKitUI.EKEventEditEventArgs> Completed {
+            get { return Observable.FromEventPattern<System.EventHandler<EventKitUI.EKEventEditEventArgs>, EventKitUI.EKEventEditEventArgs>(x => This.Completed += x, x => This.Completed -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class EKEventViewControllerEvents
+    {
+        EKEventViewController This;
+
+        public EKEventViewControllerEvents(EKEventViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<EventKitUI.EKEventViewEventArgs> Completed {
+            get { return Observable.FromEventPattern<System.EventHandler<EventKitUI.EKEventViewEventArgs>, EventKitUI.EKEventViewEventArgs>(x => This.Completed += x, x => This.Completed -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+}
+namespace ExternalAccessory
+{
+    public static class EventsMixin
+    {
+        public static EAAccessoryEvents Events(this EAAccessory This)
+        {
+            return new EAAccessoryEvents(This);
+        }
+        public static EAWiFiUnconfiguredAccessoryBrowserEvents Events(this EAWiFiUnconfiguredAccessoryBrowser This)
+        {
+            return new EAWiFiUnconfiguredAccessoryBrowserEvents(This);
+        }
+    }
+
+    public class EAAccessoryEvents
+    {
+        EAAccessory This;
+
+        public EAAccessoryEvents(EAAccessory This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> Disconnected {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Disconnected += x, x => This.Disconnected -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class EAWiFiUnconfiguredAccessoryBrowserEvents
+    {
+        EAWiFiUnconfiguredAccessoryBrowser This;
+
+        public EAWiFiUnconfiguredAccessoryBrowserEvents(EAWiFiUnconfiguredAccessoryBrowser This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs> DidFindUnconfiguredAccessories {
+            get { return Observable.FromEventPattern<System.EventHandler<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs>, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs>(x => This.DidFindUnconfiguredAccessories += x, x => This.DidFindUnconfiguredAccessories -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<ExternalAccessory.EAWiFiUnconfiguredAccessoryDidFinishEventArgs> DidFinishConfiguringAccessory {
+            get { return Observable.FromEventPattern<System.EventHandler<ExternalAccessory.EAWiFiUnconfiguredAccessoryDidFinishEventArgs>, ExternalAccessory.EAWiFiUnconfiguredAccessoryDidFinishEventArgs>(x => This.DidFinishConfiguringAccessory += x, x => This.DidFinishConfiguringAccessory -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs> DidRemoveUnconfiguredAccessories {
+            get { return Observable.FromEventPattern<System.EventHandler<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs>, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs>(x => This.DidRemoveUnconfiguredAccessories += x, x => This.DidRemoveUnconfiguredAccessories -= x).Select(x => x.EventArgs); }
+        }
+
+        public IObservable<ExternalAccessory.EAWiFiUnconfiguredAccessoryEventArgs> DidUpdateState {
+            get { return Observable.FromEventPattern<System.EventHandler<ExternalAccessory.EAWiFiUnconfiguredAccessoryEventArgs>, ExternalAccessory.EAWiFiUnconfiguredAccessoryEventArgs>(x => This.DidUpdateState += x, x => This.DidUpdateState -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -2604,126 +2728,27 @@ namespace MapKit
 
     }
 }
-namespace ExternalAccessory
+namespace GLKit
 {
     public static class EventsMixin
     {
-        public static EAAccessoryEvents Events(this EAAccessory This)
+        public static GLKViewEvents Events(this GLKView This)
         {
-            return new EAAccessoryEvents(This);
-        }
-        public static EAWiFiUnconfiguredAccessoryBrowserEvents Events(this EAWiFiUnconfiguredAccessoryBrowser This)
-        {
-            return new EAWiFiUnconfiguredAccessoryBrowserEvents(This);
+            return new GLKViewEvents(This);
         }
     }
 
-    public class EAAccessoryEvents
+    public class GLKViewEvents
     {
-        EAAccessory This;
+        GLKView This;
 
-        public EAAccessoryEvents(EAAccessory This)
+        public GLKViewEvents(GLKView This)
         {
             this.This = This;
         }
 
-        public IObservable<System.EventArgs> Disconnected {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Disconnected += x, x => This.Disconnected -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class EAWiFiUnconfiguredAccessoryBrowserEvents
-    {
-        EAWiFiUnconfiguredAccessoryBrowser This;
-
-        public EAWiFiUnconfiguredAccessoryBrowserEvents(EAWiFiUnconfiguredAccessoryBrowser This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs> DidFindUnconfiguredAccessories {
-            get { return Observable.FromEventPattern<System.EventHandler<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs>, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs>(x => This.DidFindUnconfiguredAccessories += x, x => This.DidFindUnconfiguredAccessories -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<ExternalAccessory.EAWiFiUnconfiguredAccessoryDidFinishEventArgs> DidFinishConfiguringAccessory {
-            get { return Observable.FromEventPattern<System.EventHandler<ExternalAccessory.EAWiFiUnconfiguredAccessoryDidFinishEventArgs>, ExternalAccessory.EAWiFiUnconfiguredAccessoryDidFinishEventArgs>(x => This.DidFinishConfiguringAccessory += x, x => This.DidFinishConfiguringAccessory -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs> DidRemoveUnconfiguredAccessories {
-            get { return Observable.FromEventPattern<System.EventHandler<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs>, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserEventArgs>(x => This.DidRemoveUnconfiguredAccessories += x, x => This.DidRemoveUnconfiguredAccessories -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<ExternalAccessory.EAWiFiUnconfiguredAccessoryEventArgs> DidUpdateState {
-            get { return Observable.FromEventPattern<System.EventHandler<ExternalAccessory.EAWiFiUnconfiguredAccessoryEventArgs>, ExternalAccessory.EAWiFiUnconfiguredAccessoryEventArgs>(x => This.DidUpdateState += x, x => This.DidUpdateState -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-}
-namespace EventKitUI
-{
-    public static class EventsMixin
-    {
-        public static EKCalendarChooserEvents Events(this EKCalendarChooser This)
-        {
-            return new EKCalendarChooserEvents(This);
-        }
-        public static EKEventEditViewControllerEvents Events(this EKEventEditViewController This)
-        {
-            return new EKEventEditViewControllerEvents(This);
-        }
-        public static EKEventViewControllerEvents Events(this EKEventViewController This)
-        {
-            return new EKEventViewControllerEvents(This);
-        }
-    }
-
-    public class EKCalendarChooserEvents
-    {
-        EKCalendarChooser This;
-
-        public EKCalendarChooserEvents(EKCalendarChooser This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<System.EventArgs> Cancelled {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Cancelled += x, x => This.Cancelled -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> Finished {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Finished += x, x => This.Finished -= x).Select(x => x.EventArgs); }
-        }
-
-        public IObservable<System.EventArgs> SelectionChanged {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.SelectionChanged += x, x => This.SelectionChanged -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class EKEventEditViewControllerEvents
-    {
-        EKEventEditViewController This;
-
-        public EKEventEditViewControllerEvents(EKEventEditViewController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<EventKitUI.EKEventEditEventArgs> Completed {
-            get { return Observable.FromEventPattern<System.EventHandler<EventKitUI.EKEventEditEventArgs>, EventKitUI.EKEventEditEventArgs>(x => This.Completed += x, x => This.Completed -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-    public class EKEventViewControllerEvents
-    {
-        EKEventViewController This;
-
-        public EKEventViewControllerEvents(EKEventViewController This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<EventKitUI.EKEventViewEventArgs> Completed {
-            get { return Observable.FromEventPattern<System.EventHandler<EventKitUI.EKEventViewEventArgs>, EventKitUI.EKEventViewEventArgs>(x => This.Completed += x, x => This.Completed -= x).Select(x => x.EventArgs); }
+        public IObservable<GLKit.GLKViewDrawEventArgs> DrawInRect {
+            get { return Observable.FromEventPattern<System.EventHandler<GLKit.GLKViewDrawEventArgs>, GLKit.GLKViewDrawEventArgs>(x => This.DrawInRect += x, x => This.DrawInRect -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -2757,59 +2782,20 @@ namespace MediaPlayer
 
     }
 }
-namespace GLKit
-{
-    public static class EventsMixin
-    {
-        public static GLKViewEvents Events(this GLKView This)
-        {
-            return new GLKViewEvents(This);
-        }
-    }
-
-    public class GLKViewEvents
-    {
-        GLKView This;
-
-        public GLKViewEvents(GLKView This)
-        {
-            this.This = This;
-        }
-
-        public IObservable<GLKit.GLKViewDrawEventArgs> DrawInRect {
-            get { return Observable.FromEventPattern<System.EventHandler<GLKit.GLKViewDrawEventArgs>, GLKit.GLKViewDrawEventArgs>(x => This.DrawInRect += x, x => This.DrawInRect -= x).Select(x => x.EventArgs); }
-        }
-
-    }
-}
 namespace PassKit
 {
     public static class EventsMixin
     {
-        public static PKAddPassesViewControllerEvents Events(this PKAddPassesViewController This)
-        {
-            return new PKAddPassesViewControllerEvents(This);
-        }
         public static PKPaymentAuthorizationViewControllerEvents Events(this PKPaymentAuthorizationViewController This)
         {
             return new PKPaymentAuthorizationViewControllerEvents(This);
         }
-    }
-
-    public class PKAddPassesViewControllerEvents
-    {
-        PKAddPassesViewController This;
-
-        public PKAddPassesViewControllerEvents(PKAddPassesViewController This)
+        public static PKAddPassesViewControllerEvents Events(this PKAddPassesViewController This)
         {
-            this.This = This;
+            return new PKAddPassesViewControllerEvents(This);
         }
-
-        public IObservable<System.EventArgs> Finished {
-            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Finished += x, x => This.Finished -= x).Select(x => x.EventArgs); }
-        }
-
     }
+
     public class PKPaymentAuthorizationViewControllerEvents
     {
         PKPaymentAuthorizationViewController This;
@@ -2845,6 +2831,20 @@ namespace PassKit
 
         public IObservable<System.EventArgs> WillAuthorizePayment {
             get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.WillAuthorizePayment += x, x => This.WillAuthorizePayment -= x).Select(x => x.EventArgs); }
+        }
+
+    }
+    public class PKAddPassesViewControllerEvents
+    {
+        PKAddPassesViewController This;
+
+        public PKAddPassesViewControllerEvents(PKAddPassesViewController This)
+        {
+            this.This = This;
+        }
+
+        public IObservable<System.EventArgs> Finished {
+            get { return Observable.FromEventPattern<System.EventHandler, System.EventArgs>(x => This.Finished += x, x => This.Finished -= x).Select(x => x.EventArgs); }
         }
 
     }
@@ -2923,16 +2923,6 @@ namespace iAd
 
 namespace AVFoundation.Rx
 {
-    public  partial class AVPlayerItemOutputPushDelegateRx : AVPlayerItemOutputPushDelegate
-    {
-        readonly SingleAwaitSubject<AVFoundation.AVPlayerItemOutput> _OutputSequenceWasFlushed = new SingleAwaitSubject<AVFoundation.AVPlayerItemOutput>();
-        public IObservable<AVFoundation.AVPlayerItemOutput> OutputSequenceWasFlushedObs { get { return _OutputSequenceWasFlushed; } }
-        public override void OutputSequenceWasFlushed(AVFoundation.AVPlayerItemOutput output)
-        {
-            _OutputSequenceWasFlushed.OnNext(output);
-        }
-
-    }
     public  partial class AVCaptureAudioDataOutputSampleBufferDelegateRx : AVCaptureAudioDataOutputSampleBufferDelegate
     {
         readonly SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>> _DidDropSampleBuffer = new SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>>();
@@ -2995,6 +2985,72 @@ namespace AVFoundation.Rx
         }
 
     }
+    public  partial class AVAssetDownloadDelegateRx : AVAssetDownloadDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>> _DidCompleteWithError = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>> DidCompleteWithErrorObs { get { return _DidCompleteWithError; } }
+        public override void DidCompleteWithError(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSError error)
+        {
+            _DidCompleteWithError.OnNext(Tuple.Create(session, task, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>> _DidFinishCollectingMetrics = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>> DidFinishCollectingMetricsObs { get { return _DidFinishCollectingMetrics; } }
+        public override void DidFinishCollectingMetrics(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSUrlSessionTaskMetrics metrics)
+        {
+            _DidFinishCollectingMetrics.OnNext(Tuple.Create(session, task, metrics));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, Foundation.NSUrl>> _DidFinishDownloadingToUrl = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, Foundation.NSUrl>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, Foundation.NSUrl>> DidFinishDownloadingToUrlObs { get { return _DidFinishDownloadingToUrl; } }
+        public override void DidFinishDownloadingToUrl(Foundation.NSUrlSession session, AVFoundation.AVAssetDownloadTask assetDownloadTask, Foundation.NSUrl location)
+        {
+            _DidFinishDownloadingToUrl.OnNext(Tuple.Create(session, assetDownloadTask, location));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, CoreMedia.CMTimeRange, Foundation.NSValue[], CoreMedia.CMTimeRange>> _DidLoadTimeRange = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, CoreMedia.CMTimeRange, Foundation.NSValue[], CoreMedia.CMTimeRange>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, CoreMedia.CMTimeRange, Foundation.NSValue[], CoreMedia.CMTimeRange>> DidLoadTimeRangeObs { get { return _DidLoadTimeRange; } }
+        public override void DidLoadTimeRange(Foundation.NSUrlSession session, AVFoundation.AVAssetDownloadTask assetDownloadTask, CoreMedia.CMTimeRange timeRange, Foundation.NSValue[] loadedTimeRanges, CoreMedia.CMTimeRange timeRangeExpectedToLoad)
+        {
+            _DidLoadTimeRange.OnNext(Tuple.Create(session, assetDownloadTask, timeRange, loadedTimeRanges, timeRangeExpectedToLoad));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> _DidReceiveChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> DidReceiveChallengeObs { get { return _DidReceiveChallenge; } }
+        public override void DidReceiveChallenge(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSUrlAuthenticationChallenge challenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential> completionHandler)
+        {
+            _DidReceiveChallenge.OnNext(Tuple.Create(session, task, challenge, completionHandler));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, AVFoundation.AVMediaSelection>> _DidResolveMediaSelection = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, AVFoundation.AVMediaSelection>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, AVFoundation.AVMediaSelection>> DidResolveMediaSelectionObs { get { return _DidResolveMediaSelection; } }
+        public override void DidResolveMediaSelection(Foundation.NSUrlSession session, AVFoundation.AVAssetDownloadTask assetDownloadTask, AVFoundation.AVMediaSelection resolvedMediaSelection)
+        {
+            _DidResolveMediaSelection.OnNext(Tuple.Create(session, assetDownloadTask, resolvedMediaSelection));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>> _DidSendBodyData = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>> DidSendBodyDataObs { get { return _DidSendBodyData; } }
+        public override void DidSendBodyData(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, System.Int64 bytesSent, System.Int64 totalBytesSent, System.Int64 totalBytesExpectedToSend)
+        {
+            _DidSendBodyData.OnNext(Tuple.Create(session, task, bytesSent, totalBytesSent, totalBytesExpectedToSend));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>> _NeedNewBodyStream = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>> NeedNewBodyStreamObs { get { return _NeedNewBodyStream; } }
+        public override void NeedNewBodyStream(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, System.Action<Foundation.NSInputStream> completionHandler)
+        {
+            _NeedNewBodyStream.OnNext(Tuple.Create(session, task, completionHandler));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>> _WillPerformHttpRedirection = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>> WillPerformHttpRedirectionObs { get { return _WillPerformHttpRedirection; } }
+        public override void WillPerformHttpRedirection(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSHttpUrlResponse response, Foundation.NSUrlRequest newRequest, System.Action<Foundation.NSUrlRequest> completionHandler)
+        {
+            _WillPerformHttpRedirection.OnNext(Tuple.Create(session, task, response, newRequest, completionHandler));
+        }
+
+    }
     public abstract partial class AVAssetResourceLoaderDelegateRx : AVAssetResourceLoaderDelegate
     {
         readonly SingleAwaitSubject<Tuple<AVFoundation.AVAssetResourceLoader, Foundation.NSUrlAuthenticationChallenge>> _DidCancelAuthenticationChallenge = new SingleAwaitSubject<Tuple<AVFoundation.AVAssetResourceLoader, Foundation.NSUrlAuthenticationChallenge>>();
@@ -3009,30 +3065,6 @@ namespace AVFoundation.Rx
         public override void DidCancelLoadingRequest(AVFoundation.AVAssetResourceLoader resourceLoader, AVFoundation.AVAssetResourceLoadingRequest loadingRequest)
         {
             _DidCancelLoadingRequest.OnNext(Tuple.Create(resourceLoader, loadingRequest));
-        }
-
-    }
-    public  partial class AVAudioSessionDelegateRx : AVAudioSessionDelegate
-    {
-        readonly SingleAwaitSubject<Unit> _BeginInterruption = new SingleAwaitSubject<Unit>();
-        public IObservable<Unit> BeginInterruptionObs { get { return _BeginInterruption; } }
-        public override void BeginInterruption()
-        {
-            _BeginInterruption.OnNext(Unit.Default);
-        }
-
-        readonly SingleAwaitSubject<AVFoundation.AVAudioSessionInterruptionFlags> _EndInterruption = new SingleAwaitSubject<AVFoundation.AVAudioSessionInterruptionFlags>();
-        public IObservable<AVFoundation.AVAudioSessionInterruptionFlags> EndInterruptionObs { get { return _EndInterruption; } }
-        public override void EndInterruption(AVFoundation.AVAudioSessionInterruptionFlags flags)
-        {
-            _EndInterruption.OnNext(flags);
-        }
-
-        readonly SingleAwaitSubject<System.Boolean> _InputIsAvailableChanged = new SingleAwaitSubject<System.Boolean>();
-        public IObservable<System.Boolean> InputIsAvailableChangedObs { get { return _InputIsAvailableChanged; } }
-        public override void InputIsAvailableChanged(System.Boolean isInputAvailable)
-        {
-            _InputIsAvailableChanged.OnNext(isInputAvailable);
         }
 
     }
@@ -3095,6 +3127,30 @@ namespace AVFoundation.Rx
         public override void FinishedRecording(AVFoundation.AVAudioRecorder recorder, System.Boolean flag)
         {
             _FinishedRecording.OnNext(Tuple.Create(recorder, flag));
+        }
+
+    }
+    public  partial class AVAudioSessionDelegateRx : AVAudioSessionDelegate
+    {
+        readonly SingleAwaitSubject<Unit> _BeginInterruption = new SingleAwaitSubject<Unit>();
+        public IObservable<Unit> BeginInterruptionObs { get { return _BeginInterruption; } }
+        public override void BeginInterruption()
+        {
+            _BeginInterruption.OnNext(Unit.Default);
+        }
+
+        readonly SingleAwaitSubject<AVFoundation.AVAudioSessionInterruptionFlags> _EndInterruption = new SingleAwaitSubject<AVFoundation.AVAudioSessionInterruptionFlags>();
+        public IObservable<AVFoundation.AVAudioSessionInterruptionFlags> EndInterruptionObs { get { return _EndInterruption; } }
+        public override void EndInterruption(AVFoundation.AVAudioSessionInterruptionFlags flags)
+        {
+            _EndInterruption.OnNext(flags);
+        }
+
+        readonly SingleAwaitSubject<System.Boolean> _InputIsAvailableChanged = new SingleAwaitSubject<System.Boolean>();
+        public IObservable<System.Boolean> InputIsAvailableChangedObs { get { return _InputIsAvailableChanged; } }
+        public override void InputIsAvailableChanged(System.Boolean isInputAvailable)
+        {
+            _InputIsAvailableChanged.OnNext(isInputAvailable);
         }
 
     }
@@ -3167,23 +3223,6 @@ namespace AVFoundation.Rx
         }
 
     }
-    public  partial class AVCaptureVideoDataOutputSampleBufferDelegateRx : AVCaptureVideoDataOutputSampleBufferDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>> _DidDropSampleBuffer = new SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>>();
-        public IObservable<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>> DidDropSampleBufferObs { get { return _DidDropSampleBuffer; } }
-        public override void DidDropSampleBuffer(AVFoundation.AVCaptureOutput captureOutput, CoreMedia.CMSampleBuffer sampleBuffer, AVFoundation.AVCaptureConnection connection)
-        {
-            _DidDropSampleBuffer.OnNext(Tuple.Create(captureOutput, sampleBuffer, connection));
-        }
-
-        readonly SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>> _DidOutputSampleBuffer = new SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>>();
-        public IObservable<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>> DidOutputSampleBufferObs { get { return _DidOutputSampleBuffer; } }
-        public override void DidOutputSampleBuffer(AVFoundation.AVCaptureOutput captureOutput, CoreMedia.CMSampleBuffer sampleBuffer, AVFoundation.AVCaptureConnection connection)
-        {
-            _DidOutputSampleBuffer.OnNext(Tuple.Create(captureOutput, sampleBuffer, connection));
-        }
-
-    }
     public abstract partial class AVCaptureFileOutputRecordingDelegateRx : AVCaptureFileOutputRecordingDelegate
     {
         readonly SingleAwaitSubject<Tuple<AVFoundation.AVCaptureFileOutput, Foundation.NSUrl, Foundation.NSObject[]>> _DidStartRecording = new SingleAwaitSubject<Tuple<AVFoundation.AVCaptureFileOutput, Foundation.NSUrl, Foundation.NSObject[]>>();
@@ -3201,69 +3240,20 @@ namespace AVFoundation.Rx
         }
 
     }
-    public  partial class AVAssetDownloadDelegateRx : AVAssetDownloadDelegate
+    public  partial class AVCaptureVideoDataOutputSampleBufferDelegateRx : AVCaptureVideoDataOutputSampleBufferDelegate
     {
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>> _DidCompleteWithError = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>> DidCompleteWithErrorObs { get { return _DidCompleteWithError; } }
-        public override void DidCompleteWithError(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSError error)
+        readonly SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>> _DidDropSampleBuffer = new SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>>();
+        public IObservable<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>> DidDropSampleBufferObs { get { return _DidDropSampleBuffer; } }
+        public override void DidDropSampleBuffer(AVFoundation.AVCaptureOutput captureOutput, CoreMedia.CMSampleBuffer sampleBuffer, AVFoundation.AVCaptureConnection connection)
         {
-            _DidCompleteWithError.OnNext(Tuple.Create(session, task, error));
+            _DidDropSampleBuffer.OnNext(Tuple.Create(captureOutput, sampleBuffer, connection));
         }
 
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>> _DidFinishCollectingMetrics = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>> DidFinishCollectingMetricsObs { get { return _DidFinishCollectingMetrics; } }
-        public override void DidFinishCollectingMetrics(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSUrlSessionTaskMetrics metrics)
+        readonly SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>> _DidOutputSampleBuffer = new SingleAwaitSubject<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>>();
+        public IObservable<Tuple<AVFoundation.AVCaptureOutput, CoreMedia.CMSampleBuffer, AVFoundation.AVCaptureConnection>> DidOutputSampleBufferObs { get { return _DidOutputSampleBuffer; } }
+        public override void DidOutputSampleBuffer(AVFoundation.AVCaptureOutput captureOutput, CoreMedia.CMSampleBuffer sampleBuffer, AVFoundation.AVCaptureConnection connection)
         {
-            _DidFinishCollectingMetrics.OnNext(Tuple.Create(session, task, metrics));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, Foundation.NSUrl>> _DidFinishDownloadingToUrl = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, Foundation.NSUrl>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, Foundation.NSUrl>> DidFinishDownloadingToUrlObs { get { return _DidFinishDownloadingToUrl; } }
-        public override void DidFinishDownloadingToUrl(Foundation.NSUrlSession session, AVFoundation.AVAssetDownloadTask assetDownloadTask, Foundation.NSUrl location)
-        {
-            _DidFinishDownloadingToUrl.OnNext(Tuple.Create(session, assetDownloadTask, location));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, CoreMedia.CMTimeRange, Foundation.NSValue[], CoreMedia.CMTimeRange>> _DidLoadTimeRange = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, CoreMedia.CMTimeRange, Foundation.NSValue[], CoreMedia.CMTimeRange>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, CoreMedia.CMTimeRange, Foundation.NSValue[], CoreMedia.CMTimeRange>> DidLoadTimeRangeObs { get { return _DidLoadTimeRange; } }
-        public override void DidLoadTimeRange(Foundation.NSUrlSession session, AVFoundation.AVAssetDownloadTask assetDownloadTask, CoreMedia.CMTimeRange timeRange, Foundation.NSValue[] loadedTimeRanges, CoreMedia.CMTimeRange timeRangeExpectedToLoad)
-        {
-            _DidLoadTimeRange.OnNext(Tuple.Create(session, assetDownloadTask, timeRange, loadedTimeRanges, timeRangeExpectedToLoad));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> _DidReceiveChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> DidReceiveChallengeObs { get { return _DidReceiveChallenge; } }
-        public override void DidReceiveChallenge(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSUrlAuthenticationChallenge challenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential> completionHandler)
-        {
-            _DidReceiveChallenge.OnNext(Tuple.Create(session, task, challenge, completionHandler));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, AVFoundation.AVMediaSelection>> _DidResolveMediaSelection = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, AVFoundation.AVMediaSelection>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, AVFoundation.AVAssetDownloadTask, AVFoundation.AVMediaSelection>> DidResolveMediaSelectionObs { get { return _DidResolveMediaSelection; } }
-        public override void DidResolveMediaSelection(Foundation.NSUrlSession session, AVFoundation.AVAssetDownloadTask assetDownloadTask, AVFoundation.AVMediaSelection resolvedMediaSelection)
-        {
-            _DidResolveMediaSelection.OnNext(Tuple.Create(session, assetDownloadTask, resolvedMediaSelection));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>> _DidSendBodyData = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>> DidSendBodyDataObs { get { return _DidSendBodyData; } }
-        public override void DidSendBodyData(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, System.Int64 bytesSent, System.Int64 totalBytesSent, System.Int64 totalBytesExpectedToSend)
-        {
-            _DidSendBodyData.OnNext(Tuple.Create(session, task, bytesSent, totalBytesSent, totalBytesExpectedToSend));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>> _NeedNewBodyStream = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>> NeedNewBodyStreamObs { get { return _NeedNewBodyStream; } }
-        public override void NeedNewBodyStream(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, System.Action<Foundation.NSInputStream> completionHandler)
-        {
-            _NeedNewBodyStream.OnNext(Tuple.Create(session, task, completionHandler));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>> _WillPerformHttpRedirection = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>> WillPerformHttpRedirectionObs { get { return _WillPerformHttpRedirection; } }
-        public override void WillPerformHttpRedirection(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSHttpUrlResponse response, Foundation.NSUrlRequest newRequest, System.Action<Foundation.NSUrlRequest> completionHandler)
-        {
-            _WillPerformHttpRedirection.OnNext(Tuple.Create(session, task, response, newRequest, completionHandler));
+            _DidOutputSampleBuffer.OnNext(Tuple.Create(captureOutput, sampleBuffer, connection));
         }
 
     }
@@ -3311,54 +3301,19 @@ namespace AVFoundation.Rx
         }
 
     }
-}
-namespace GameKit.Rx
-{
-    public  partial class GKMatchDelegateRx : GKMatchDelegate
+    public  partial class AVPlayerItemOutputPushDelegateRx : AVPlayerItemOutputPushDelegate
     {
-        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, string>> _DataReceived = new SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, string>>();
-        public IObservable<Tuple<GameKit.GKMatch, Foundation.NSData, string>> DataReceivedObs { get { return _DataReceived; } }
-        public override void DataReceived(GameKit.GKMatch match, Foundation.NSData data, string playerId)
+        readonly SingleAwaitSubject<AVFoundation.AVPlayerItemOutput> _OutputSequenceWasFlushed = new SingleAwaitSubject<AVFoundation.AVPlayerItemOutput>();
+        public IObservable<AVFoundation.AVPlayerItemOutput> OutputSequenceWasFlushedObs { get { return _OutputSequenceWasFlushed; } }
+        public override void OutputSequenceWasFlushed(AVFoundation.AVPlayerItemOutput output)
         {
-            _DataReceived.OnNext(Tuple.Create(match, data, playerId));
-        }
-
-        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer, GameKit.GKPlayer>> _DataReceivedForRecipient = new SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer, GameKit.GKPlayer>>();
-        public IObservable<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer, GameKit.GKPlayer>> DataReceivedForRecipientObs { get { return _DataReceivedForRecipient; } }
-        public override void DataReceivedForRecipient(GameKit.GKMatch match, Foundation.NSData data, GameKit.GKPlayer recipient, GameKit.GKPlayer player)
-        {
-            _DataReceivedForRecipient.OnNext(Tuple.Create(match, data, recipient, player));
-        }
-
-        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer>> _DataReceivedFromPlayer = new SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer>>();
-        public IObservable<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer>> DataReceivedFromPlayerObs { get { return _DataReceivedFromPlayer; } }
-        public override void DataReceivedFromPlayer(GameKit.GKMatch match, Foundation.NSData data, GameKit.GKPlayer player)
-        {
-            _DataReceivedFromPlayer.OnNext(Tuple.Create(match, data, player));
-        }
-
-        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSError>> _Failed = new SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSError>>();
-        public IObservable<Tuple<GameKit.GKMatch, Foundation.NSError>> FailedObs { get { return _Failed; } }
-        public override void Failed(GameKit.GKMatch match, Foundation.NSError error)
-        {
-            _Failed.OnNext(Tuple.Create(match, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, string, GameKit.GKPlayerConnectionState>> _StateChanged = new SingleAwaitSubject<Tuple<GameKit.GKMatch, string, GameKit.GKPlayerConnectionState>>();
-        public IObservable<Tuple<GameKit.GKMatch, string, GameKit.GKPlayerConnectionState>> StateChangedObs { get { return _StateChanged; } }
-        public override void StateChanged(GameKit.GKMatch match, string playerId, GameKit.GKPlayerConnectionState state)
-        {
-            _StateChanged.OnNext(Tuple.Create(match, playerId, state));
-        }
-
-        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, GameKit.GKPlayer, GameKit.GKPlayerConnectionState>> _StateChangedForPlayer = new SingleAwaitSubject<Tuple<GameKit.GKMatch, GameKit.GKPlayer, GameKit.GKPlayerConnectionState>>();
-        public IObservable<Tuple<GameKit.GKMatch, GameKit.GKPlayer, GameKit.GKPlayerConnectionState>> StateChangedForPlayerObs { get { return _StateChangedForPlayer; } }
-        public override void StateChangedForPlayer(GameKit.GKMatch match, GameKit.GKPlayer player, GameKit.GKPlayerConnectionState state)
-        {
-            _StateChangedForPlayer.OnNext(Tuple.Create(match, player, state));
+            _OutputSequenceWasFlushed.OnNext(output);
         }
 
     }
+}
+namespace GameKit.Rx
+{
     public abstract partial class GKMatchmakerViewControllerDelegateRx : GKMatchmakerViewControllerDelegate
     {
         readonly SingleAwaitSubject<GameKit.GKMatchmakerViewController> _WasCancelled = new SingleAwaitSubject<GameKit.GKMatchmakerViewController>();
@@ -3528,16 +3483,6 @@ namespace GameKit.Rx
         }
 
     }
-    public abstract partial class GKFriendRequestComposeViewControllerDelegateRx : GKFriendRequestComposeViewControllerDelegate
-    {
-        readonly SingleAwaitSubject<GameKit.GKFriendRequestComposeViewController> _DidFinish = new SingleAwaitSubject<GameKit.GKFriendRequestComposeViewController>();
-        public IObservable<GameKit.GKFriendRequestComposeViewController> DidFinishObs { get { return _DidFinish; } }
-        public override void DidFinish(GameKit.GKFriendRequestComposeViewController viewController)
-        {
-            _DidFinish.OnNext(viewController);
-        }
-
-    }
     public abstract partial class GKGameCenterControllerDelegateRx : GKGameCenterControllerDelegate
     {
         readonly SingleAwaitSubject<GameKit.GKGameCenterViewController> _Finished = new SingleAwaitSubject<GameKit.GKGameCenterViewController>();
@@ -3545,16 +3490,6 @@ namespace GameKit.Rx
         public override void Finished(GameKit.GKGameCenterViewController controller)
         {
             _Finished.OnNext(controller);
-        }
-
-    }
-    public abstract partial class GKLeaderboardViewControllerDelegateRx : GKLeaderboardViewControllerDelegate
-    {
-        readonly SingleAwaitSubject<GameKit.GKLeaderboardViewController> _DidFinish = new SingleAwaitSubject<GameKit.GKLeaderboardViewController>();
-        public IObservable<GameKit.GKLeaderboardViewController> DidFinishObs { get { return _DidFinish; } }
-        public override void DidFinish(GameKit.GKLeaderboardViewController viewController)
-        {
-            _DidFinish.OnNext(viewController);
         }
 
     }
@@ -3599,167 +3534,68 @@ namespace GameKit.Rx
         }
 
     }
-}
-namespace PhotosUI.Rx
-{
-    public  partial class PHLivePhotoViewDelegateRx : PHLivePhotoViewDelegate
+    public  partial class GKMatchDelegateRx : GKMatchDelegate
     {
-        readonly SingleAwaitSubject<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>> _DidEndPlayback = new SingleAwaitSubject<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>>();
-        public IObservable<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>> DidEndPlaybackObs { get { return _DidEndPlayback; } }
-        public override void DidEndPlayback(PhotosUI.PHLivePhotoView livePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle playbackStyle)
+        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, string>> _DataReceived = new SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, string>>();
+        public IObservable<Tuple<GameKit.GKMatch, Foundation.NSData, string>> DataReceivedObs { get { return _DataReceived; } }
+        public override void DataReceived(GameKit.GKMatch match, Foundation.NSData data, string playerId)
         {
-            _DidEndPlayback.OnNext(Tuple.Create(livePhotoView, playbackStyle));
+            _DataReceived.OnNext(Tuple.Create(match, data, playerId));
         }
 
-        readonly SingleAwaitSubject<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>> _WillBeginPlayback = new SingleAwaitSubject<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>>();
-        public IObservable<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>> WillBeginPlaybackObs { get { return _WillBeginPlayback; } }
-        public override void WillBeginPlayback(PhotosUI.PHLivePhotoView livePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle playbackStyle)
+        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer, GameKit.GKPlayer>> _DataReceivedForRecipient = new SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer, GameKit.GKPlayer>>();
+        public IObservable<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer, GameKit.GKPlayer>> DataReceivedForRecipientObs { get { return _DataReceivedForRecipient; } }
+        public override void DataReceivedForRecipient(GameKit.GKMatch match, Foundation.NSData data, GameKit.GKPlayer recipient, GameKit.GKPlayer player)
         {
-            _WillBeginPlayback.OnNext(Tuple.Create(livePhotoView, playbackStyle));
+            _DataReceivedForRecipient.OnNext(Tuple.Create(match, data, recipient, player));
+        }
+
+        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer>> _DataReceivedFromPlayer = new SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer>>();
+        public IObservable<Tuple<GameKit.GKMatch, Foundation.NSData, GameKit.GKPlayer>> DataReceivedFromPlayerObs { get { return _DataReceivedFromPlayer; } }
+        public override void DataReceivedFromPlayer(GameKit.GKMatch match, Foundation.NSData data, GameKit.GKPlayer player)
+        {
+            _DataReceivedFromPlayer.OnNext(Tuple.Create(match, data, player));
+        }
+
+        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSError>> _Failed = new SingleAwaitSubject<Tuple<GameKit.GKMatch, Foundation.NSError>>();
+        public IObservable<Tuple<GameKit.GKMatch, Foundation.NSError>> FailedObs { get { return _Failed; } }
+        public override void Failed(GameKit.GKMatch match, Foundation.NSError error)
+        {
+            _Failed.OnNext(Tuple.Create(match, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, string, GameKit.GKPlayerConnectionState>> _StateChanged = new SingleAwaitSubject<Tuple<GameKit.GKMatch, string, GameKit.GKPlayerConnectionState>>();
+        public IObservable<Tuple<GameKit.GKMatch, string, GameKit.GKPlayerConnectionState>> StateChangedObs { get { return _StateChanged; } }
+        public override void StateChanged(GameKit.GKMatch match, string playerId, GameKit.GKPlayerConnectionState state)
+        {
+            _StateChanged.OnNext(Tuple.Create(match, playerId, state));
+        }
+
+        readonly SingleAwaitSubject<Tuple<GameKit.GKMatch, GameKit.GKPlayer, GameKit.GKPlayerConnectionState>> _StateChangedForPlayer = new SingleAwaitSubject<Tuple<GameKit.GKMatch, GameKit.GKPlayer, GameKit.GKPlayerConnectionState>>();
+        public IObservable<Tuple<GameKit.GKMatch, GameKit.GKPlayer, GameKit.GKPlayerConnectionState>> StateChangedForPlayerObs { get { return _StateChangedForPlayer; } }
+        public override void StateChangedForPlayer(GameKit.GKMatch match, GameKit.GKPlayer player, GameKit.GKPlayerConnectionState state)
+        {
+            _StateChangedForPlayer.OnNext(Tuple.Create(match, player, state));
         }
 
     }
-}
-namespace PushKit.Rx
-{
-    public abstract partial class PKPushRegistryDelegateRx : PKPushRegistryDelegate
+    public abstract partial class GKFriendRequestComposeViewControllerDelegateRx : GKFriendRequestComposeViewControllerDelegate
     {
-        readonly SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, string>> _DidInvalidatePushToken = new SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, string>>();
-        public IObservable<Tuple<PushKit.PKPushRegistry, string>> DidInvalidatePushTokenObs { get { return _DidInvalidatePushToken; } }
-        public override void DidInvalidatePushToken(PushKit.PKPushRegistry registry, string type)
+        readonly SingleAwaitSubject<GameKit.GKFriendRequestComposeViewController> _DidFinish = new SingleAwaitSubject<GameKit.GKFriendRequestComposeViewController>();
+        public IObservable<GameKit.GKFriendRequestComposeViewController> DidFinishObs { get { return _DidFinish; } }
+        public override void DidFinish(GameKit.GKFriendRequestComposeViewController viewController)
         {
-            _DidInvalidatePushToken.OnNext(Tuple.Create(registry, type));
-        }
-
-        readonly SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, PushKit.PKPushPayload, string>> _DidReceiveIncomingPush = new SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, PushKit.PKPushPayload, string>>();
-        public IObservable<Tuple<PushKit.PKPushRegistry, PushKit.PKPushPayload, string>> DidReceiveIncomingPushObs { get { return _DidReceiveIncomingPush; } }
-        public override void DidReceiveIncomingPush(PushKit.PKPushRegistry registry, PushKit.PKPushPayload payload, string type)
-        {
-            _DidReceiveIncomingPush.OnNext(Tuple.Create(registry, payload, type));
-        }
-
-        readonly SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, PushKit.PKPushCredentials, string>> _DidUpdatePushCredentials = new SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, PushKit.PKPushCredentials, string>>();
-        public IObservable<Tuple<PushKit.PKPushRegistry, PushKit.PKPushCredentials, string>> DidUpdatePushCredentialsObs { get { return _DidUpdatePushCredentials; } }
-        public override void DidUpdatePushCredentials(PushKit.PKPushRegistry registry, PushKit.PKPushCredentials credentials, string type)
-        {
-            _DidUpdatePushCredentials.OnNext(Tuple.Create(registry, credentials, type));
+            _DidFinish.OnNext(viewController);
         }
 
     }
-}
-namespace QuickLook.Rx
-{
-    public  partial class QLPreviewControllerDelegateRx : QLPreviewControllerDelegate
+    public abstract partial class GKLeaderboardViewControllerDelegateRx : GKLeaderboardViewControllerDelegate
     {
-        readonly SingleAwaitSubject<QuickLook.QLPreviewController> _DidDismiss = new SingleAwaitSubject<QuickLook.QLPreviewController>();
-        public IObservable<QuickLook.QLPreviewController> DidDismissObs { get { return _DidDismiss; } }
-        public override void DidDismiss(QuickLook.QLPreviewController controller)
+        readonly SingleAwaitSubject<GameKit.GKLeaderboardViewController> _DidFinish = new SingleAwaitSubject<GameKit.GKLeaderboardViewController>();
+        public IObservable<GameKit.GKLeaderboardViewController> DidFinishObs { get { return _DidFinish; } }
+        public override void DidFinish(GameKit.GKLeaderboardViewController viewController)
         {
-            _DidDismiss.OnNext(controller);
-        }
-
-        readonly SingleAwaitSubject<QuickLook.QLPreviewController> _WillDismiss = new SingleAwaitSubject<QuickLook.QLPreviewController>();
-        public IObservable<QuickLook.QLPreviewController> WillDismissObs { get { return _WillDismiss; } }
-        public override void WillDismiss(QuickLook.QLPreviewController controller)
-        {
-            _WillDismiss.OnNext(controller);
-        }
-
-    }
-}
-namespace ReplayKit.Rx
-{
-    public abstract partial class RPBroadcastActivityViewControllerDelegateRx : RPBroadcastActivityViewControllerDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastActivityViewController, ReplayKit.RPBroadcastController, Foundation.NSError>> _DidFinish = new SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastActivityViewController, ReplayKit.RPBroadcastController, Foundation.NSError>>();
-        public IObservable<Tuple<ReplayKit.RPBroadcastActivityViewController, ReplayKit.RPBroadcastController, Foundation.NSError>> DidFinishObs { get { return _DidFinish; } }
-        public override void DidFinish(ReplayKit.RPBroadcastActivityViewController broadcastActivityViewController, ReplayKit.RPBroadcastController broadcastController, Foundation.NSError error)
-        {
-            _DidFinish.OnNext(Tuple.Create(broadcastActivityViewController, broadcastController, error));
-        }
-
-    }
-    public  partial class RPBroadcastControllerDelegateRx : RPBroadcastControllerDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastController, Foundation.NSError>> _DidFinish = new SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastController, Foundation.NSError>>();
-        public IObservable<Tuple<ReplayKit.RPBroadcastController, Foundation.NSError>> DidFinishObs { get { return _DidFinish; } }
-        public override void DidFinish(ReplayKit.RPBroadcastController broadcastController, Foundation.NSError error)
-        {
-            _DidFinish.OnNext(Tuple.Create(broadcastController, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastController, Foundation.NSDictionary<Foundation.NSString,Foundation.INSCoding>>> _DidUpdateServiceInfo = new SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastController, Foundation.NSDictionary<Foundation.NSString,Foundation.INSCoding>>>();
-        public IObservable<Tuple<ReplayKit.RPBroadcastController, Foundation.NSDictionary<Foundation.NSString,Foundation.INSCoding>>> DidUpdateServiceInfoObs { get { return _DidUpdateServiceInfo; } }
-        public override void DidUpdateServiceInfo(ReplayKit.RPBroadcastController broadcastController, Foundation.NSDictionary<Foundation.NSString,Foundation.INSCoding> serviceInfo)
-        {
-            _DidUpdateServiceInfo.OnNext(Tuple.Create(broadcastController, serviceInfo));
-        }
-
-    }
-    public  partial class RPPreviewViewControllerDelegateRx : RPPreviewViewControllerDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<ReplayKit.RPPreviewViewController, Foundation.NSSet<Foundation.NSString>>> _DidFinish = new SingleAwaitSubject<Tuple<ReplayKit.RPPreviewViewController, Foundation.NSSet<Foundation.NSString>>>();
-        public IObservable<Tuple<ReplayKit.RPPreviewViewController, Foundation.NSSet<Foundation.NSString>>> DidFinishObs { get { return _DidFinish; } }
-        public override void DidFinish(ReplayKit.RPPreviewViewController previewController, Foundation.NSSet<Foundation.NSString> activityTypes)
-        {
-            _DidFinish.OnNext(Tuple.Create(previewController, activityTypes));
-        }
-
-    }
-    public  partial class RPScreenRecorderDelegateRx : RPScreenRecorderDelegate
-    {
-        readonly SingleAwaitSubject<ReplayKit.RPScreenRecorder> _DidChangeAvailability = new SingleAwaitSubject<ReplayKit.RPScreenRecorder>();
-        public IObservable<ReplayKit.RPScreenRecorder> DidChangeAvailabilityObs { get { return _DidChangeAvailability; } }
-        public override void DidChangeAvailability(ReplayKit.RPScreenRecorder screenRecorder)
-        {
-            _DidChangeAvailability.OnNext(screenRecorder);
-        }
-
-        readonly SingleAwaitSubject<Tuple<ReplayKit.RPScreenRecorder, Foundation.NSError, ReplayKit.RPPreviewViewController>> _DidStopRecording = new SingleAwaitSubject<Tuple<ReplayKit.RPScreenRecorder, Foundation.NSError, ReplayKit.RPPreviewViewController>>();
-        public IObservable<Tuple<ReplayKit.RPScreenRecorder, Foundation.NSError, ReplayKit.RPPreviewViewController>> DidStopRecordingObs { get { return _DidStopRecording; } }
-        public override void DidStopRecording(ReplayKit.RPScreenRecorder screenRecorder, Foundation.NSError error, ReplayKit.RPPreviewViewController previewViewController)
-        {
-            _DidStopRecording.OnNext(Tuple.Create(screenRecorder, error, previewViewController));
-        }
-
-    }
-}
-namespace GameplayKit.Rx
-{
-    public  partial class GKAgentDelegateRx : GKAgentDelegate
-    {
-        readonly SingleAwaitSubject<GameplayKit.GKAgent> _AgentDidUpdate = new SingleAwaitSubject<GameplayKit.GKAgent>();
-        public IObservable<GameplayKit.GKAgent> AgentDidUpdateObs { get { return _AgentDidUpdate; } }
-        public override void AgentDidUpdate(GameplayKit.GKAgent agent)
-        {
-            _AgentDidUpdate.OnNext(agent);
-        }
-
-        readonly SingleAwaitSubject<GameplayKit.GKAgent> _AgentWillUpdate = new SingleAwaitSubject<GameplayKit.GKAgent>();
-        public IObservable<GameplayKit.GKAgent> AgentWillUpdateObs { get { return _AgentWillUpdate; } }
-        public override void AgentWillUpdate(GameplayKit.GKAgent agent)
-        {
-            _AgentWillUpdate.OnNext(agent);
-        }
-
-    }
-}
-namespace SafariServices.Rx
-{
-    public  partial class SFSafariViewControllerDelegateRx : SFSafariViewControllerDelegate
-    {
-        readonly SingleAwaitSubject<SafariServices.SFSafariViewController> _DidFinish = new SingleAwaitSubject<SafariServices.SFSafariViewController>();
-        public IObservable<SafariServices.SFSafariViewController> DidFinishObs { get { return _DidFinish; } }
-        public override void DidFinish(SafariServices.SFSafariViewController controller)
-        {
-            _DidFinish.OnNext(controller);
-        }
-
-        readonly SingleAwaitSubject<Tuple<SafariServices.SFSafariViewController, System.Boolean>> _DidCompleteInitialLoad = new SingleAwaitSubject<Tuple<SafariServices.SFSafariViewController, System.Boolean>>();
-        public IObservable<Tuple<SafariServices.SFSafariViewController, System.Boolean>> DidCompleteInitialLoadObs { get { return _DidCompleteInitialLoad; } }
-        public override void DidCompleteInitialLoad(SafariServices.SFSafariViewController controller, System.Boolean didLoadSuccessfully)
-        {
-            _DidCompleteInitialLoad.OnNext(Tuple.Create(controller, didLoadSuccessfully));
+            _DidFinish.OnNext(viewController);
         }
 
     }
@@ -3857,6 +3693,73 @@ namespace AVKit.Rx
 
     }
 }
+namespace PhotosUI.Rx
+{
+    public  partial class PHLivePhotoViewDelegateRx : PHLivePhotoViewDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>> _DidEndPlayback = new SingleAwaitSubject<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>>();
+        public IObservable<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>> DidEndPlaybackObs { get { return _DidEndPlayback; } }
+        public override void DidEndPlayback(PhotosUI.PHLivePhotoView livePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle playbackStyle)
+        {
+            _DidEndPlayback.OnNext(Tuple.Create(livePhotoView, playbackStyle));
+        }
+
+        readonly SingleAwaitSubject<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>> _WillBeginPlayback = new SingleAwaitSubject<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>>();
+        public IObservable<Tuple<PhotosUI.PHLivePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle>> WillBeginPlaybackObs { get { return _WillBeginPlayback; } }
+        public override void WillBeginPlayback(PhotosUI.PHLivePhotoView livePhotoView, PhotosUI.PHLivePhotoViewPlaybackStyle playbackStyle)
+        {
+            _WillBeginPlayback.OnNext(Tuple.Create(livePhotoView, playbackStyle));
+        }
+
+    }
+}
+namespace PushKit.Rx
+{
+    public abstract partial class PKPushRegistryDelegateRx : PKPushRegistryDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, string>> _DidInvalidatePushToken = new SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, string>>();
+        public IObservable<Tuple<PushKit.PKPushRegistry, string>> DidInvalidatePushTokenObs { get { return _DidInvalidatePushToken; } }
+        public override void DidInvalidatePushToken(PushKit.PKPushRegistry registry, string type)
+        {
+            _DidInvalidatePushToken.OnNext(Tuple.Create(registry, type));
+        }
+
+        readonly SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, PushKit.PKPushPayload, string>> _DidReceiveIncomingPush = new SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, PushKit.PKPushPayload, string>>();
+        public IObservable<Tuple<PushKit.PKPushRegistry, PushKit.PKPushPayload, string>> DidReceiveIncomingPushObs { get { return _DidReceiveIncomingPush; } }
+        public override void DidReceiveIncomingPush(PushKit.PKPushRegistry registry, PushKit.PKPushPayload payload, string type)
+        {
+            _DidReceiveIncomingPush.OnNext(Tuple.Create(registry, payload, type));
+        }
+
+        readonly SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, PushKit.PKPushCredentials, string>> _DidUpdatePushCredentials = new SingleAwaitSubject<Tuple<PushKit.PKPushRegistry, PushKit.PKPushCredentials, string>>();
+        public IObservable<Tuple<PushKit.PKPushRegistry, PushKit.PKPushCredentials, string>> DidUpdatePushCredentialsObs { get { return _DidUpdatePushCredentials; } }
+        public override void DidUpdatePushCredentials(PushKit.PKPushRegistry registry, PushKit.PKPushCredentials credentials, string type)
+        {
+            _DidUpdatePushCredentials.OnNext(Tuple.Create(registry, credentials, type));
+        }
+
+    }
+}
+namespace QuickLook.Rx
+{
+    public  partial class QLPreviewControllerDelegateRx : QLPreviewControllerDelegate
+    {
+        readonly SingleAwaitSubject<QuickLook.QLPreviewController> _DidDismiss = new SingleAwaitSubject<QuickLook.QLPreviewController>();
+        public IObservable<QuickLook.QLPreviewController> DidDismissObs { get { return _DidDismiss; } }
+        public override void DidDismiss(QuickLook.QLPreviewController controller)
+        {
+            _DidDismiss.OnNext(controller);
+        }
+
+        readonly SingleAwaitSubject<QuickLook.QLPreviewController> _WillDismiss = new SingleAwaitSubject<QuickLook.QLPreviewController>();
+        public IObservable<QuickLook.QLPreviewController> WillDismissObs { get { return _WillDismiss; } }
+        public override void WillDismiss(QuickLook.QLPreviewController controller)
+        {
+            _WillDismiss.OnNext(controller);
+        }
+
+    }
+}
 namespace AddressBookUI.Rx
 {
     public abstract partial class ABNewPersonViewControllerDelegateRx : ABNewPersonViewControllerDelegate
@@ -3897,87 +3800,130 @@ namespace AddressBookUI.Rx
 
     }
 }
-namespace SceneKit.Rx
+namespace ReplayKit.Rx
 {
-    public  partial class SCNNodeRendererDelegateRx : SCNNodeRendererDelegate
+    public abstract partial class RPBroadcastActivityViewControllerDelegateRx : RPBroadcastActivityViewControllerDelegate
     {
-        readonly SingleAwaitSubject<Tuple<SceneKit.SCNNode, SceneKit.SCNRenderer, Foundation.NSDictionary>> _Render = new SingleAwaitSubject<Tuple<SceneKit.SCNNode, SceneKit.SCNRenderer, Foundation.NSDictionary>>();
-        public IObservable<Tuple<SceneKit.SCNNode, SceneKit.SCNRenderer, Foundation.NSDictionary>> RenderObs { get { return _Render; } }
-        public override void Render(SceneKit.SCNNode node, SceneKit.SCNRenderer renderer, Foundation.NSDictionary arguments)
+        readonly SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastActivityViewController, ReplayKit.RPBroadcastController, Foundation.NSError>> _DidFinish = new SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastActivityViewController, ReplayKit.RPBroadcastController, Foundation.NSError>>();
+        public IObservable<Tuple<ReplayKit.RPBroadcastActivityViewController, ReplayKit.RPBroadcastController, Foundation.NSError>> DidFinishObs { get { return _DidFinish; } }
+        public override void DidFinish(ReplayKit.RPBroadcastActivityViewController broadcastActivityViewController, ReplayKit.RPBroadcastController broadcastController, Foundation.NSError error)
         {
-            _Render.OnNext(Tuple.Create(node, renderer, arguments));
+            _DidFinish.OnNext(Tuple.Create(broadcastActivityViewController, broadcastController, error));
         }
 
     }
-    public  partial class SCNPhysicsContactDelegateRx : SCNPhysicsContactDelegate
+    public  partial class RPBroadcastControllerDelegateRx : RPBroadcastControllerDelegate
     {
-        readonly SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> _DidBeginContact = new SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>>();
-        public IObservable<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> DidBeginContactObs { get { return _DidBeginContact; } }
-        public override void DidBeginContact(SceneKit.SCNPhysicsWorld world, SceneKit.SCNPhysicsContact contact)
+        readonly SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastController, Foundation.NSError>> _DidFinish = new SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastController, Foundation.NSError>>();
+        public IObservable<Tuple<ReplayKit.RPBroadcastController, Foundation.NSError>> DidFinishObs { get { return _DidFinish; } }
+        public override void DidFinish(ReplayKit.RPBroadcastController broadcastController, Foundation.NSError error)
         {
-            _DidBeginContact.OnNext(Tuple.Create(world, contact));
+            _DidFinish.OnNext(Tuple.Create(broadcastController, error));
         }
 
-        readonly SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> _DidEndContact = new SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>>();
-        public IObservable<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> DidEndContactObs { get { return _DidEndContact; } }
-        public override void DidEndContact(SceneKit.SCNPhysicsWorld world, SceneKit.SCNPhysicsContact contact)
+        readonly SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastController, Foundation.NSDictionary<Foundation.NSString,Foundation.INSCoding>>> _DidUpdateServiceInfo = new SingleAwaitSubject<Tuple<ReplayKit.RPBroadcastController, Foundation.NSDictionary<Foundation.NSString,Foundation.INSCoding>>>();
+        public IObservable<Tuple<ReplayKit.RPBroadcastController, Foundation.NSDictionary<Foundation.NSString,Foundation.INSCoding>>> DidUpdateServiceInfoObs { get { return _DidUpdateServiceInfo; } }
+        public override void DidUpdateServiceInfo(ReplayKit.RPBroadcastController broadcastController, Foundation.NSDictionary<Foundation.NSString,Foundation.INSCoding> serviceInfo)
         {
-            _DidEndContact.OnNext(Tuple.Create(world, contact));
-        }
-
-        readonly SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> _DidUpdateContact = new SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>>();
-        public IObservable<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> DidUpdateContactObs { get { return _DidUpdateContact; } }
-        public override void DidUpdateContact(SceneKit.SCNPhysicsWorld world, SceneKit.SCNPhysicsContact contact)
-        {
-            _DidUpdateContact.OnNext(Tuple.Create(world, contact));
+            _DidUpdateServiceInfo.OnNext(Tuple.Create(broadcastController, serviceInfo));
         }
 
     }
-    public  partial class SCNProgramDelegateRx : SCNProgramDelegate
+    public  partial class RPPreviewViewControllerDelegateRx : RPPreviewViewControllerDelegate
     {
-        readonly SingleAwaitSubject<Tuple<SceneKit.SCNProgram, Foundation.NSError>> _HandleError = new SingleAwaitSubject<Tuple<SceneKit.SCNProgram, Foundation.NSError>>();
-        public IObservable<Tuple<SceneKit.SCNProgram, Foundation.NSError>> HandleErrorObs { get { return _HandleError; } }
-        public override void HandleError(SceneKit.SCNProgram program, Foundation.NSError error)
+        readonly SingleAwaitSubject<Tuple<ReplayKit.RPPreviewViewController, Foundation.NSSet<Foundation.NSString>>> _DidFinish = new SingleAwaitSubject<Tuple<ReplayKit.RPPreviewViewController, Foundation.NSSet<Foundation.NSString>>>();
+        public IObservable<Tuple<ReplayKit.RPPreviewViewController, Foundation.NSSet<Foundation.NSString>>> DidFinishObs { get { return _DidFinish; } }
+        public override void DidFinish(ReplayKit.RPPreviewViewController previewController, Foundation.NSSet<Foundation.NSString> activityTypes)
         {
-            _HandleError.OnNext(Tuple.Create(program, error));
+            _DidFinish.OnNext(Tuple.Create(previewController, activityTypes));
         }
 
     }
-    public  partial class SCNSceneRendererDelegateRx : SCNSceneRendererDelegate
+    public  partial class RPScreenRecorderDelegateRx : RPScreenRecorderDelegate
     {
-        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> _DidApplyAnimations = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>>();
-        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> DidApplyAnimationsObs { get { return _DidApplyAnimations; } }
-        public override void DidApplyAnimations(SceneKit.ISCNSceneRenderer renderer, System.Double timeInSeconds)
+        readonly SingleAwaitSubject<ReplayKit.RPScreenRecorder> _DidChangeAvailability = new SingleAwaitSubject<ReplayKit.RPScreenRecorder>();
+        public IObservable<ReplayKit.RPScreenRecorder> DidChangeAvailabilityObs { get { return _DidChangeAvailability; } }
+        public override void DidChangeAvailability(ReplayKit.RPScreenRecorder screenRecorder)
         {
-            _DidApplyAnimations.OnNext(Tuple.Create(renderer, timeInSeconds));
+            _DidChangeAvailability.OnNext(screenRecorder);
         }
 
-        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>> _DidRenderScene = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>>();
-        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>> DidRenderSceneObs { get { return _DidRenderScene; } }
-        public override void DidRenderScene(SceneKit.ISCNSceneRenderer renderer, SceneKit.SCNScene scene, System.Double timeInSeconds)
+        readonly SingleAwaitSubject<Tuple<ReplayKit.RPScreenRecorder, Foundation.NSError, ReplayKit.RPPreviewViewController>> _DidStopRecording = new SingleAwaitSubject<Tuple<ReplayKit.RPScreenRecorder, Foundation.NSError, ReplayKit.RPPreviewViewController>>();
+        public IObservable<Tuple<ReplayKit.RPScreenRecorder, Foundation.NSError, ReplayKit.RPPreviewViewController>> DidStopRecordingObs { get { return _DidStopRecording; } }
+        public override void DidStopRecording(ReplayKit.RPScreenRecorder screenRecorder, Foundation.NSError error, ReplayKit.RPPreviewViewController previewViewController)
         {
-            _DidRenderScene.OnNext(Tuple.Create(renderer, scene, timeInSeconds));
+            _DidStopRecording.OnNext(Tuple.Create(screenRecorder, error, previewViewController));
         }
 
-        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> _DidSimulatePhysics = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>>();
-        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> DidSimulatePhysicsObs { get { return _DidSimulatePhysics; } }
-        public override void DidSimulatePhysics(SceneKit.ISCNSceneRenderer renderer, System.Double timeInSeconds)
+    }
+}
+namespace CoreAnimation.Rx
+{
+    public  partial class CALayerDelegateRx : CALayerDelegate
+    {
+        readonly SingleAwaitSubject<CoreAnimation.CALayer> _DisplayLayer = new SingleAwaitSubject<CoreAnimation.CALayer>();
+        public IObservable<CoreAnimation.CALayer> DisplayLayerObs { get { return _DisplayLayer; } }
+        public override void DisplayLayer(CoreAnimation.CALayer layer)
         {
-            _DidSimulatePhysics.OnNext(Tuple.Create(renderer, timeInSeconds));
+            _DisplayLayer.OnNext(layer);
         }
 
-        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> _Update = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>>();
-        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> UpdateObs { get { return _Update; } }
-        public override void Update(SceneKit.ISCNSceneRenderer renderer, System.Double timeInSeconds)
+        readonly SingleAwaitSubject<CoreAnimation.CALayer> _LayoutSublayersOfLayer = new SingleAwaitSubject<CoreAnimation.CALayer>();
+        public IObservable<CoreAnimation.CALayer> LayoutSublayersOfLayerObs { get { return _LayoutSublayersOfLayer; } }
+        public override void LayoutSublayersOfLayer(CoreAnimation.CALayer layer)
         {
-            _Update.OnNext(Tuple.Create(renderer, timeInSeconds));
+            _LayoutSublayersOfLayer.OnNext(layer);
         }
 
-        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>> _WillRenderScene = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>>();
-        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>> WillRenderSceneObs { get { return _WillRenderScene; } }
-        public override void WillRenderScene(SceneKit.ISCNSceneRenderer renderer, SceneKit.SCNScene scene, System.Double timeInSeconds)
+        readonly SingleAwaitSubject<CoreAnimation.CALayer> _WillDrawLayer = new SingleAwaitSubject<CoreAnimation.CALayer>();
+        public IObservable<CoreAnimation.CALayer> WillDrawLayerObs { get { return _WillDrawLayer; } }
+        public override void WillDrawLayer(CoreAnimation.CALayer layer)
         {
-            _WillRenderScene.OnNext(Tuple.Create(renderer, scene, timeInSeconds));
+            _WillDrawLayer.OnNext(layer);
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreAnimation.CALayer, CoreGraphics.CGContext>> _DrawLayer = new SingleAwaitSubject<Tuple<CoreAnimation.CALayer, CoreGraphics.CGContext>>();
+        public IObservable<Tuple<CoreAnimation.CALayer, CoreGraphics.CGContext>> DrawLayerObs { get { return _DrawLayer; } }
+        public override void DrawLayer(CoreAnimation.CALayer layer, CoreGraphics.CGContext context)
+        {
+            _DrawLayer.OnNext(Tuple.Create(layer, context));
+        }
+
+    }
+    public  partial class CAAnimationDelegateRx : CAAnimationDelegate
+    {
+        readonly SingleAwaitSubject<CoreAnimation.CAAnimation> _AnimationStarted = new SingleAwaitSubject<CoreAnimation.CAAnimation>();
+        public IObservable<CoreAnimation.CAAnimation> AnimationStartedObs { get { return _AnimationStarted; } }
+        public override void AnimationStarted(CoreAnimation.CAAnimation anim)
+        {
+            _AnimationStarted.OnNext(anim);
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreAnimation.CAAnimation, System.Boolean>> _AnimationStopped = new SingleAwaitSubject<Tuple<CoreAnimation.CAAnimation, System.Boolean>>();
+        public IObservable<Tuple<CoreAnimation.CAAnimation, System.Boolean>> AnimationStoppedObs { get { return _AnimationStopped; } }
+        public override void AnimationStopped(CoreAnimation.CAAnimation anim, System.Boolean finished)
+        {
+            _AnimationStopped.OnNext(Tuple.Create(anim, finished));
+        }
+
+    }
+}
+namespace SafariServices.Rx
+{
+    public  partial class SFSafariViewControllerDelegateRx : SFSafariViewControllerDelegate
+    {
+        readonly SingleAwaitSubject<SafariServices.SFSafariViewController> _DidFinish = new SingleAwaitSubject<SafariServices.SFSafariViewController>();
+        public IObservable<SafariServices.SFSafariViewController> DidFinishObs { get { return _DidFinish; } }
+        public override void DidFinish(SafariServices.SFSafariViewController controller)
+        {
+            _DidFinish.OnNext(controller);
+        }
+
+        readonly SingleAwaitSubject<Tuple<SafariServices.SFSafariViewController, System.Boolean>> _DidCompleteInitialLoad = new SingleAwaitSubject<Tuple<SafariServices.SFSafariViewController, System.Boolean>>();
+        public IObservable<Tuple<SafariServices.SFSafariViewController, System.Boolean>> DidCompleteInitialLoadObs { get { return _DidCompleteInitialLoad; } }
+        public override void DidCompleteInitialLoad(SafariServices.SFSafariViewController controller, System.Boolean didLoadSuccessfully)
+        {
+            _DidCompleteInitialLoad.OnNext(Tuple.Create(controller, didLoadSuccessfully));
         }
 
     }
@@ -4092,382 +4038,22 @@ namespace CallKit.Rx
 
     }
 }
-namespace CoreAnimation.Rx
+namespace GameplayKit.Rx
 {
-    public  partial class CALayerDelegateRx : CALayerDelegate
+    public  partial class GKAgentDelegateRx : GKAgentDelegate
     {
-        readonly SingleAwaitSubject<CoreAnimation.CALayer> _DisplayLayer = new SingleAwaitSubject<CoreAnimation.CALayer>();
-        public IObservable<CoreAnimation.CALayer> DisplayLayerObs { get { return _DisplayLayer; } }
-        public override void DisplayLayer(CoreAnimation.CALayer layer)
+        readonly SingleAwaitSubject<GameplayKit.GKAgent> _AgentDidUpdate = new SingleAwaitSubject<GameplayKit.GKAgent>();
+        public IObservable<GameplayKit.GKAgent> AgentDidUpdateObs { get { return _AgentDidUpdate; } }
+        public override void AgentDidUpdate(GameplayKit.GKAgent agent)
         {
-            _DisplayLayer.OnNext(layer);
+            _AgentDidUpdate.OnNext(agent);
         }
 
-        readonly SingleAwaitSubject<CoreAnimation.CALayer> _LayoutSublayersOfLayer = new SingleAwaitSubject<CoreAnimation.CALayer>();
-        public IObservable<CoreAnimation.CALayer> LayoutSublayersOfLayerObs { get { return _LayoutSublayersOfLayer; } }
-        public override void LayoutSublayersOfLayer(CoreAnimation.CALayer layer)
+        readonly SingleAwaitSubject<GameplayKit.GKAgent> _AgentWillUpdate = new SingleAwaitSubject<GameplayKit.GKAgent>();
+        public IObservable<GameplayKit.GKAgent> AgentWillUpdateObs { get { return _AgentWillUpdate; } }
+        public override void AgentWillUpdate(GameplayKit.GKAgent agent)
         {
-            _LayoutSublayersOfLayer.OnNext(layer);
-        }
-
-        readonly SingleAwaitSubject<CoreAnimation.CALayer> _WillDrawLayer = new SingleAwaitSubject<CoreAnimation.CALayer>();
-        public IObservable<CoreAnimation.CALayer> WillDrawLayerObs { get { return _WillDrawLayer; } }
-        public override void WillDrawLayer(CoreAnimation.CALayer layer)
-        {
-            _WillDrawLayer.OnNext(layer);
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreAnimation.CALayer, CoreGraphics.CGContext>> _DrawLayer = new SingleAwaitSubject<Tuple<CoreAnimation.CALayer, CoreGraphics.CGContext>>();
-        public IObservable<Tuple<CoreAnimation.CALayer, CoreGraphics.CGContext>> DrawLayerObs { get { return _DrawLayer; } }
-        public override void DrawLayer(CoreAnimation.CALayer layer, CoreGraphics.CGContext context)
-        {
-            _DrawLayer.OnNext(Tuple.Create(layer, context));
-        }
-
-    }
-    public  partial class CAAnimationDelegateRx : CAAnimationDelegate
-    {
-        readonly SingleAwaitSubject<CoreAnimation.CAAnimation> _AnimationStarted = new SingleAwaitSubject<CoreAnimation.CAAnimation>();
-        public IObservable<CoreAnimation.CAAnimation> AnimationStartedObs { get { return _AnimationStarted; } }
-        public override void AnimationStarted(CoreAnimation.CAAnimation anim)
-        {
-            _AnimationStarted.OnNext(anim);
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreAnimation.CAAnimation, System.Boolean>> _AnimationStopped = new SingleAwaitSubject<Tuple<CoreAnimation.CAAnimation, System.Boolean>>();
-        public IObservable<Tuple<CoreAnimation.CAAnimation, System.Boolean>> AnimationStoppedObs { get { return _AnimationStopped; } }
-        public override void AnimationStopped(CoreAnimation.CAAnimation anim, System.Boolean finished)
-        {
-            _AnimationStopped.OnNext(Tuple.Create(anim, finished));
-        }
-
-    }
-}
-namespace HomeKit.Rx
-{
-    public  partial class HMAccessoryBrowserDelegateRx : HMAccessoryBrowserDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>> _DidFindNewAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>>();
-        public IObservable<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>> DidFindNewAccessoryObs { get { return _DidFindNewAccessory; } }
-        public override void DidFindNewAccessory(HomeKit.HMAccessoryBrowser browser, HomeKit.HMAccessory accessory)
-        {
-            _DidFindNewAccessory.OnNext(Tuple.Create(browser, accessory));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>> _DidRemoveNewAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>>();
-        public IObservable<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>> DidRemoveNewAccessoryObs { get { return _DidRemoveNewAccessory; } }
-        public override void DidRemoveNewAccessory(HomeKit.HMAccessoryBrowser browser, HomeKit.HMAccessory accessory)
-        {
-            _DidRemoveNewAccessory.OnNext(Tuple.Create(browser, accessory));
-        }
-
-    }
-    public  partial class HMAccessoryDelegateRx : HMAccessoryDelegate
-    {
-        readonly SingleAwaitSubject<HomeKit.HMAccessory> _DidUpdateName = new SingleAwaitSubject<HomeKit.HMAccessory>();
-        public IObservable<HomeKit.HMAccessory> DidUpdateNameObs { get { return _DidUpdateName; } }
-        public override void DidUpdateName(HomeKit.HMAccessory accessory)
-        {
-            _DidUpdateName.OnNext(accessory);
-        }
-
-        readonly SingleAwaitSubject<HomeKit.HMAccessory> _DidUpdateReachability = new SingleAwaitSubject<HomeKit.HMAccessory>();
-        public IObservable<HomeKit.HMAccessory> DidUpdateReachabilityObs { get { return _DidUpdateReachability; } }
-        public override void DidUpdateReachability(HomeKit.HMAccessory accessory)
-        {
-            _DidUpdateReachability.OnNext(accessory);
-        }
-
-        readonly SingleAwaitSubject<HomeKit.HMAccessory> _DidUpdateServices = new SingleAwaitSubject<HomeKit.HMAccessory>();
-        public IObservable<HomeKit.HMAccessory> DidUpdateServicesObs { get { return _DidUpdateServices; } }
-        public override void DidUpdateServices(HomeKit.HMAccessory accessory)
-        {
-            _DidUpdateServices.OnNext(accessory);
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService>> _DidUpdateAssociatedServiceType = new SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService>>();
-        public IObservable<Tuple<HomeKit.HMAccessory, HomeKit.HMService>> DidUpdateAssociatedServiceTypeObs { get { return _DidUpdateAssociatedServiceType; } }
-        public override void DidUpdateAssociatedServiceType(HomeKit.HMAccessory accessory, HomeKit.HMService service)
-        {
-            _DidUpdateAssociatedServiceType.OnNext(Tuple.Create(accessory, service));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService>> _DidUpdateNameForService = new SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService>>();
-        public IObservable<Tuple<HomeKit.HMAccessory, HomeKit.HMService>> DidUpdateNameForServiceObs { get { return _DidUpdateNameForService; } }
-        public override void DidUpdateNameForService(HomeKit.HMAccessory accessory, HomeKit.HMService service)
-        {
-            _DidUpdateNameForService.OnNext(Tuple.Create(accessory, service));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService, HomeKit.HMCharacteristic>> _DidUpdateValueForCharacteristic = new SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService, HomeKit.HMCharacteristic>>();
-        public IObservable<Tuple<HomeKit.HMAccessory, HomeKit.HMService, HomeKit.HMCharacteristic>> DidUpdateValueForCharacteristicObs { get { return _DidUpdateValueForCharacteristic; } }
-        public override void DidUpdateValueForCharacteristic(HomeKit.HMAccessory accessory, HomeKit.HMService service, HomeKit.HMCharacteristic characteristic)
-        {
-            _DidUpdateValueForCharacteristic.OnNext(Tuple.Create(accessory, service, characteristic));
-        }
-
-    }
-    public  partial class HMCameraSnapshotControlDelegateRx : HMCameraSnapshotControlDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMCameraSnapshotControl, HomeKit.HMCameraSnapshot, Foundation.NSError>> _DidTakeSnapshot = new SingleAwaitSubject<Tuple<HomeKit.HMCameraSnapshotControl, HomeKit.HMCameraSnapshot, Foundation.NSError>>();
-        public IObservable<Tuple<HomeKit.HMCameraSnapshotControl, HomeKit.HMCameraSnapshot, Foundation.NSError>> DidTakeSnapshotObs { get { return _DidTakeSnapshot; } }
-        public override void DidTakeSnapshot(HomeKit.HMCameraSnapshotControl cameraSnapshotControl, HomeKit.HMCameraSnapshot snapshot, Foundation.NSError error)
-        {
-            _DidTakeSnapshot.OnNext(Tuple.Create(cameraSnapshotControl, snapshot, error));
-        }
-
-    }
-    public  partial class HMCameraStreamControlDelegateRx : HMCameraStreamControlDelegate
-    {
-        readonly SingleAwaitSubject<HomeKit.HMCameraStreamControl> _DidStartStream = new SingleAwaitSubject<HomeKit.HMCameraStreamControl>();
-        public IObservable<HomeKit.HMCameraStreamControl> DidStartStreamObs { get { return _DidStartStream; } }
-        public override void DidStartStream(HomeKit.HMCameraStreamControl cameraStreamControl)
-        {
-            _DidStartStream.OnNext(cameraStreamControl);
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMCameraStreamControl, Foundation.NSError>> _DidStopStream = new SingleAwaitSubject<Tuple<HomeKit.HMCameraStreamControl, Foundation.NSError>>();
-        public IObservable<Tuple<HomeKit.HMCameraStreamControl, Foundation.NSError>> DidStopStreamObs { get { return _DidStopStream; } }
-        public override void DidStopStream(HomeKit.HMCameraStreamControl cameraStreamControl, Foundation.NSError error)
-        {
-            _DidStopStream.OnNext(Tuple.Create(cameraStreamControl, error));
-        }
-
-    }
-    public  partial class HMHomeDelegateRx : HMHomeDelegate
-    {
-        readonly SingleAwaitSubject<HomeKit.HMHome> _DidUpdateNameForHome = new SingleAwaitSubject<HomeKit.HMHome>();
-        public IObservable<HomeKit.HMHome> DidUpdateNameForHomeObs { get { return _DidUpdateNameForHome; } }
-        public override void DidUpdateNameForHome(HomeKit.HMHome home)
-        {
-            _DidUpdateNameForHome.OnNext(home);
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> _DidAddAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> DidAddAccessoryObs { get { return _DidAddAccessory; } }
-        public override void DidAddAccessory(HomeKit.HMHome home, HomeKit.HMAccessory accessory)
-        {
-            _DidAddAccessory.OnNext(Tuple.Create(home, accessory));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> _DidAddActionSet = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> DidAddActionSetObs { get { return _DidAddActionSet; } }
-        public override void DidAddActionSet(HomeKit.HMHome home, HomeKit.HMActionSet actionSet)
-        {
-            _DidAddActionSet.OnNext(Tuple.Create(home, actionSet));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> _DidAddRoom = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> DidAddRoomObs { get { return _DidAddRoom; } }
-        public override void DidAddRoom(HomeKit.HMHome home, HomeKit.HMRoom room)
-        {
-            _DidAddRoom.OnNext(Tuple.Create(home, room));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>> _DidAddRoomToZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>> DidAddRoomToZoneObs { get { return _DidAddRoomToZone; } }
-        public override void DidAddRoomToZone(HomeKit.HMHome home, HomeKit.HMRoom room, HomeKit.HMZone zone)
-        {
-            _DidAddRoomToZone.OnNext(Tuple.Create(home, room, zone));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>> _DidAddService = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>> DidAddServiceObs { get { return _DidAddService; } }
-        public override void DidAddService(HomeKit.HMHome home, HomeKit.HMService service, HomeKit.HMServiceGroup group)
-        {
-            _DidAddService.OnNext(Tuple.Create(home, service, group));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> _DidAddServiceGroup = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> DidAddServiceGroupObs { get { return _DidAddServiceGroup; } }
-        public override void DidAddServiceGroup(HomeKit.HMHome home, HomeKit.HMServiceGroup group)
-        {
-            _DidAddServiceGroup.OnNext(Tuple.Create(home, group));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> _DidAddTrigger = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> DidAddTriggerObs { get { return _DidAddTrigger; } }
-        public override void DidAddTrigger(HomeKit.HMHome home, HomeKit.HMTrigger trigger)
-        {
-            _DidAddTrigger.OnNext(Tuple.Create(home, trigger));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMUser>> _DidAddUser = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMUser>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMUser>> DidAddUserObs { get { return _DidAddUser; } }
-        public override void DidAddUser(HomeKit.HMHome home, HomeKit.HMUser user)
-        {
-            _DidAddUser.OnNext(Tuple.Create(home, user));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>> _DidAddZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMZone>> DidAddZoneObs { get { return _DidAddZone; } }
-        public override void DidAddZone(HomeKit.HMHome home, HomeKit.HMZone zone)
-        {
-            _DidAddZone.OnNext(Tuple.Create(home, zone));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, Foundation.NSError, HomeKit.HMAccessory>> _DidEncounterError = new SingleAwaitSubject<Tuple<HomeKit.HMHome, Foundation.NSError, HomeKit.HMAccessory>>();
-        public IObservable<Tuple<HomeKit.HMHome, Foundation.NSError, HomeKit.HMAccessory>> DidEncounterErrorObs { get { return _DidEncounterError; } }
-        public override void DidEncounterError(HomeKit.HMHome home, Foundation.NSError error, HomeKit.HMAccessory accessory)
-        {
-            _DidEncounterError.OnNext(Tuple.Create(home, error, accessory));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> _DidRemoveAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> DidRemoveAccessoryObs { get { return _DidRemoveAccessory; } }
-        public override void DidRemoveAccessory(HomeKit.HMHome home, HomeKit.HMAccessory accessory)
-        {
-            _DidRemoveAccessory.OnNext(Tuple.Create(home, accessory));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> _DidRemoveActionSet = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> DidRemoveActionSetObs { get { return _DidRemoveActionSet; } }
-        public override void DidRemoveActionSet(HomeKit.HMHome home, HomeKit.HMActionSet actionSet)
-        {
-            _DidRemoveActionSet.OnNext(Tuple.Create(home, actionSet));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> _DidRemoveRoom = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> DidRemoveRoomObs { get { return _DidRemoveRoom; } }
-        public override void DidRemoveRoom(HomeKit.HMHome home, HomeKit.HMRoom room)
-        {
-            _DidRemoveRoom.OnNext(Tuple.Create(home, room));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>> _DidRemoveRoomFromZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>> DidRemoveRoomFromZoneObs { get { return _DidRemoveRoomFromZone; } }
-        public override void DidRemoveRoomFromZone(HomeKit.HMHome home, HomeKit.HMRoom room, HomeKit.HMZone zone)
-        {
-            _DidRemoveRoomFromZone.OnNext(Tuple.Create(home, room, zone));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>> _DidRemoveService = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>> DidRemoveServiceObs { get { return _DidRemoveService; } }
-        public override void DidRemoveService(HomeKit.HMHome home, HomeKit.HMService service, HomeKit.HMServiceGroup group)
-        {
-            _DidRemoveService.OnNext(Tuple.Create(home, service, group));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> _DidRemoveServiceGroup = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> DidRemoveServiceGroupObs { get { return _DidRemoveServiceGroup; } }
-        public override void DidRemoveServiceGroup(HomeKit.HMHome home, HomeKit.HMServiceGroup group)
-        {
-            _DidRemoveServiceGroup.OnNext(Tuple.Create(home, group));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> _DidRemoveTrigger = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> DidRemoveTriggerObs { get { return _DidRemoveTrigger; } }
-        public override void DidRemoveTrigger(HomeKit.HMHome home, HomeKit.HMTrigger trigger)
-        {
-            _DidRemoveTrigger.OnNext(Tuple.Create(home, trigger));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMUser>> _DidRemoveUser = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMUser>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMUser>> DidRemoveUserObs { get { return _DidRemoveUser; } }
-        public override void DidRemoveUser(HomeKit.HMHome home, HomeKit.HMUser user)
-        {
-            _DidRemoveUser.OnNext(Tuple.Create(home, user));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>> _DidRemoveZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMZone>> DidRemoveZoneObs { get { return _DidRemoveZone; } }
-        public override void DidRemoveZone(HomeKit.HMHome home, HomeKit.HMZone zone)
-        {
-            _DidRemoveZone.OnNext(Tuple.Create(home, zone));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> _DidUnblockAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> DidUnblockAccessoryObs { get { return _DidUnblockAccessory; } }
-        public override void DidUnblockAccessory(HomeKit.HMHome home, HomeKit.HMAccessory accessory)
-        {
-            _DidUnblockAccessory.OnNext(Tuple.Create(home, accessory));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> _DidUpdateActionsForActionSet = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> DidUpdateActionsForActionSetObs { get { return _DidUpdateActionsForActionSet; } }
-        public override void DidUpdateActionsForActionSet(HomeKit.HMHome home, HomeKit.HMActionSet actionSet)
-        {
-            _DidUpdateActionsForActionSet.OnNext(Tuple.Create(home, actionSet));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> _DidUpdateNameForActionSet = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> DidUpdateNameForActionSetObs { get { return _DidUpdateNameForActionSet; } }
-        public override void DidUpdateNameForActionSet(HomeKit.HMHome home, HomeKit.HMActionSet actionSet)
-        {
-            _DidUpdateNameForActionSet.OnNext(Tuple.Create(home, actionSet));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> _DidUpdateNameForRoom = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> DidUpdateNameForRoomObs { get { return _DidUpdateNameForRoom; } }
-        public override void DidUpdateNameForRoom(HomeKit.HMHome home, HomeKit.HMRoom room)
-        {
-            _DidUpdateNameForRoom.OnNext(Tuple.Create(home, room));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> _DidUpdateNameForServiceGroup = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> DidUpdateNameForServiceGroupObs { get { return _DidUpdateNameForServiceGroup; } }
-        public override void DidUpdateNameForServiceGroup(HomeKit.HMHome home, HomeKit.HMServiceGroup group)
-        {
-            _DidUpdateNameForServiceGroup.OnNext(Tuple.Create(home, group));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> _DidUpdateNameForTrigger = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> DidUpdateNameForTriggerObs { get { return _DidUpdateNameForTrigger; } }
-        public override void DidUpdateNameForTrigger(HomeKit.HMHome home, HomeKit.HMTrigger trigger)
-        {
-            _DidUpdateNameForTrigger.OnNext(Tuple.Create(home, trigger));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>> _DidUpdateNameForZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMZone>> DidUpdateNameForZoneObs { get { return _DidUpdateNameForZone; } }
-        public override void DidUpdateNameForZone(HomeKit.HMHome home, HomeKit.HMZone zone)
-        {
-            _DidUpdateNameForZone.OnNext(Tuple.Create(home, zone));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMAccessory>> _DidUpdateRoom = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMAccessory>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMAccessory>> DidUpdateRoomObs { get { return _DidUpdateRoom; } }
-        public override void DidUpdateRoom(HomeKit.HMHome home, HomeKit.HMRoom room, HomeKit.HMAccessory accessory)
-        {
-            _DidUpdateRoom.OnNext(Tuple.Create(home, room, accessory));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> _DidUpdateTrigger = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>>();
-        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> DidUpdateTriggerObs { get { return _DidUpdateTrigger; } }
-        public override void DidUpdateTrigger(HomeKit.HMHome home, HomeKit.HMTrigger trigger)
-        {
-            _DidUpdateTrigger.OnNext(Tuple.Create(home, trigger));
-        }
-
-    }
-    public  partial class HMHomeManagerDelegateRx : HMHomeManagerDelegate
-    {
-        readonly SingleAwaitSubject<HomeKit.HMHomeManager> _DidUpdateHomes = new SingleAwaitSubject<HomeKit.HMHomeManager>();
-        public IObservable<HomeKit.HMHomeManager> DidUpdateHomesObs { get { return _DidUpdateHomes; } }
-        public override void DidUpdateHomes(HomeKit.HMHomeManager manager)
-        {
-            _DidUpdateHomes.OnNext(manager);
-        }
-
-        readonly SingleAwaitSubject<HomeKit.HMHomeManager> _DidUpdatePrimaryHome = new SingleAwaitSubject<HomeKit.HMHomeManager>();
-        public IObservable<HomeKit.HMHomeManager> DidUpdatePrimaryHomeObs { get { return _DidUpdatePrimaryHome; } }
-        public override void DidUpdatePrimaryHome(HomeKit.HMHomeManager manager)
-        {
-            _DidUpdatePrimaryHome.OnNext(manager);
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>> _DidAddHome = new SingleAwaitSubject<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>>();
-        public IObservable<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>> DidAddHomeObs { get { return _DidAddHome; } }
-        public override void DidAddHome(HomeKit.HMHomeManager manager, HomeKit.HMHome home)
-        {
-            _DidAddHome.OnNext(Tuple.Create(manager, home));
-        }
-
-        readonly SingleAwaitSubject<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>> _DidRemoveHome = new SingleAwaitSubject<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>>();
-        public IObservable<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>> DidRemoveHomeObs { get { return _DidRemoveHome; } }
-        public override void DidRemoveHome(HomeKit.HMHomeManager manager, HomeKit.HMHome home)
-        {
-            _DidRemoveHome.OnNext(Tuple.Create(manager, home));
+            _AgentWillUpdate.OnNext(agent);
         }
 
     }
@@ -5252,6 +4838,33 @@ namespace UIKit.Rx
         }
 
     }
+    public  partial class UINavigationBarDelegateRx : UINavigationBarDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>> _DidPopItem = new SingleAwaitSubject<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>>();
+        public IObservable<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>> DidPopItemObs { get { return _DidPopItem; } }
+        public override void DidPopItem(UIKit.UINavigationBar navigationBar, UIKit.UINavigationItem item)
+        {
+            _DidPopItem.OnNext(Tuple.Create(navigationBar, item));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>> _DidPushItem = new SingleAwaitSubject<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>>();
+        public IObservable<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>> DidPushItemObs { get { return _DidPushItem; } }
+        public override void DidPushItem(UIKit.UINavigationBar navigationBar, UIKit.UINavigationItem item)
+        {
+            _DidPushItem.OnNext(Tuple.Create(navigationBar, item));
+        }
+
+    }
+    public  partial class UIPickerViewDelegateRx : UIPickerViewDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<UIKit.UIPickerView, System.nint, System.nint>> _Selected = new SingleAwaitSubject<Tuple<UIKit.UIPickerView, System.nint, System.nint>>();
+        public IObservable<Tuple<UIKit.UIPickerView, System.nint, System.nint>> SelectedObs { get { return _Selected; } }
+        public override void Selected(UIKit.UIPickerView pickerView, System.nint row, System.nint component)
+        {
+            _Selected.OnNext(Tuple.Create(pickerView, row, component));
+        }
+
+    }
     public abstract partial class UIPreviewInteractionDelegateRx : UIPreviewInteractionDelegate
     {
         readonly SingleAwaitSubject<UIKit.UIPreviewInteraction> _DidCancel = new SingleAwaitSubject<UIKit.UIPreviewInteraction>();
@@ -5286,20 +4899,20 @@ namespace UIKit.Rx
         }
 
     }
-    public  partial class UINavigationBarDelegateRx : UINavigationBarDelegate
+    public  partial class UINavigationControllerDelegateRx : UINavigationControllerDelegate
     {
-        readonly SingleAwaitSubject<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>> _DidPopItem = new SingleAwaitSubject<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>>();
-        public IObservable<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>> DidPopItemObs { get { return _DidPopItem; } }
-        public override void DidPopItem(UIKit.UINavigationBar navigationBar, UIKit.UINavigationItem item)
+        readonly SingleAwaitSubject<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>> _DidShowViewController = new SingleAwaitSubject<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>>();
+        public IObservable<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>> DidShowViewControllerObs { get { return _DidShowViewController; } }
+        public override void DidShowViewController(UIKit.UINavigationController navigationController, UIKit.UIViewController viewController, System.Boolean animated)
         {
-            _DidPopItem.OnNext(Tuple.Create(navigationBar, item));
+            _DidShowViewController.OnNext(Tuple.Create(navigationController, viewController, animated));
         }
 
-        readonly SingleAwaitSubject<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>> _DidPushItem = new SingleAwaitSubject<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>>();
-        public IObservable<Tuple<UIKit.UINavigationBar, UIKit.UINavigationItem>> DidPushItemObs { get { return _DidPushItem; } }
-        public override void DidPushItem(UIKit.UINavigationBar navigationBar, UIKit.UINavigationItem item)
+        readonly SingleAwaitSubject<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>> _WillShowViewController = new SingleAwaitSubject<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>>();
+        public IObservable<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>> WillShowViewControllerObs { get { return _WillShowViewController; } }
+        public override void WillShowViewController(UIKit.UINavigationController navigationController, UIKit.UIViewController viewController, System.Boolean animated)
         {
-            _DidPushItem.OnNext(Tuple.Create(navigationBar, item));
+            _WillShowViewController.OnNext(Tuple.Create(navigationController, viewController, animated));
         }
 
     }
@@ -5345,33 +4958,6 @@ namespace UIKit.Rx
         public override void WillStartJob(UIKit.UIPrintInteractionController printInteractionController)
         {
             _WillStartJob.OnNext(printInteractionController);
-        }
-
-    }
-    public  partial class UINavigationControllerDelegateRx : UINavigationControllerDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>> _DidShowViewController = new SingleAwaitSubject<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>>();
-        public IObservable<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>> DidShowViewControllerObs { get { return _DidShowViewController; } }
-        public override void DidShowViewController(UIKit.UINavigationController navigationController, UIKit.UIViewController viewController, System.Boolean animated)
-        {
-            _DidShowViewController.OnNext(Tuple.Create(navigationController, viewController, animated));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>> _WillShowViewController = new SingleAwaitSubject<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>>();
-        public IObservable<Tuple<UIKit.UINavigationController, UIKit.UIViewController, System.Boolean>> WillShowViewControllerObs { get { return _WillShowViewController; } }
-        public override void WillShowViewController(UIKit.UINavigationController navigationController, UIKit.UIViewController viewController, System.Boolean animated)
-        {
-            _WillShowViewController.OnNext(Tuple.Create(navigationController, viewController, animated));
-        }
-
-    }
-    public  partial class UIPickerViewDelegateRx : UIPickerViewDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<UIKit.UIPickerView, System.nint, System.nint>> _Selected = new SingleAwaitSubject<Tuple<UIKit.UIPickerView, System.nint, System.nint>>();
-        public IObservable<Tuple<UIKit.UIPickerView, System.nint, System.nint>> SelectedObs { get { return _Selected; } }
-        public override void Selected(UIKit.UIPickerView pickerView, System.nint row, System.nint component)
-        {
-            _Selected.OnNext(Tuple.Create(pickerView, row, component));
         }
 
     }
@@ -5448,189 +5034,6 @@ namespace UIKit.Rx
         }
 
     }
-    public  partial class UIPageViewControllerDelegateRx : UIPageViewControllerDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<UIKit.UIPageViewController, System.Boolean, UIKit.UIViewController[], System.Boolean>> _DidFinishAnimating = new SingleAwaitSubject<Tuple<UIKit.UIPageViewController, System.Boolean, UIKit.UIViewController[], System.Boolean>>();
-        public IObservable<Tuple<UIKit.UIPageViewController, System.Boolean, UIKit.UIViewController[], System.Boolean>> DidFinishAnimatingObs { get { return _DidFinishAnimating; } }
-        public override void DidFinishAnimating(UIKit.UIPageViewController pageViewController, System.Boolean finished, UIKit.UIViewController[] previousViewControllers, System.Boolean completed)
-        {
-            _DidFinishAnimating.OnNext(Tuple.Create(pageViewController, finished, previousViewControllers, completed));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UIPageViewController, UIKit.UIViewController[]>> _WillTransition = new SingleAwaitSubject<Tuple<UIKit.UIPageViewController, UIKit.UIViewController[]>>();
-        public IObservable<Tuple<UIKit.UIPageViewController, UIKit.UIViewController[]>> WillTransitionObs { get { return _WillTransition; } }
-        public override void WillTransition(UIKit.UIPageViewController pageViewController, UIKit.UIViewController[] pendingViewControllers)
-        {
-            _WillTransition.OnNext(Tuple.Create(pageViewController, pendingViewControllers));
-        }
-
-    }
-    public  partial class UISearchBarDelegateRx : UISearchBarDelegate
-    {
-        readonly SingleAwaitSubject<UIKit.UISearchBar> _BookmarkButtonClicked = new SingleAwaitSubject<UIKit.UISearchBar>();
-        public IObservable<UIKit.UISearchBar> BookmarkButtonClickedObs { get { return _BookmarkButtonClicked; } }
-        public override void BookmarkButtonClicked(UIKit.UISearchBar searchBar)
-        {
-            _BookmarkButtonClicked.OnNext(searchBar);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UISearchBar> _CancelButtonClicked = new SingleAwaitSubject<UIKit.UISearchBar>();
-        public IObservable<UIKit.UISearchBar> CancelButtonClickedObs { get { return _CancelButtonClicked; } }
-        public override void CancelButtonClicked(UIKit.UISearchBar searchBar)
-        {
-            _CancelButtonClicked.OnNext(searchBar);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UISearchBar> _ListButtonClicked = new SingleAwaitSubject<UIKit.UISearchBar>();
-        public IObservable<UIKit.UISearchBar> ListButtonClickedObs { get { return _ListButtonClicked; } }
-        public override void ListButtonClicked(UIKit.UISearchBar searchBar)
-        {
-            _ListButtonClicked.OnNext(searchBar);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UISearchBar> _OnEditingStarted = new SingleAwaitSubject<UIKit.UISearchBar>();
-        public IObservable<UIKit.UISearchBar> OnEditingStartedObs { get { return _OnEditingStarted; } }
-        public override void OnEditingStarted(UIKit.UISearchBar searchBar)
-        {
-            _OnEditingStarted.OnNext(searchBar);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UISearchBar> _OnEditingStopped = new SingleAwaitSubject<UIKit.UISearchBar>();
-        public IObservable<UIKit.UISearchBar> OnEditingStoppedObs { get { return _OnEditingStopped; } }
-        public override void OnEditingStopped(UIKit.UISearchBar searchBar)
-        {
-            _OnEditingStopped.OnNext(searchBar);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UISearchBar> _SearchButtonClicked = new SingleAwaitSubject<UIKit.UISearchBar>();
-        public IObservable<UIKit.UISearchBar> SearchButtonClickedObs { get { return _SearchButtonClicked; } }
-        public override void SearchButtonClicked(UIKit.UISearchBar searchBar)
-        {
-            _SearchButtonClicked.OnNext(searchBar);
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UISearchBar, System.nint>> _SelectedScopeButtonIndexChanged = new SingleAwaitSubject<Tuple<UIKit.UISearchBar, System.nint>>();
-        public IObservable<Tuple<UIKit.UISearchBar, System.nint>> SelectedScopeButtonIndexChangedObs { get { return _SelectedScopeButtonIndexChanged; } }
-        public override void SelectedScopeButtonIndexChanged(UIKit.UISearchBar searchBar, System.nint selectedScope)
-        {
-            _SelectedScopeButtonIndexChanged.OnNext(Tuple.Create(searchBar, selectedScope));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UISearchBar, string>> _TextChanged = new SingleAwaitSubject<Tuple<UIKit.UISearchBar, string>>();
-        public IObservable<Tuple<UIKit.UISearchBar, string>> TextChangedObs { get { return _TextChanged; } }
-        public override void TextChanged(UIKit.UISearchBar searchBar, string searchText)
-        {
-            _TextChanged.OnNext(Tuple.Create(searchBar, searchText));
-        }
-
-    }
-    public  partial class UITabBarControllerDelegateRx : UITabBarControllerDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>> _FinishedCustomizingViewControllers = new SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>>();
-        public IObservable<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>> FinishedCustomizingViewControllersObs { get { return _FinishedCustomizingViewControllers; } }
-        public override void FinishedCustomizingViewControllers(UIKit.UITabBarController tabBarController, UIKit.UIViewController[] viewControllers, System.Boolean changed)
-        {
-            _FinishedCustomizingViewControllers.OnNext(Tuple.Create(tabBarController, viewControllers, changed));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[]>> _OnCustomizingViewControllers = new SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[]>>();
-        public IObservable<Tuple<UIKit.UITabBarController, UIKit.UIViewController[]>> OnCustomizingViewControllersObs { get { return _OnCustomizingViewControllers; } }
-        public override void OnCustomizingViewControllers(UIKit.UITabBarController tabBarController, UIKit.UIViewController[] viewControllers)
-        {
-            _OnCustomizingViewControllers.OnNext(Tuple.Create(tabBarController, viewControllers));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>> _OnEndCustomizingViewControllers = new SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>>();
-        public IObservable<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>> OnEndCustomizingViewControllersObs { get { return _OnEndCustomizingViewControllers; } }
-        public override void OnEndCustomizingViewControllers(UIKit.UITabBarController tabBarController, UIKit.UIViewController[] viewControllers, System.Boolean changed)
-        {
-            _OnEndCustomizingViewControllers.OnNext(Tuple.Create(tabBarController, viewControllers, changed));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController>> _ViewControllerSelected = new SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController>>();
-        public IObservable<Tuple<UIKit.UITabBarController, UIKit.UIViewController>> ViewControllerSelectedObs { get { return _ViewControllerSelected; } }
-        public override void ViewControllerSelected(UIKit.UITabBarController tabBarController, UIKit.UIViewController viewController)
-        {
-            _ViewControllerSelected.OnNext(Tuple.Create(tabBarController, viewController));
-        }
-
-    }
-    public  partial class UISearchControllerDelegateRx : UISearchControllerDelegate
-    {
-        readonly SingleAwaitSubject<UIKit.UISearchController> _DidDismissSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
-        public IObservable<UIKit.UISearchController> DidDismissSearchControllerObs { get { return _DidDismissSearchController; } }
-        public override void DidDismissSearchController(UIKit.UISearchController searchController)
-        {
-            _DidDismissSearchController.OnNext(searchController);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UISearchController> _DidPresentSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
-        public IObservable<UIKit.UISearchController> DidPresentSearchControllerObs { get { return _DidPresentSearchController; } }
-        public override void DidPresentSearchController(UIKit.UISearchController searchController)
-        {
-            _DidPresentSearchController.OnNext(searchController);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UISearchController> _PresentSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
-        public IObservable<UIKit.UISearchController> PresentSearchControllerObs { get { return _PresentSearchController; } }
-        public override void PresentSearchController(UIKit.UISearchController searchController)
-        {
-            _PresentSearchController.OnNext(searchController);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UISearchController> _WillDismissSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
-        public IObservable<UIKit.UISearchController> WillDismissSearchControllerObs { get { return _WillDismissSearchController; } }
-        public override void WillDismissSearchController(UIKit.UISearchController searchController)
-        {
-            _WillDismissSearchController.OnNext(searchController);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UISearchController> _WillPresentSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
-        public IObservable<UIKit.UISearchController> WillPresentSearchControllerObs { get { return _WillPresentSearchController; } }
-        public override void WillPresentSearchController(UIKit.UISearchController searchController)
-        {
-            _WillPresentSearchController.OnNext(searchController);
-        }
-
-    }
-    public  partial class UITabBarDelegateRx : UITabBarDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>> _DidBeginCustomizingItems = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>>();
-        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>> DidBeginCustomizingItemsObs { get { return _DidBeginCustomizingItems; } }
-        public override void DidBeginCustomizingItems(UIKit.UITabBar tabbar, UIKit.UITabBarItem[] items)
-        {
-            _DidBeginCustomizingItems.OnNext(Tuple.Create(tabbar, items));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>> _DidEndCustomizingItems = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>>();
-        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>> DidEndCustomizingItemsObs { get { return _DidEndCustomizingItems; } }
-        public override void DidEndCustomizingItems(UIKit.UITabBar tabbar, UIKit.UITabBarItem[] items, System.Boolean changed)
-        {
-            _DidEndCustomizingItems.OnNext(Tuple.Create(tabbar, items, changed));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem>> _ItemSelected = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem>>();
-        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem>> ItemSelectedObs { get { return _ItemSelected; } }
-        public override void ItemSelected(UIKit.UITabBar tabbar, UIKit.UITabBarItem item)
-        {
-            _ItemSelected.OnNext(Tuple.Create(tabbar, item));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>> _WillBeginCustomizingItems = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>>();
-        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>> WillBeginCustomizingItemsObs { get { return _WillBeginCustomizingItems; } }
-        public override void WillBeginCustomizingItems(UIKit.UITabBar tabbar, UIKit.UITabBarItem[] items)
-        {
-            _WillBeginCustomizingItems.OnNext(Tuple.Create(tabbar, items));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>> _WillEndCustomizingItems = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>>();
-        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>> WillEndCustomizingItemsObs { get { return _WillEndCustomizingItems; } }
-        public override void WillEndCustomizingItems(UIKit.UITabBar tabbar, UIKit.UITabBarItem[] items, System.Boolean changed)
-        {
-            _WillEndCustomizingItems.OnNext(Tuple.Create(tabbar, items, changed));
-        }
-
-    }
     public  partial class UIPrinterPickerControllerDelegateRx : UIPrinterPickerControllerDelegate
     {
         readonly SingleAwaitSubject<UIKit.UIPrinterPickerController> _DidDismiss = new SingleAwaitSubject<UIKit.UIPrinterPickerController>();
@@ -5669,179 +5072,89 @@ namespace UIKit.Rx
         }
 
     }
-    public  partial class UISplitViewControllerDelegateRx : UISplitViewControllerDelegate
+    public  partial class UIPageViewControllerDelegateRx : UIPageViewControllerDelegate
     {
-        readonly SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UISplitViewControllerDisplayMode>> _WillChangeDisplayMode = new SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UISplitViewControllerDisplayMode>>();
-        public IObservable<Tuple<UIKit.UISplitViewController, UIKit.UISplitViewControllerDisplayMode>> WillChangeDisplayModeObs { get { return _WillChangeDisplayMode; } }
-        public override void WillChangeDisplayMode(UIKit.UISplitViewController svc, UIKit.UISplitViewControllerDisplayMode displayMode)
+        readonly SingleAwaitSubject<Tuple<UIKit.UIPageViewController, System.Boolean, UIKit.UIViewController[], System.Boolean>> _DidFinishAnimating = new SingleAwaitSubject<Tuple<UIKit.UIPageViewController, System.Boolean, UIKit.UIViewController[], System.Boolean>>();
+        public IObservable<Tuple<UIKit.UIPageViewController, System.Boolean, UIKit.UIViewController[], System.Boolean>> DidFinishAnimatingObs { get { return _DidFinishAnimating; } }
+        public override void DidFinishAnimating(UIKit.UIPageViewController pageViewController, System.Boolean finished, UIKit.UIViewController[] previousViewControllers, System.Boolean completed)
         {
-            _WillChangeDisplayMode.OnNext(Tuple.Create(svc, displayMode));
+            _DidFinishAnimating.OnNext(Tuple.Create(pageViewController, finished, previousViewControllers, completed));
         }
 
-        readonly SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem, UIKit.UIPopoverController>> _WillHideViewController = new SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem, UIKit.UIPopoverController>>();
-        public IObservable<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem, UIKit.UIPopoverController>> WillHideViewControllerObs { get { return _WillHideViewController; } }
-        public override void WillHideViewController(UIKit.UISplitViewController svc, UIKit.UIViewController aViewController, UIKit.UIBarButtonItem barButtonItem, UIKit.UIPopoverController pc)
+        readonly SingleAwaitSubject<Tuple<UIKit.UIPageViewController, UIKit.UIViewController[]>> _WillTransition = new SingleAwaitSubject<Tuple<UIKit.UIPageViewController, UIKit.UIViewController[]>>();
+        public IObservable<Tuple<UIKit.UIPageViewController, UIKit.UIViewController[]>> WillTransitionObs { get { return _WillTransition; } }
+        public override void WillTransition(UIKit.UIPageViewController pageViewController, UIKit.UIViewController[] pendingViewControllers)
         {
-            _WillHideViewController.OnNext(Tuple.Create(svc, aViewController, barButtonItem, pc));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIPopoverController, UIKit.UIViewController>> _WillPresentViewController = new SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIPopoverController, UIKit.UIViewController>>();
-        public IObservable<Tuple<UIKit.UISplitViewController, UIKit.UIPopoverController, UIKit.UIViewController>> WillPresentViewControllerObs { get { return _WillPresentViewController; } }
-        public override void WillPresentViewController(UIKit.UISplitViewController svc, UIKit.UIPopoverController pc, UIKit.UIViewController aViewController)
-        {
-            _WillPresentViewController.OnNext(Tuple.Create(svc, pc, aViewController));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem>> _WillShowViewController = new SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem>>();
-        public IObservable<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem>> WillShowViewControllerObs { get { return _WillShowViewController; } }
-        public override void WillShowViewController(UIKit.UISplitViewController svc, UIKit.UIViewController aViewController, UIKit.UIBarButtonItem button)
-        {
-            _WillShowViewController.OnNext(Tuple.Create(svc, aViewController, button));
+            _WillTransition.OnNext(Tuple.Create(pageViewController, pendingViewControllers));
         }
 
     }
-    public  partial class UITextFieldDelegateRx : UITextFieldDelegate
+    public  partial class UITabBarControllerDelegateRx : UITabBarControllerDelegate
     {
-        readonly SingleAwaitSubject<UIKit.UITextField> _EditingEnded = new SingleAwaitSubject<UIKit.UITextField>();
-        public IObservable<UIKit.UITextField> EditingEndedObs { get { return _EditingEnded; } }
-        public override void EditingEnded(UIKit.UITextField textField)
+        readonly SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>> _FinishedCustomizingViewControllers = new SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>>();
+        public IObservable<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>> FinishedCustomizingViewControllersObs { get { return _FinishedCustomizingViewControllers; } }
+        public override void FinishedCustomizingViewControllers(UIKit.UITabBarController tabBarController, UIKit.UIViewController[] viewControllers, System.Boolean changed)
         {
-            _EditingEnded.OnNext(textField);
+            _FinishedCustomizingViewControllers.OnNext(Tuple.Create(tabBarController, viewControllers, changed));
         }
 
-        readonly SingleAwaitSubject<UIKit.UITextField> _EditingStarted = new SingleAwaitSubject<UIKit.UITextField>();
-        public IObservable<UIKit.UITextField> EditingStartedObs { get { return _EditingStarted; } }
-        public override void EditingStarted(UIKit.UITextField textField)
+        readonly SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[]>> _OnCustomizingViewControllers = new SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[]>>();
+        public IObservable<Tuple<UIKit.UITabBarController, UIKit.UIViewController[]>> OnCustomizingViewControllersObs { get { return _OnCustomizingViewControllers; } }
+        public override void OnCustomizingViewControllers(UIKit.UITabBarController tabBarController, UIKit.UIViewController[] viewControllers)
         {
-            _EditingStarted.OnNext(textField);
+            _OnCustomizingViewControllers.OnNext(Tuple.Create(tabBarController, viewControllers));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>> _OnEndCustomizingViewControllers = new SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>>();
+        public IObservable<Tuple<UIKit.UITabBarController, UIKit.UIViewController[], System.Boolean>> OnEndCustomizingViewControllersObs { get { return _OnEndCustomizingViewControllers; } }
+        public override void OnEndCustomizingViewControllers(UIKit.UITabBarController tabBarController, UIKit.UIViewController[] viewControllers, System.Boolean changed)
+        {
+            _OnEndCustomizingViewControllers.OnNext(Tuple.Create(tabBarController, viewControllers, changed));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController>> _ViewControllerSelected = new SingleAwaitSubject<Tuple<UIKit.UITabBarController, UIKit.UIViewController>>();
+        public IObservable<Tuple<UIKit.UITabBarController, UIKit.UIViewController>> ViewControllerSelectedObs { get { return _ViewControllerSelected; } }
+        public override void ViewControllerSelected(UIKit.UITabBarController tabBarController, UIKit.UIViewController viewController)
+        {
+            _ViewControllerSelected.OnNext(Tuple.Create(tabBarController, viewController));
         }
 
     }
-    public  partial class UISearchDisplayDelegateRx : UISearchDisplayDelegate
+    public  partial class UITabBarDelegateRx : UITabBarDelegate
     {
-        readonly SingleAwaitSubject<UIKit.UISearchDisplayController> _DidBeginSearch = new SingleAwaitSubject<UIKit.UISearchDisplayController>();
-        public IObservable<UIKit.UISearchDisplayController> DidBeginSearchObs { get { return _DidBeginSearch; } }
-        public override void DidBeginSearch(UIKit.UISearchDisplayController controller)
+        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>> _DidBeginCustomizingItems = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>>();
+        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>> DidBeginCustomizingItemsObs { get { return _DidBeginCustomizingItems; } }
+        public override void DidBeginCustomizingItems(UIKit.UITabBar tabbar, UIKit.UITabBarItem[] items)
         {
-            _DidBeginSearch.OnNext(controller);
+            _DidBeginCustomizingItems.OnNext(Tuple.Create(tabbar, items));
         }
 
-        readonly SingleAwaitSubject<UIKit.UISearchDisplayController> _DidEndSearch = new SingleAwaitSubject<UIKit.UISearchDisplayController>();
-        public IObservable<UIKit.UISearchDisplayController> DidEndSearchObs { get { return _DidEndSearch; } }
-        public override void DidEndSearch(UIKit.UISearchDisplayController controller)
+        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>> _DidEndCustomizingItems = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>>();
+        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>> DidEndCustomizingItemsObs { get { return _DidEndCustomizingItems; } }
+        public override void DidEndCustomizingItems(UIKit.UITabBar tabbar, UIKit.UITabBarItem[] items, System.Boolean changed)
         {
-            _DidEndSearch.OnNext(controller);
+            _DidEndCustomizingItems.OnNext(Tuple.Create(tabbar, items, changed));
         }
 
-        readonly SingleAwaitSubject<UIKit.UISearchDisplayController> _WillBeginSearch = new SingleAwaitSubject<UIKit.UISearchDisplayController>();
-        public IObservable<UIKit.UISearchDisplayController> WillBeginSearchObs { get { return _WillBeginSearch; } }
-        public override void WillBeginSearch(UIKit.UISearchDisplayController controller)
+        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem>> _ItemSelected = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem>>();
+        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem>> ItemSelectedObs { get { return _ItemSelected; } }
+        public override void ItemSelected(UIKit.UITabBar tabbar, UIKit.UITabBarItem item)
         {
-            _WillBeginSearch.OnNext(controller);
+            _ItemSelected.OnNext(Tuple.Create(tabbar, item));
         }
 
-        readonly SingleAwaitSubject<UIKit.UISearchDisplayController> _WillEndSearch = new SingleAwaitSubject<UIKit.UISearchDisplayController>();
-        public IObservable<UIKit.UISearchDisplayController> WillEndSearchObs { get { return _WillEndSearch; } }
-        public override void WillEndSearch(UIKit.UISearchDisplayController controller)
+        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>> _WillBeginCustomizingItems = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>>();
+        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[]>> WillBeginCustomizingItemsObs { get { return _WillBeginCustomizingItems; } }
+        public override void WillBeginCustomizingItems(UIKit.UITabBar tabbar, UIKit.UITabBarItem[] items)
         {
-            _WillEndSearch.OnNext(controller);
+            _WillBeginCustomizingItems.OnNext(Tuple.Create(tabbar, items));
         }
 
-        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _DidHideSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
-        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> DidHideSearchResultsObs { get { return _DidHideSearchResults; } }
-        public override void DidHideSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
+        readonly SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>> _WillEndCustomizingItems = new SingleAwaitSubject<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>>();
+        public IObservable<Tuple<UIKit.UITabBar, UIKit.UITabBarItem[], System.Boolean>> WillEndCustomizingItemsObs { get { return _WillEndCustomizingItems; } }
+        public override void WillEndCustomizingItems(UIKit.UITabBar tabbar, UIKit.UITabBarItem[] items, System.Boolean changed)
         {
-            _DidHideSearchResults.OnNext(Tuple.Create(controller, tableView));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _DidLoadSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
-        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> DidLoadSearchResultsObs { get { return _DidLoadSearchResults; } }
-        public override void DidLoadSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
-        {
-            _DidLoadSearchResults.OnNext(Tuple.Create(controller, tableView));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _DidShowSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
-        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> DidShowSearchResultsObs { get { return _DidShowSearchResults; } }
-        public override void DidShowSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
-        {
-            _DidShowSearchResults.OnNext(Tuple.Create(controller, tableView));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _WillHideSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
-        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> WillHideSearchResultsObs { get { return _WillHideSearchResults; } }
-        public override void WillHideSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
-        {
-            _WillHideSearchResults.OnNext(Tuple.Create(controller, tableView));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _WillShowSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
-        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> WillShowSearchResultsObs { get { return _WillShowSearchResults; } }
-        public override void WillShowSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
-        {
-            _WillShowSearchResults.OnNext(Tuple.Create(controller, tableView));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _WillUnloadSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
-        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> WillUnloadSearchResultsObs { get { return _WillUnloadSearchResults; } }
-        public override void WillUnloadSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
-        {
-            _WillUnloadSearchResults.OnNext(Tuple.Create(controller, tableView));
-        }
-
-    }
-    public  partial class UITextViewDelegateRx : UITextViewDelegate
-    {
-        readonly SingleAwaitSubject<UIKit.UITextView> _Changed = new SingleAwaitSubject<UIKit.UITextView>();
-        public IObservable<UIKit.UITextView> ChangedObs { get { return _Changed; } }
-        public override void Changed(UIKit.UITextView textView)
-        {
-            _Changed.OnNext(textView);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UITextView> _EditingEnded = new SingleAwaitSubject<UIKit.UITextView>();
-        public IObservable<UIKit.UITextView> EditingEndedObs { get { return _EditingEnded; } }
-        public override void EditingEnded(UIKit.UITextView textView)
-        {
-            _EditingEnded.OnNext(textView);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UITextView> _EditingStarted = new SingleAwaitSubject<UIKit.UITextView>();
-        public IObservable<UIKit.UITextView> EditingStartedObs { get { return _EditingStarted; } }
-        public override void EditingStarted(UIKit.UITextView textView)
-        {
-            _EditingStarted.OnNext(textView);
-        }
-
-        readonly SingleAwaitSubject<UIKit.UITextView> _SelectionChanged = new SingleAwaitSubject<UIKit.UITextView>();
-        public IObservable<UIKit.UITextView> SelectionChangedObs { get { return _SelectionChanged; } }
-        public override void SelectionChanged(UIKit.UITextView textView)
-        {
-            _SelectionChanged.OnNext(textView);
-        }
-
-    }
-    public  partial class UIVideoEditorControllerDelegateRx : UIVideoEditorControllerDelegate
-    {
-        readonly SingleAwaitSubject<UIKit.UIVideoEditorController> _UserCancelled = new SingleAwaitSubject<UIKit.UIVideoEditorController>();
-        public IObservable<UIKit.UIVideoEditorController> UserCancelledObs { get { return _UserCancelled; } }
-        public override void UserCancelled(UIKit.UIVideoEditorController editor)
-        {
-            _UserCancelled.OnNext(editor);
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UIVideoEditorController, Foundation.NSError>> _Failed = new SingleAwaitSubject<Tuple<UIKit.UIVideoEditorController, Foundation.NSError>>();
-        public IObservable<Tuple<UIKit.UIVideoEditorController, Foundation.NSError>> FailedObs { get { return _Failed; } }
-        public override void Failed(UIKit.UIVideoEditorController editor, Foundation.NSError error)
-        {
-            _Failed.OnNext(Tuple.Create(editor, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<UIKit.UIVideoEditorController, string>> _VideoSaved = new SingleAwaitSubject<Tuple<UIKit.UIVideoEditorController, string>>();
-        public IObservable<Tuple<UIKit.UIVideoEditorController, string>> VideoSavedObs { get { return _VideoSaved; } }
-        public override void VideoSaved(UIKit.UIVideoEditorController editor, string editedVideoPath)
-        {
-            _VideoSaved.OnNext(Tuple.Create(editor, editedVideoPath));
+            _WillEndCustomizingItems.OnNext(Tuple.Create(tabbar, items, changed));
         }
 
     }
@@ -5953,34 +5266,62 @@ namespace UIKit.Rx
         }
 
     }
-    public abstract partial class UITextInputDelegateRx : UITextInputDelegate
+    public  partial class UISearchBarDelegateRx : UISearchBarDelegate
     {
-        readonly SingleAwaitSubject<UIKit.IUITextInput> _SelectionDidChange = new SingleAwaitSubject<UIKit.IUITextInput>();
-        public IObservable<UIKit.IUITextInput> SelectionDidChangeObs { get { return _SelectionDidChange; } }
-        public override void SelectionDidChange(UIKit.IUITextInput uiTextInput)
+        readonly SingleAwaitSubject<UIKit.UISearchBar> _BookmarkButtonClicked = new SingleAwaitSubject<UIKit.UISearchBar>();
+        public IObservable<UIKit.UISearchBar> BookmarkButtonClickedObs { get { return _BookmarkButtonClicked; } }
+        public override void BookmarkButtonClicked(UIKit.UISearchBar searchBar)
         {
-            _SelectionDidChange.OnNext(uiTextInput);
+            _BookmarkButtonClicked.OnNext(searchBar);
         }
 
-        readonly SingleAwaitSubject<UIKit.IUITextInput> _SelectionWillChange = new SingleAwaitSubject<UIKit.IUITextInput>();
-        public IObservable<UIKit.IUITextInput> SelectionWillChangeObs { get { return _SelectionWillChange; } }
-        public override void SelectionWillChange(UIKit.IUITextInput uiTextInput)
+        readonly SingleAwaitSubject<UIKit.UISearchBar> _CancelButtonClicked = new SingleAwaitSubject<UIKit.UISearchBar>();
+        public IObservable<UIKit.UISearchBar> CancelButtonClickedObs { get { return _CancelButtonClicked; } }
+        public override void CancelButtonClicked(UIKit.UISearchBar searchBar)
         {
-            _SelectionWillChange.OnNext(uiTextInput);
+            _CancelButtonClicked.OnNext(searchBar);
         }
 
-        readonly SingleAwaitSubject<UIKit.IUITextInput> _TextDidChange = new SingleAwaitSubject<UIKit.IUITextInput>();
-        public IObservable<UIKit.IUITextInput> TextDidChangeObs { get { return _TextDidChange; } }
-        public override void TextDidChange(UIKit.IUITextInput textInput)
+        readonly SingleAwaitSubject<UIKit.UISearchBar> _ListButtonClicked = new SingleAwaitSubject<UIKit.UISearchBar>();
+        public IObservable<UIKit.UISearchBar> ListButtonClickedObs { get { return _ListButtonClicked; } }
+        public override void ListButtonClicked(UIKit.UISearchBar searchBar)
         {
-            _TextDidChange.OnNext(textInput);
+            _ListButtonClicked.OnNext(searchBar);
         }
 
-        readonly SingleAwaitSubject<UIKit.IUITextInput> _TextWillChange = new SingleAwaitSubject<UIKit.IUITextInput>();
-        public IObservable<UIKit.IUITextInput> TextWillChangeObs { get { return _TextWillChange; } }
-        public override void TextWillChange(UIKit.IUITextInput textInput)
+        readonly SingleAwaitSubject<UIKit.UISearchBar> _OnEditingStarted = new SingleAwaitSubject<UIKit.UISearchBar>();
+        public IObservable<UIKit.UISearchBar> OnEditingStartedObs { get { return _OnEditingStarted; } }
+        public override void OnEditingStarted(UIKit.UISearchBar searchBar)
         {
-            _TextWillChange.OnNext(textInput);
+            _OnEditingStarted.OnNext(searchBar);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UISearchBar> _OnEditingStopped = new SingleAwaitSubject<UIKit.UISearchBar>();
+        public IObservable<UIKit.UISearchBar> OnEditingStoppedObs { get { return _OnEditingStopped; } }
+        public override void OnEditingStopped(UIKit.UISearchBar searchBar)
+        {
+            _OnEditingStopped.OnNext(searchBar);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UISearchBar> _SearchButtonClicked = new SingleAwaitSubject<UIKit.UISearchBar>();
+        public IObservable<UIKit.UISearchBar> SearchButtonClickedObs { get { return _SearchButtonClicked; } }
+        public override void SearchButtonClicked(UIKit.UISearchBar searchBar)
+        {
+            _SearchButtonClicked.OnNext(searchBar);
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISearchBar, System.nint>> _SelectedScopeButtonIndexChanged = new SingleAwaitSubject<Tuple<UIKit.UISearchBar, System.nint>>();
+        public IObservable<Tuple<UIKit.UISearchBar, System.nint>> SelectedScopeButtonIndexChangedObs { get { return _SelectedScopeButtonIndexChanged; } }
+        public override void SelectedScopeButtonIndexChanged(UIKit.UISearchBar searchBar, System.nint selectedScope)
+        {
+            _SelectedScopeButtonIndexChanged.OnNext(Tuple.Create(searchBar, selectedScope));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISearchBar, string>> _TextChanged = new SingleAwaitSubject<Tuple<UIKit.UISearchBar, string>>();
+        public IObservable<Tuple<UIKit.UISearchBar, string>> TextChangedObs { get { return _TextChanged; } }
+        public override void TextChanged(UIKit.UISearchBar searchBar, string searchText)
+        {
+            _TextChanged.OnNext(Tuple.Create(searchBar, searchText));
         }
 
     }
@@ -6106,6 +5447,220 @@ namespace UIKit.Rx
         }
 
     }
+    public  partial class UISearchControllerDelegateRx : UISearchControllerDelegate
+    {
+        readonly SingleAwaitSubject<UIKit.UISearchController> _DidDismissSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
+        public IObservable<UIKit.UISearchController> DidDismissSearchControllerObs { get { return _DidDismissSearchController; } }
+        public override void DidDismissSearchController(UIKit.UISearchController searchController)
+        {
+            _DidDismissSearchController.OnNext(searchController);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UISearchController> _DidPresentSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
+        public IObservable<UIKit.UISearchController> DidPresentSearchControllerObs { get { return _DidPresentSearchController; } }
+        public override void DidPresentSearchController(UIKit.UISearchController searchController)
+        {
+            _DidPresentSearchController.OnNext(searchController);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UISearchController> _PresentSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
+        public IObservable<UIKit.UISearchController> PresentSearchControllerObs { get { return _PresentSearchController; } }
+        public override void PresentSearchController(UIKit.UISearchController searchController)
+        {
+            _PresentSearchController.OnNext(searchController);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UISearchController> _WillDismissSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
+        public IObservable<UIKit.UISearchController> WillDismissSearchControllerObs { get { return _WillDismissSearchController; } }
+        public override void WillDismissSearchController(UIKit.UISearchController searchController)
+        {
+            _WillDismissSearchController.OnNext(searchController);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UISearchController> _WillPresentSearchController = new SingleAwaitSubject<UIKit.UISearchController>();
+        public IObservable<UIKit.UISearchController> WillPresentSearchControllerObs { get { return _WillPresentSearchController; } }
+        public override void WillPresentSearchController(UIKit.UISearchController searchController)
+        {
+            _WillPresentSearchController.OnNext(searchController);
+        }
+
+    }
+    public  partial class UISearchDisplayDelegateRx : UISearchDisplayDelegate
+    {
+        readonly SingleAwaitSubject<UIKit.UISearchDisplayController> _DidBeginSearch = new SingleAwaitSubject<UIKit.UISearchDisplayController>();
+        public IObservable<UIKit.UISearchDisplayController> DidBeginSearchObs { get { return _DidBeginSearch; } }
+        public override void DidBeginSearch(UIKit.UISearchDisplayController controller)
+        {
+            _DidBeginSearch.OnNext(controller);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UISearchDisplayController> _DidEndSearch = new SingleAwaitSubject<UIKit.UISearchDisplayController>();
+        public IObservable<UIKit.UISearchDisplayController> DidEndSearchObs { get { return _DidEndSearch; } }
+        public override void DidEndSearch(UIKit.UISearchDisplayController controller)
+        {
+            _DidEndSearch.OnNext(controller);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UISearchDisplayController> _WillBeginSearch = new SingleAwaitSubject<UIKit.UISearchDisplayController>();
+        public IObservable<UIKit.UISearchDisplayController> WillBeginSearchObs { get { return _WillBeginSearch; } }
+        public override void WillBeginSearch(UIKit.UISearchDisplayController controller)
+        {
+            _WillBeginSearch.OnNext(controller);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UISearchDisplayController> _WillEndSearch = new SingleAwaitSubject<UIKit.UISearchDisplayController>();
+        public IObservable<UIKit.UISearchDisplayController> WillEndSearchObs { get { return _WillEndSearch; } }
+        public override void WillEndSearch(UIKit.UISearchDisplayController controller)
+        {
+            _WillEndSearch.OnNext(controller);
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _DidHideSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
+        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> DidHideSearchResultsObs { get { return _DidHideSearchResults; } }
+        public override void DidHideSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
+        {
+            _DidHideSearchResults.OnNext(Tuple.Create(controller, tableView));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _DidLoadSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
+        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> DidLoadSearchResultsObs { get { return _DidLoadSearchResults; } }
+        public override void DidLoadSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
+        {
+            _DidLoadSearchResults.OnNext(Tuple.Create(controller, tableView));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _DidShowSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
+        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> DidShowSearchResultsObs { get { return _DidShowSearchResults; } }
+        public override void DidShowSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
+        {
+            _DidShowSearchResults.OnNext(Tuple.Create(controller, tableView));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _WillHideSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
+        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> WillHideSearchResultsObs { get { return _WillHideSearchResults; } }
+        public override void WillHideSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
+        {
+            _WillHideSearchResults.OnNext(Tuple.Create(controller, tableView));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _WillShowSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
+        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> WillShowSearchResultsObs { get { return _WillShowSearchResults; } }
+        public override void WillShowSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
+        {
+            _WillShowSearchResults.OnNext(Tuple.Create(controller, tableView));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> _WillUnloadSearchResults = new SingleAwaitSubject<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>>();
+        public IObservable<Tuple<UIKit.UISearchDisplayController, UIKit.UITableView>> WillUnloadSearchResultsObs { get { return _WillUnloadSearchResults; } }
+        public override void WillUnloadSearchResults(UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
+        {
+            _WillUnloadSearchResults.OnNext(Tuple.Create(controller, tableView));
+        }
+
+    }
+    public  partial class UISplitViewControllerDelegateRx : UISplitViewControllerDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UISplitViewControllerDisplayMode>> _WillChangeDisplayMode = new SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UISplitViewControllerDisplayMode>>();
+        public IObservable<Tuple<UIKit.UISplitViewController, UIKit.UISplitViewControllerDisplayMode>> WillChangeDisplayModeObs { get { return _WillChangeDisplayMode; } }
+        public override void WillChangeDisplayMode(UIKit.UISplitViewController svc, UIKit.UISplitViewControllerDisplayMode displayMode)
+        {
+            _WillChangeDisplayMode.OnNext(Tuple.Create(svc, displayMode));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem, UIKit.UIPopoverController>> _WillHideViewController = new SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem, UIKit.UIPopoverController>>();
+        public IObservable<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem, UIKit.UIPopoverController>> WillHideViewControllerObs { get { return _WillHideViewController; } }
+        public override void WillHideViewController(UIKit.UISplitViewController svc, UIKit.UIViewController aViewController, UIKit.UIBarButtonItem barButtonItem, UIKit.UIPopoverController pc)
+        {
+            _WillHideViewController.OnNext(Tuple.Create(svc, aViewController, barButtonItem, pc));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIPopoverController, UIKit.UIViewController>> _WillPresentViewController = new SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIPopoverController, UIKit.UIViewController>>();
+        public IObservable<Tuple<UIKit.UISplitViewController, UIKit.UIPopoverController, UIKit.UIViewController>> WillPresentViewControllerObs { get { return _WillPresentViewController; } }
+        public override void WillPresentViewController(UIKit.UISplitViewController svc, UIKit.UIPopoverController pc, UIKit.UIViewController aViewController)
+        {
+            _WillPresentViewController.OnNext(Tuple.Create(svc, pc, aViewController));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem>> _WillShowViewController = new SingleAwaitSubject<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem>>();
+        public IObservable<Tuple<UIKit.UISplitViewController, UIKit.UIViewController, UIKit.UIBarButtonItem>> WillShowViewControllerObs { get { return _WillShowViewController; } }
+        public override void WillShowViewController(UIKit.UISplitViewController svc, UIKit.UIViewController aViewController, UIKit.UIBarButtonItem button)
+        {
+            _WillShowViewController.OnNext(Tuple.Create(svc, aViewController, button));
+        }
+
+    }
+    public  partial class UIVideoEditorControllerDelegateRx : UIVideoEditorControllerDelegate
+    {
+        readonly SingleAwaitSubject<UIKit.UIVideoEditorController> _UserCancelled = new SingleAwaitSubject<UIKit.UIVideoEditorController>();
+        public IObservable<UIKit.UIVideoEditorController> UserCancelledObs { get { return _UserCancelled; } }
+        public override void UserCancelled(UIKit.UIVideoEditorController editor)
+        {
+            _UserCancelled.OnNext(editor);
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UIVideoEditorController, Foundation.NSError>> _Failed = new SingleAwaitSubject<Tuple<UIKit.UIVideoEditorController, Foundation.NSError>>();
+        public IObservable<Tuple<UIKit.UIVideoEditorController, Foundation.NSError>> FailedObs { get { return _Failed; } }
+        public override void Failed(UIKit.UIVideoEditorController editor, Foundation.NSError error)
+        {
+            _Failed.OnNext(Tuple.Create(editor, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<UIKit.UIVideoEditorController, string>> _VideoSaved = new SingleAwaitSubject<Tuple<UIKit.UIVideoEditorController, string>>();
+        public IObservable<Tuple<UIKit.UIVideoEditorController, string>> VideoSavedObs { get { return _VideoSaved; } }
+        public override void VideoSaved(UIKit.UIVideoEditorController editor, string editedVideoPath)
+        {
+            _VideoSaved.OnNext(Tuple.Create(editor, editedVideoPath));
+        }
+
+    }
+    public  partial class UITextFieldDelegateRx : UITextFieldDelegate
+    {
+        readonly SingleAwaitSubject<UIKit.UITextField> _EditingEnded = new SingleAwaitSubject<UIKit.UITextField>();
+        public IObservable<UIKit.UITextField> EditingEndedObs { get { return _EditingEnded; } }
+        public override void EditingEnded(UIKit.UITextField textField)
+        {
+            _EditingEnded.OnNext(textField);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UITextField> _EditingStarted = new SingleAwaitSubject<UIKit.UITextField>();
+        public IObservable<UIKit.UITextField> EditingStartedObs { get { return _EditingStarted; } }
+        public override void EditingStarted(UIKit.UITextField textField)
+        {
+            _EditingStarted.OnNext(textField);
+        }
+
+    }
+    public  partial class UITextViewDelegateRx : UITextViewDelegate
+    {
+        readonly SingleAwaitSubject<UIKit.UITextView> _Changed = new SingleAwaitSubject<UIKit.UITextView>();
+        public IObservable<UIKit.UITextView> ChangedObs { get { return _Changed; } }
+        public override void Changed(UIKit.UITextView textView)
+        {
+            _Changed.OnNext(textView);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UITextView> _EditingEnded = new SingleAwaitSubject<UIKit.UITextView>();
+        public IObservable<UIKit.UITextView> EditingEndedObs { get { return _EditingEnded; } }
+        public override void EditingEnded(UIKit.UITextView textView)
+        {
+            _EditingEnded.OnNext(textView);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UITextView> _EditingStarted = new SingleAwaitSubject<UIKit.UITextView>();
+        public IObservable<UIKit.UITextView> EditingStartedObs { get { return _EditingStarted; } }
+        public override void EditingStarted(UIKit.UITextView textView)
+        {
+            _EditingStarted.OnNext(textView);
+        }
+
+        readonly SingleAwaitSubject<UIKit.UITextView> _SelectionChanged = new SingleAwaitSubject<UIKit.UITextView>();
+        public IObservable<UIKit.UITextView> SelectionChangedObs { get { return _SelectionChanged; } }
+        public override void SelectionChanged(UIKit.UITextView textView)
+        {
+            _SelectionChanged.OnNext(textView);
+        }
+
+    }
     public  partial class UIWebViewDelegateRx : UIWebViewDelegate
     {
         readonly SingleAwaitSubject<UIKit.UIWebView> _LoadingFinished = new SingleAwaitSubject<UIKit.UIWebView>();
@@ -6130,6 +5685,37 @@ namespace UIKit.Rx
         }
 
     }
+    public abstract partial class UITextInputDelegateRx : UITextInputDelegate
+    {
+        readonly SingleAwaitSubject<UIKit.IUITextInput> _SelectionDidChange = new SingleAwaitSubject<UIKit.IUITextInput>();
+        public IObservable<UIKit.IUITextInput> SelectionDidChangeObs { get { return _SelectionDidChange; } }
+        public override void SelectionDidChange(UIKit.IUITextInput uiTextInput)
+        {
+            _SelectionDidChange.OnNext(uiTextInput);
+        }
+
+        readonly SingleAwaitSubject<UIKit.IUITextInput> _SelectionWillChange = new SingleAwaitSubject<UIKit.IUITextInput>();
+        public IObservable<UIKit.IUITextInput> SelectionWillChangeObs { get { return _SelectionWillChange; } }
+        public override void SelectionWillChange(UIKit.IUITextInput uiTextInput)
+        {
+            _SelectionWillChange.OnNext(uiTextInput);
+        }
+
+        readonly SingleAwaitSubject<UIKit.IUITextInput> _TextDidChange = new SingleAwaitSubject<UIKit.IUITextInput>();
+        public IObservable<UIKit.IUITextInput> TextDidChangeObs { get { return _TextDidChange; } }
+        public override void TextDidChange(UIKit.IUITextInput textInput)
+        {
+            _TextDidChange.OnNext(textInput);
+        }
+
+        readonly SingleAwaitSubject<UIKit.IUITextInput> _TextWillChange = new SingleAwaitSubject<UIKit.IUITextInput>();
+        public IObservable<UIKit.IUITextInput> TextWillChangeObs { get { return _TextWillChange; } }
+        public override void TextWillChange(UIKit.IUITextInput textInput)
+        {
+            _TextWillChange.OnNext(textInput);
+        }
+
+    }
     public abstract partial class UIViewControllerPreviewingDelegateRx : UIViewControllerPreviewingDelegate
     {
         readonly SingleAwaitSubject<Tuple<UIKit.IUIViewControllerPreviewing, UIKit.UIViewController>> _CommitViewController = new SingleAwaitSubject<Tuple<UIKit.IUIViewControllerPreviewing, UIKit.UIViewController>>();
@@ -6137,6 +5723,478 @@ namespace UIKit.Rx
         public override void CommitViewController(UIKit.IUIViewControllerPreviewing previewingContext, UIKit.UIViewController viewControllerToCommit)
         {
             _CommitViewController.OnNext(Tuple.Create(previewingContext, viewControllerToCommit));
+        }
+
+    }
+}
+namespace SceneKit.Rx
+{
+    public  partial class SCNNodeRendererDelegateRx : SCNNodeRendererDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<SceneKit.SCNNode, SceneKit.SCNRenderer, Foundation.NSDictionary>> _Render = new SingleAwaitSubject<Tuple<SceneKit.SCNNode, SceneKit.SCNRenderer, Foundation.NSDictionary>>();
+        public IObservable<Tuple<SceneKit.SCNNode, SceneKit.SCNRenderer, Foundation.NSDictionary>> RenderObs { get { return _Render; } }
+        public override void Render(SceneKit.SCNNode node, SceneKit.SCNRenderer renderer, Foundation.NSDictionary arguments)
+        {
+            _Render.OnNext(Tuple.Create(node, renderer, arguments));
+        }
+
+    }
+    public  partial class SCNPhysicsContactDelegateRx : SCNPhysicsContactDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> _DidBeginContact = new SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>>();
+        public IObservable<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> DidBeginContactObs { get { return _DidBeginContact; } }
+        public override void DidBeginContact(SceneKit.SCNPhysicsWorld world, SceneKit.SCNPhysicsContact contact)
+        {
+            _DidBeginContact.OnNext(Tuple.Create(world, contact));
+        }
+
+        readonly SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> _DidEndContact = new SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>>();
+        public IObservable<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> DidEndContactObs { get { return _DidEndContact; } }
+        public override void DidEndContact(SceneKit.SCNPhysicsWorld world, SceneKit.SCNPhysicsContact contact)
+        {
+            _DidEndContact.OnNext(Tuple.Create(world, contact));
+        }
+
+        readonly SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> _DidUpdateContact = new SingleAwaitSubject<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>>();
+        public IObservable<Tuple<SceneKit.SCNPhysicsWorld, SceneKit.SCNPhysicsContact>> DidUpdateContactObs { get { return _DidUpdateContact; } }
+        public override void DidUpdateContact(SceneKit.SCNPhysicsWorld world, SceneKit.SCNPhysicsContact contact)
+        {
+            _DidUpdateContact.OnNext(Tuple.Create(world, contact));
+        }
+
+    }
+    public  partial class SCNProgramDelegateRx : SCNProgramDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<SceneKit.SCNProgram, Foundation.NSError>> _HandleError = new SingleAwaitSubject<Tuple<SceneKit.SCNProgram, Foundation.NSError>>();
+        public IObservable<Tuple<SceneKit.SCNProgram, Foundation.NSError>> HandleErrorObs { get { return _HandleError; } }
+        public override void HandleError(SceneKit.SCNProgram program, Foundation.NSError error)
+        {
+            _HandleError.OnNext(Tuple.Create(program, error));
+        }
+
+    }
+    public  partial class SCNSceneRendererDelegateRx : SCNSceneRendererDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> _DidApplyAnimations = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>>();
+        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> DidApplyAnimationsObs { get { return _DidApplyAnimations; } }
+        public override void DidApplyAnimations(SceneKit.ISCNSceneRenderer renderer, System.Double timeInSeconds)
+        {
+            _DidApplyAnimations.OnNext(Tuple.Create(renderer, timeInSeconds));
+        }
+
+        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>> _DidRenderScene = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>>();
+        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>> DidRenderSceneObs { get { return _DidRenderScene; } }
+        public override void DidRenderScene(SceneKit.ISCNSceneRenderer renderer, SceneKit.SCNScene scene, System.Double timeInSeconds)
+        {
+            _DidRenderScene.OnNext(Tuple.Create(renderer, scene, timeInSeconds));
+        }
+
+        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> _DidSimulatePhysics = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>>();
+        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> DidSimulatePhysicsObs { get { return _DidSimulatePhysics; } }
+        public override void DidSimulatePhysics(SceneKit.ISCNSceneRenderer renderer, System.Double timeInSeconds)
+        {
+            _DidSimulatePhysics.OnNext(Tuple.Create(renderer, timeInSeconds));
+        }
+
+        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> _Update = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, System.Double>>();
+        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, System.Double>> UpdateObs { get { return _Update; } }
+        public override void Update(SceneKit.ISCNSceneRenderer renderer, System.Double timeInSeconds)
+        {
+            _Update.OnNext(Tuple.Create(renderer, timeInSeconds));
+        }
+
+        readonly SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>> _WillRenderScene = new SingleAwaitSubject<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>>();
+        public IObservable<Tuple<SceneKit.ISCNSceneRenderer, SceneKit.SCNScene, System.Double>> WillRenderSceneObs { get { return _WillRenderScene; } }
+        public override void WillRenderScene(SceneKit.ISCNSceneRenderer renderer, SceneKit.SCNScene scene, System.Double timeInSeconds)
+        {
+            _WillRenderScene.OnNext(Tuple.Create(renderer, scene, timeInSeconds));
+        }
+
+    }
+}
+namespace HomeKit.Rx
+{
+    public  partial class HMAccessoryBrowserDelegateRx : HMAccessoryBrowserDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>> _DidFindNewAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>>();
+        public IObservable<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>> DidFindNewAccessoryObs { get { return _DidFindNewAccessory; } }
+        public override void DidFindNewAccessory(HomeKit.HMAccessoryBrowser browser, HomeKit.HMAccessory accessory)
+        {
+            _DidFindNewAccessory.OnNext(Tuple.Create(browser, accessory));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>> _DidRemoveNewAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>>();
+        public IObservable<Tuple<HomeKit.HMAccessoryBrowser, HomeKit.HMAccessory>> DidRemoveNewAccessoryObs { get { return _DidRemoveNewAccessory; } }
+        public override void DidRemoveNewAccessory(HomeKit.HMAccessoryBrowser browser, HomeKit.HMAccessory accessory)
+        {
+            _DidRemoveNewAccessory.OnNext(Tuple.Create(browser, accessory));
+        }
+
+    }
+    public  partial class HMAccessoryDelegateRx : HMAccessoryDelegate
+    {
+        readonly SingleAwaitSubject<HomeKit.HMAccessory> _DidUpdateName = new SingleAwaitSubject<HomeKit.HMAccessory>();
+        public IObservable<HomeKit.HMAccessory> DidUpdateNameObs { get { return _DidUpdateName; } }
+        public override void DidUpdateName(HomeKit.HMAccessory accessory)
+        {
+            _DidUpdateName.OnNext(accessory);
+        }
+
+        readonly SingleAwaitSubject<HomeKit.HMAccessory> _DidUpdateReachability = new SingleAwaitSubject<HomeKit.HMAccessory>();
+        public IObservable<HomeKit.HMAccessory> DidUpdateReachabilityObs { get { return _DidUpdateReachability; } }
+        public override void DidUpdateReachability(HomeKit.HMAccessory accessory)
+        {
+            _DidUpdateReachability.OnNext(accessory);
+        }
+
+        readonly SingleAwaitSubject<HomeKit.HMAccessory> _DidUpdateServices = new SingleAwaitSubject<HomeKit.HMAccessory>();
+        public IObservable<HomeKit.HMAccessory> DidUpdateServicesObs { get { return _DidUpdateServices; } }
+        public override void DidUpdateServices(HomeKit.HMAccessory accessory)
+        {
+            _DidUpdateServices.OnNext(accessory);
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService>> _DidUpdateAssociatedServiceType = new SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService>>();
+        public IObservable<Tuple<HomeKit.HMAccessory, HomeKit.HMService>> DidUpdateAssociatedServiceTypeObs { get { return _DidUpdateAssociatedServiceType; } }
+        public override void DidUpdateAssociatedServiceType(HomeKit.HMAccessory accessory, HomeKit.HMService service)
+        {
+            _DidUpdateAssociatedServiceType.OnNext(Tuple.Create(accessory, service));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService>> _DidUpdateNameForService = new SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService>>();
+        public IObservable<Tuple<HomeKit.HMAccessory, HomeKit.HMService>> DidUpdateNameForServiceObs { get { return _DidUpdateNameForService; } }
+        public override void DidUpdateNameForService(HomeKit.HMAccessory accessory, HomeKit.HMService service)
+        {
+            _DidUpdateNameForService.OnNext(Tuple.Create(accessory, service));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService, HomeKit.HMCharacteristic>> _DidUpdateValueForCharacteristic = new SingleAwaitSubject<Tuple<HomeKit.HMAccessory, HomeKit.HMService, HomeKit.HMCharacteristic>>();
+        public IObservable<Tuple<HomeKit.HMAccessory, HomeKit.HMService, HomeKit.HMCharacteristic>> DidUpdateValueForCharacteristicObs { get { return _DidUpdateValueForCharacteristic; } }
+        public override void DidUpdateValueForCharacteristic(HomeKit.HMAccessory accessory, HomeKit.HMService service, HomeKit.HMCharacteristic characteristic)
+        {
+            _DidUpdateValueForCharacteristic.OnNext(Tuple.Create(accessory, service, characteristic));
+        }
+
+    }
+    public  partial class HMCameraSnapshotControlDelegateRx : HMCameraSnapshotControlDelegate
+    {
+        readonly SingleAwaitSubject<HomeKit.HMCameraSnapshotControl> _DidUpdateMostRecentSnapshot = new SingleAwaitSubject<HomeKit.HMCameraSnapshotControl>();
+        public IObservable<HomeKit.HMCameraSnapshotControl> DidUpdateMostRecentSnapshotObs { get { return _DidUpdateMostRecentSnapshot; } }
+        public override void DidUpdateMostRecentSnapshot(HomeKit.HMCameraSnapshotControl cameraSnapshotControl)
+        {
+            _DidUpdateMostRecentSnapshot.OnNext(cameraSnapshotControl);
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMCameraSnapshotControl, HomeKit.HMCameraSnapshot, Foundation.NSError>> _DidTakeSnapshot = new SingleAwaitSubject<Tuple<HomeKit.HMCameraSnapshotControl, HomeKit.HMCameraSnapshot, Foundation.NSError>>();
+        public IObservable<Tuple<HomeKit.HMCameraSnapshotControl, HomeKit.HMCameraSnapshot, Foundation.NSError>> DidTakeSnapshotObs { get { return _DidTakeSnapshot; } }
+        public override void DidTakeSnapshot(HomeKit.HMCameraSnapshotControl cameraSnapshotControl, HomeKit.HMCameraSnapshot snapshot, Foundation.NSError error)
+        {
+            _DidTakeSnapshot.OnNext(Tuple.Create(cameraSnapshotControl, snapshot, error));
+        }
+
+    }
+    public  partial class HMCameraStreamControlDelegateRx : HMCameraStreamControlDelegate
+    {
+        readonly SingleAwaitSubject<HomeKit.HMCameraStreamControl> _DidStartStream = new SingleAwaitSubject<HomeKit.HMCameraStreamControl>();
+        public IObservable<HomeKit.HMCameraStreamControl> DidStartStreamObs { get { return _DidStartStream; } }
+        public override void DidStartStream(HomeKit.HMCameraStreamControl cameraStreamControl)
+        {
+            _DidStartStream.OnNext(cameraStreamControl);
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMCameraStreamControl, Foundation.NSError>> _DidStopStream = new SingleAwaitSubject<Tuple<HomeKit.HMCameraStreamControl, Foundation.NSError>>();
+        public IObservable<Tuple<HomeKit.HMCameraStreamControl, Foundation.NSError>> DidStopStreamObs { get { return _DidStopStream; } }
+        public override void DidStopStream(HomeKit.HMCameraStreamControl cameraStreamControl, Foundation.NSError error)
+        {
+            _DidStopStream.OnNext(Tuple.Create(cameraStreamControl, error));
+        }
+
+    }
+    public  partial class HMHomeDelegateRx : HMHomeDelegate
+    {
+        readonly SingleAwaitSubject<HomeKit.HMHome> _DidUpdateNameForHome = new SingleAwaitSubject<HomeKit.HMHome>();
+        public IObservable<HomeKit.HMHome> DidUpdateNameForHomeObs { get { return _DidUpdateNameForHome; } }
+        public override void DidUpdateNameForHome(HomeKit.HMHome home)
+        {
+            _DidUpdateNameForHome.OnNext(home);
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> _DidAddAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> DidAddAccessoryObs { get { return _DidAddAccessory; } }
+        public override void DidAddAccessory(HomeKit.HMHome home, HomeKit.HMAccessory accessory)
+        {
+            _DidAddAccessory.OnNext(Tuple.Create(home, accessory));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> _DidAddActionSet = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> DidAddActionSetObs { get { return _DidAddActionSet; } }
+        public override void DidAddActionSet(HomeKit.HMHome home, HomeKit.HMActionSet actionSet)
+        {
+            _DidAddActionSet.OnNext(Tuple.Create(home, actionSet));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> _DidAddRoom = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> DidAddRoomObs { get { return _DidAddRoom; } }
+        public override void DidAddRoom(HomeKit.HMHome home, HomeKit.HMRoom room)
+        {
+            _DidAddRoom.OnNext(Tuple.Create(home, room));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>> _DidAddRoomToZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>> DidAddRoomToZoneObs { get { return _DidAddRoomToZone; } }
+        public override void DidAddRoomToZone(HomeKit.HMHome home, HomeKit.HMRoom room, HomeKit.HMZone zone)
+        {
+            _DidAddRoomToZone.OnNext(Tuple.Create(home, room, zone));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>> _DidAddService = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>> DidAddServiceObs { get { return _DidAddService; } }
+        public override void DidAddService(HomeKit.HMHome home, HomeKit.HMService service, HomeKit.HMServiceGroup group)
+        {
+            _DidAddService.OnNext(Tuple.Create(home, service, group));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> _DidAddServiceGroup = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> DidAddServiceGroupObs { get { return _DidAddServiceGroup; } }
+        public override void DidAddServiceGroup(HomeKit.HMHome home, HomeKit.HMServiceGroup group)
+        {
+            _DidAddServiceGroup.OnNext(Tuple.Create(home, group));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> _DidAddTrigger = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> DidAddTriggerObs { get { return _DidAddTrigger; } }
+        public override void DidAddTrigger(HomeKit.HMHome home, HomeKit.HMTrigger trigger)
+        {
+            _DidAddTrigger.OnNext(Tuple.Create(home, trigger));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMUser>> _DidAddUser = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMUser>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMUser>> DidAddUserObs { get { return _DidAddUser; } }
+        public override void DidAddUser(HomeKit.HMHome home, HomeKit.HMUser user)
+        {
+            _DidAddUser.OnNext(Tuple.Create(home, user));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>> _DidAddZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMZone>> DidAddZoneObs { get { return _DidAddZone; } }
+        public override void DidAddZone(HomeKit.HMHome home, HomeKit.HMZone zone)
+        {
+            _DidAddZone.OnNext(Tuple.Create(home, zone));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, Foundation.NSError, HomeKit.HMAccessory>> _DidEncounterError = new SingleAwaitSubject<Tuple<HomeKit.HMHome, Foundation.NSError, HomeKit.HMAccessory>>();
+        public IObservable<Tuple<HomeKit.HMHome, Foundation.NSError, HomeKit.HMAccessory>> DidEncounterErrorObs { get { return _DidEncounterError; } }
+        public override void DidEncounterError(HomeKit.HMHome home, Foundation.NSError error, HomeKit.HMAccessory accessory)
+        {
+            _DidEncounterError.OnNext(Tuple.Create(home, error, accessory));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> _DidRemoveAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> DidRemoveAccessoryObs { get { return _DidRemoveAccessory; } }
+        public override void DidRemoveAccessory(HomeKit.HMHome home, HomeKit.HMAccessory accessory)
+        {
+            _DidRemoveAccessory.OnNext(Tuple.Create(home, accessory));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> _DidRemoveActionSet = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> DidRemoveActionSetObs { get { return _DidRemoveActionSet; } }
+        public override void DidRemoveActionSet(HomeKit.HMHome home, HomeKit.HMActionSet actionSet)
+        {
+            _DidRemoveActionSet.OnNext(Tuple.Create(home, actionSet));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> _DidRemoveRoom = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> DidRemoveRoomObs { get { return _DidRemoveRoom; } }
+        public override void DidRemoveRoom(HomeKit.HMHome home, HomeKit.HMRoom room)
+        {
+            _DidRemoveRoom.OnNext(Tuple.Create(home, room));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>> _DidRemoveRoomFromZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMZone>> DidRemoveRoomFromZoneObs { get { return _DidRemoveRoomFromZone; } }
+        public override void DidRemoveRoomFromZone(HomeKit.HMHome home, HomeKit.HMRoom room, HomeKit.HMZone zone)
+        {
+            _DidRemoveRoomFromZone.OnNext(Tuple.Create(home, room, zone));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>> _DidRemoveService = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMService, HomeKit.HMServiceGroup>> DidRemoveServiceObs { get { return _DidRemoveService; } }
+        public override void DidRemoveService(HomeKit.HMHome home, HomeKit.HMService service, HomeKit.HMServiceGroup group)
+        {
+            _DidRemoveService.OnNext(Tuple.Create(home, service, group));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> _DidRemoveServiceGroup = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> DidRemoveServiceGroupObs { get { return _DidRemoveServiceGroup; } }
+        public override void DidRemoveServiceGroup(HomeKit.HMHome home, HomeKit.HMServiceGroup group)
+        {
+            _DidRemoveServiceGroup.OnNext(Tuple.Create(home, group));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> _DidRemoveTrigger = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> DidRemoveTriggerObs { get { return _DidRemoveTrigger; } }
+        public override void DidRemoveTrigger(HomeKit.HMHome home, HomeKit.HMTrigger trigger)
+        {
+            _DidRemoveTrigger.OnNext(Tuple.Create(home, trigger));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMUser>> _DidRemoveUser = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMUser>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMUser>> DidRemoveUserObs { get { return _DidRemoveUser; } }
+        public override void DidRemoveUser(HomeKit.HMHome home, HomeKit.HMUser user)
+        {
+            _DidRemoveUser.OnNext(Tuple.Create(home, user));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>> _DidRemoveZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMZone>> DidRemoveZoneObs { get { return _DidRemoveZone; } }
+        public override void DidRemoveZone(HomeKit.HMHome home, HomeKit.HMZone zone)
+        {
+            _DidRemoveZone.OnNext(Tuple.Create(home, zone));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> _DidUnblockAccessory = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMAccessory>> DidUnblockAccessoryObs { get { return _DidUnblockAccessory; } }
+        public override void DidUnblockAccessory(HomeKit.HMHome home, HomeKit.HMAccessory accessory)
+        {
+            _DidUnblockAccessory.OnNext(Tuple.Create(home, accessory));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> _DidUpdateActionsForActionSet = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> DidUpdateActionsForActionSetObs { get { return _DidUpdateActionsForActionSet; } }
+        public override void DidUpdateActionsForActionSet(HomeKit.HMHome home, HomeKit.HMActionSet actionSet)
+        {
+            _DidUpdateActionsForActionSet.OnNext(Tuple.Create(home, actionSet));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> _DidUpdateNameForActionSet = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMActionSet>> DidUpdateNameForActionSetObs { get { return _DidUpdateNameForActionSet; } }
+        public override void DidUpdateNameForActionSet(HomeKit.HMHome home, HomeKit.HMActionSet actionSet)
+        {
+            _DidUpdateNameForActionSet.OnNext(Tuple.Create(home, actionSet));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> _DidUpdateNameForRoom = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom>> DidUpdateNameForRoomObs { get { return _DidUpdateNameForRoom; } }
+        public override void DidUpdateNameForRoom(HomeKit.HMHome home, HomeKit.HMRoom room)
+        {
+            _DidUpdateNameForRoom.OnNext(Tuple.Create(home, room));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> _DidUpdateNameForServiceGroup = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMServiceGroup>> DidUpdateNameForServiceGroupObs { get { return _DidUpdateNameForServiceGroup; } }
+        public override void DidUpdateNameForServiceGroup(HomeKit.HMHome home, HomeKit.HMServiceGroup group)
+        {
+            _DidUpdateNameForServiceGroup.OnNext(Tuple.Create(home, group));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> _DidUpdateNameForTrigger = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> DidUpdateNameForTriggerObs { get { return _DidUpdateNameForTrigger; } }
+        public override void DidUpdateNameForTrigger(HomeKit.HMHome home, HomeKit.HMTrigger trigger)
+        {
+            _DidUpdateNameForTrigger.OnNext(Tuple.Create(home, trigger));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>> _DidUpdateNameForZone = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMZone>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMZone>> DidUpdateNameForZoneObs { get { return _DidUpdateNameForZone; } }
+        public override void DidUpdateNameForZone(HomeKit.HMHome home, HomeKit.HMZone zone)
+        {
+            _DidUpdateNameForZone.OnNext(Tuple.Create(home, zone));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMAccessory>> _DidUpdateRoom = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMAccessory>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMRoom, HomeKit.HMAccessory>> DidUpdateRoomObs { get { return _DidUpdateRoom; } }
+        public override void DidUpdateRoom(HomeKit.HMHome home, HomeKit.HMRoom room, HomeKit.HMAccessory accessory)
+        {
+            _DidUpdateRoom.OnNext(Tuple.Create(home, room, accessory));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> _DidUpdateTrigger = new SingleAwaitSubject<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>>();
+        public IObservable<Tuple<HomeKit.HMHome, HomeKit.HMTrigger>> DidUpdateTriggerObs { get { return _DidUpdateTrigger; } }
+        public override void DidUpdateTrigger(HomeKit.HMHome home, HomeKit.HMTrigger trigger)
+        {
+            _DidUpdateTrigger.OnNext(Tuple.Create(home, trigger));
+        }
+
+    }
+    public  partial class HMHomeManagerDelegateRx : HMHomeManagerDelegate
+    {
+        readonly SingleAwaitSubject<HomeKit.HMHomeManager> _DidUpdateHomes = new SingleAwaitSubject<HomeKit.HMHomeManager>();
+        public IObservable<HomeKit.HMHomeManager> DidUpdateHomesObs { get { return _DidUpdateHomes; } }
+        public override void DidUpdateHomes(HomeKit.HMHomeManager manager)
+        {
+            _DidUpdateHomes.OnNext(manager);
+        }
+
+        readonly SingleAwaitSubject<HomeKit.HMHomeManager> _DidUpdatePrimaryHome = new SingleAwaitSubject<HomeKit.HMHomeManager>();
+        public IObservable<HomeKit.HMHomeManager> DidUpdatePrimaryHomeObs { get { return _DidUpdatePrimaryHome; } }
+        public override void DidUpdatePrimaryHome(HomeKit.HMHomeManager manager)
+        {
+            _DidUpdatePrimaryHome.OnNext(manager);
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>> _DidAddHome = new SingleAwaitSubject<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>>();
+        public IObservable<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>> DidAddHomeObs { get { return _DidAddHome; } }
+        public override void DidAddHome(HomeKit.HMHomeManager manager, HomeKit.HMHome home)
+        {
+            _DidAddHome.OnNext(Tuple.Create(manager, home));
+        }
+
+        readonly SingleAwaitSubject<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>> _DidRemoveHome = new SingleAwaitSubject<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>>();
+        public IObservable<Tuple<HomeKit.HMHomeManager, HomeKit.HMHome>> DidRemoveHomeObs { get { return _DidRemoveHome; } }
+        public override void DidRemoveHome(HomeKit.HMHomeManager manager, HomeKit.HMHome home)
+        {
+            _DidRemoveHome.OnNext(Tuple.Create(manager, home));
+        }
+
+    }
+}
+namespace ContactsUI.Rx
+{
+    public  partial class CNContactPickerDelegateRx : CNContactPickerDelegate
+    {
+        readonly SingleAwaitSubject<ContactsUI.CNContactPickerViewController> _ContactPickerDidCancel = new SingleAwaitSubject<ContactsUI.CNContactPickerViewController>();
+        public IObservable<ContactsUI.CNContactPickerViewController> ContactPickerDidCancelObs { get { return _ContactPickerDidCancel; } }
+        public override void ContactPickerDidCancel(ContactsUI.CNContactPickerViewController picker)
+        {
+            _ContactPickerDidCancel.OnNext(picker);
+        }
+
+        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact>> _DidSelectContact = new SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact>>();
+        public IObservable<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact>> DidSelectContactObs { get { return _DidSelectContact; } }
+        public override void DidSelectContact(ContactsUI.CNContactPickerViewController picker, Contacts.CNContact contact)
+        {
+            _DidSelectContact.OnNext(Tuple.Create(picker, contact));
+        }
+
+        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty[]>> _DidSelectContactProperties = new SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty[]>>();
+        public IObservable<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty[]>> DidSelectContactPropertiesObs { get { return _DidSelectContactProperties; } }
+        public override void DidSelectContactProperties(ContactsUI.CNContactPickerViewController picker, Contacts.CNContactProperty[] contactProperties)
+        {
+            _DidSelectContactProperties.OnNext(Tuple.Create(picker, contactProperties));
+        }
+
+        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty>> _DidSelectContactProperty = new SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty>>();
+        public IObservable<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty>> DidSelectContactPropertyObs { get { return _DidSelectContactProperty; } }
+        public override void DidSelectContactProperty(ContactsUI.CNContactPickerViewController picker, Contacts.CNContactProperty contactProperty)
+        {
+            _DidSelectContactProperty.OnNext(Tuple.Create(picker, contactProperty));
+        }
+
+        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact[]>> _DidSelectContacts = new SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact[]>>();
+        public IObservable<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact[]>> DidSelectContactsObs { get { return _DidSelectContacts; } }
+        public override void DidSelectContacts(ContactsUI.CNContactPickerViewController picker, Contacts.CNContact[] contacts)
+        {
+            _DidSelectContacts.OnNext(Tuple.Create(picker, contacts));
+        }
+
+    }
+    public  partial class CNContactViewControllerDelegateRx : CNContactViewControllerDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactViewController, Contacts.CNContact>> _DidComplete = new SingleAwaitSubject<Tuple<ContactsUI.CNContactViewController, Contacts.CNContact>>();
+        public IObservable<Tuple<ContactsUI.CNContactViewController, Contacts.CNContact>> DidCompleteObs { get { return _DidComplete; } }
+        public override void DidComplete(ContactsUI.CNContactViewController viewController, Contacts.CNContact contact)
+        {
+            _DidComplete.OnNext(Tuple.Create(viewController, contact));
         }
 
     }
@@ -6195,115 +6253,6 @@ namespace Speech.Rx
         public override void AvailabilityDidChange(Speech.SFSpeechRecognizer speechRecognizer, System.Boolean available)
         {
             _AvailabilityDidChange.OnNext(Tuple.Create(speechRecognizer, available));
-        }
-
-    }
-}
-namespace ContactsUI.Rx
-{
-    public  partial class CNContactPickerDelegateRx : CNContactPickerDelegate
-    {
-        readonly SingleAwaitSubject<ContactsUI.CNContactPickerViewController> _ContactPickerDidCancel = new SingleAwaitSubject<ContactsUI.CNContactPickerViewController>();
-        public IObservable<ContactsUI.CNContactPickerViewController> ContactPickerDidCancelObs { get { return _ContactPickerDidCancel; } }
-        public override void ContactPickerDidCancel(ContactsUI.CNContactPickerViewController picker)
-        {
-            _ContactPickerDidCancel.OnNext(picker);
-        }
-
-        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact>> _DidSelectContact = new SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact>>();
-        public IObservable<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact>> DidSelectContactObs { get { return _DidSelectContact; } }
-        public override void DidSelectContact(ContactsUI.CNContactPickerViewController picker, Contacts.CNContact contact)
-        {
-            _DidSelectContact.OnNext(Tuple.Create(picker, contact));
-        }
-
-        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty[]>> _DidSelectContactProperties = new SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty[]>>();
-        public IObservable<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty[]>> DidSelectContactPropertiesObs { get { return _DidSelectContactProperties; } }
-        public override void DidSelectContactProperties(ContactsUI.CNContactPickerViewController picker, Contacts.CNContactProperty[] contactProperties)
-        {
-            _DidSelectContactProperties.OnNext(Tuple.Create(picker, contactProperties));
-        }
-
-        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty>> _DidSelectContactProperty = new SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty>>();
-        public IObservable<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContactProperty>> DidSelectContactPropertyObs { get { return _DidSelectContactProperty; } }
-        public override void DidSelectContactProperty(ContactsUI.CNContactPickerViewController picker, Contacts.CNContactProperty contactProperty)
-        {
-            _DidSelectContactProperty.OnNext(Tuple.Create(picker, contactProperty));
-        }
-
-        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact[]>> _DidSelectContacts = new SingleAwaitSubject<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact[]>>();
-        public IObservable<Tuple<ContactsUI.CNContactPickerViewController, Contacts.CNContact[]>> DidSelectContactsObs { get { return _DidSelectContacts; } }
-        public override void DidSelectContacts(ContactsUI.CNContactPickerViewController picker, Contacts.CNContact[] contacts)
-        {
-            _DidSelectContacts.OnNext(Tuple.Create(picker, contacts));
-        }
-
-    }
-    public  partial class CNContactViewControllerDelegateRx : CNContactViewControllerDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<ContactsUI.CNContactViewController, Contacts.CNContact>> _DidComplete = new SingleAwaitSubject<Tuple<ContactsUI.CNContactViewController, Contacts.CNContact>>();
-        public IObservable<Tuple<ContactsUI.CNContactViewController, Contacts.CNContact>> DidCompleteObs { get { return _DidComplete; } }
-        public override void DidComplete(ContactsUI.CNContactViewController viewController, Contacts.CNContact contact)
-        {
-            _DidComplete.OnNext(Tuple.Create(viewController, contact));
-        }
-
-    }
-}
-namespace SpriteKit.Rx
-{
-    public  partial class SKPhysicsContactDelegateRx : SKPhysicsContactDelegate
-    {
-        readonly SingleAwaitSubject<SpriteKit.SKPhysicsContact> _DidBeginContact = new SingleAwaitSubject<SpriteKit.SKPhysicsContact>();
-        public IObservable<SpriteKit.SKPhysicsContact> DidBeginContactObs { get { return _DidBeginContact; } }
-        public override void DidBeginContact(SpriteKit.SKPhysicsContact contact)
-        {
-            _DidBeginContact.OnNext(contact);
-        }
-
-        readonly SingleAwaitSubject<SpriteKit.SKPhysicsContact> _DidEndContact = new SingleAwaitSubject<SpriteKit.SKPhysicsContact>();
-        public IObservable<SpriteKit.SKPhysicsContact> DidEndContactObs { get { return _DidEndContact; } }
-        public override void DidEndContact(SpriteKit.SKPhysicsContact contact)
-        {
-            _DidEndContact.OnNext(contact);
-        }
-
-    }
-    public  partial class SKSceneDelegateRx : SKSceneDelegate
-    {
-        readonly SingleAwaitSubject<SpriteKit.SKScene> _DidApplyConstraints = new SingleAwaitSubject<SpriteKit.SKScene>();
-        public IObservable<SpriteKit.SKScene> DidApplyConstraintsObs { get { return _DidApplyConstraints; } }
-        public override void DidApplyConstraints(SpriteKit.SKScene scene)
-        {
-            _DidApplyConstraints.OnNext(scene);
-        }
-
-        readonly SingleAwaitSubject<SpriteKit.SKScene> _DidEvaluateActions = new SingleAwaitSubject<SpriteKit.SKScene>();
-        public IObservable<SpriteKit.SKScene> DidEvaluateActionsObs { get { return _DidEvaluateActions; } }
-        public override void DidEvaluateActions(SpriteKit.SKScene scene)
-        {
-            _DidEvaluateActions.OnNext(scene);
-        }
-
-        readonly SingleAwaitSubject<SpriteKit.SKScene> _DidFinishUpdate = new SingleAwaitSubject<SpriteKit.SKScene>();
-        public IObservable<SpriteKit.SKScene> DidFinishUpdateObs { get { return _DidFinishUpdate; } }
-        public override void DidFinishUpdate(SpriteKit.SKScene scene)
-        {
-            _DidFinishUpdate.OnNext(scene);
-        }
-
-        readonly SingleAwaitSubject<SpriteKit.SKScene> _DidSimulatePhysics = new SingleAwaitSubject<SpriteKit.SKScene>();
-        public IObservable<SpriteKit.SKScene> DidSimulatePhysicsObs { get { return _DidSimulatePhysics; } }
-        public override void DidSimulatePhysics(SpriteKit.SKScene scene)
-        {
-            _DidSimulatePhysics.OnNext(scene);
-        }
-
-        readonly SingleAwaitSubject<Tuple<System.Double, SpriteKit.SKScene>> _Update = new SingleAwaitSubject<Tuple<System.Double, SpriteKit.SKScene>>();
-        public IObservable<Tuple<System.Double, SpriteKit.SKScene>> UpdateObs { get { return _Update; } }
-        public override void Update(System.Double currentTime, SpriteKit.SKScene scene)
-        {
-            _Update.OnNext(Tuple.Create(currentTime, scene));
         }
 
     }
@@ -6537,8 +6486,110 @@ namespace CoreBluetooth.Rx
 
     }
 }
+namespace SpriteKit.Rx
+{
+    public  partial class SKPhysicsContactDelegateRx : SKPhysicsContactDelegate
+    {
+        readonly SingleAwaitSubject<SpriteKit.SKPhysicsContact> _DidBeginContact = new SingleAwaitSubject<SpriteKit.SKPhysicsContact>();
+        public IObservable<SpriteKit.SKPhysicsContact> DidBeginContactObs { get { return _DidBeginContact; } }
+        public override void DidBeginContact(SpriteKit.SKPhysicsContact contact)
+        {
+            _DidBeginContact.OnNext(contact);
+        }
+
+        readonly SingleAwaitSubject<SpriteKit.SKPhysicsContact> _DidEndContact = new SingleAwaitSubject<SpriteKit.SKPhysicsContact>();
+        public IObservable<SpriteKit.SKPhysicsContact> DidEndContactObs { get { return _DidEndContact; } }
+        public override void DidEndContact(SpriteKit.SKPhysicsContact contact)
+        {
+            _DidEndContact.OnNext(contact);
+        }
+
+    }
+    public  partial class SKSceneDelegateRx : SKSceneDelegate
+    {
+        readonly SingleAwaitSubject<SpriteKit.SKScene> _DidApplyConstraints = new SingleAwaitSubject<SpriteKit.SKScene>();
+        public IObservable<SpriteKit.SKScene> DidApplyConstraintsObs { get { return _DidApplyConstraints; } }
+        public override void DidApplyConstraints(SpriteKit.SKScene scene)
+        {
+            _DidApplyConstraints.OnNext(scene);
+        }
+
+        readonly SingleAwaitSubject<SpriteKit.SKScene> _DidEvaluateActions = new SingleAwaitSubject<SpriteKit.SKScene>();
+        public IObservable<SpriteKit.SKScene> DidEvaluateActionsObs { get { return _DidEvaluateActions; } }
+        public override void DidEvaluateActions(SpriteKit.SKScene scene)
+        {
+            _DidEvaluateActions.OnNext(scene);
+        }
+
+        readonly SingleAwaitSubject<SpriteKit.SKScene> _DidFinishUpdate = new SingleAwaitSubject<SpriteKit.SKScene>();
+        public IObservable<SpriteKit.SKScene> DidFinishUpdateObs { get { return _DidFinishUpdate; } }
+        public override void DidFinishUpdate(SpriteKit.SKScene scene)
+        {
+            _DidFinishUpdate.OnNext(scene);
+        }
+
+        readonly SingleAwaitSubject<SpriteKit.SKScene> _DidSimulatePhysics = new SingleAwaitSubject<SpriteKit.SKScene>();
+        public IObservable<SpriteKit.SKScene> DidSimulatePhysicsObs { get { return _DidSimulatePhysics; } }
+        public override void DidSimulatePhysics(SpriteKit.SKScene scene)
+        {
+            _DidSimulatePhysics.OnNext(scene);
+        }
+
+        readonly SingleAwaitSubject<Tuple<System.Double, SpriteKit.SKScene>> _Update = new SingleAwaitSubject<Tuple<System.Double, SpriteKit.SKScene>>();
+        public IObservable<Tuple<System.Double, SpriteKit.SKScene>> UpdateObs { get { return _Update; } }
+        public override void Update(System.Double currentTime, SpriteKit.SKScene scene)
+        {
+            _Update.OnNext(Tuple.Create(currentTime, scene));
+        }
+
+    }
+}
+namespace CoreData.Rx
+{
+    public  partial class NSFetchedResultsControllerDelegateRx : NSFetchedResultsControllerDelegate
+    {
+        readonly SingleAwaitSubject<CoreData.NSFetchedResultsController> _DidChangeContent = new SingleAwaitSubject<CoreData.NSFetchedResultsController>();
+        public IObservable<CoreData.NSFetchedResultsController> DidChangeContentObs { get { return _DidChangeContent; } }
+        public override void DidChangeContent(CoreData.NSFetchedResultsController controller)
+        {
+            _DidChangeContent.OnNext(controller);
+        }
+
+        readonly SingleAwaitSubject<CoreData.NSFetchedResultsController> _WillChangeContent = new SingleAwaitSubject<CoreData.NSFetchedResultsController>();
+        public IObservable<CoreData.NSFetchedResultsController> WillChangeContentObs { get { return _WillChangeContent; } }
+        public override void WillChangeContent(CoreData.NSFetchedResultsController controller)
+        {
+            _WillChangeContent.OnNext(controller);
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreData.NSFetchedResultsController, Foundation.NSObject, Foundation.NSIndexPath, CoreData.NSFetchedResultsChangeType, Foundation.NSIndexPath>> _DidChangeObject = new SingleAwaitSubject<Tuple<CoreData.NSFetchedResultsController, Foundation.NSObject, Foundation.NSIndexPath, CoreData.NSFetchedResultsChangeType, Foundation.NSIndexPath>>();
+        public IObservable<Tuple<CoreData.NSFetchedResultsController, Foundation.NSObject, Foundation.NSIndexPath, CoreData.NSFetchedResultsChangeType, Foundation.NSIndexPath>> DidChangeObjectObs { get { return _DidChangeObject; } }
+        public override void DidChangeObject(CoreData.NSFetchedResultsController controller, Foundation.NSObject anObject, Foundation.NSIndexPath indexPath, CoreData.NSFetchedResultsChangeType type, Foundation.NSIndexPath newIndexPath)
+        {
+            _DidChangeObject.OnNext(Tuple.Create(controller, anObject, indexPath, type, newIndexPath));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreData.NSFetchedResultsController, CoreData.INSFetchedResultsSectionInfo, System.nuint, CoreData.NSFetchedResultsChangeType>> _DidChangeSection = new SingleAwaitSubject<Tuple<CoreData.NSFetchedResultsController, CoreData.INSFetchedResultsSectionInfo, System.nuint, CoreData.NSFetchedResultsChangeType>>();
+        public IObservable<Tuple<CoreData.NSFetchedResultsController, CoreData.INSFetchedResultsSectionInfo, System.nuint, CoreData.NSFetchedResultsChangeType>> DidChangeSectionObs { get { return _DidChangeSection; } }
+        public override void DidChangeSection(CoreData.NSFetchedResultsController controller, CoreData.INSFetchedResultsSectionInfo sectionInfo, System.nuint sectionIndex, CoreData.NSFetchedResultsChangeType type)
+        {
+            _DidChangeSection.OnNext(Tuple.Create(controller, sectionInfo, sectionIndex, type));
+        }
+
+    }
+}
 namespace StoreKit.Rx
 {
+    public  partial class SKCloudServiceSetupViewControllerDelegateRx : SKCloudServiceSetupViewControllerDelegate
+    {
+        readonly SingleAwaitSubject<StoreKit.SKCloudServiceSetupViewController> _DidDismiss = new SingleAwaitSubject<StoreKit.SKCloudServiceSetupViewController>();
+        public IObservable<StoreKit.SKCloudServiceSetupViewController> DidDismissObs { get { return _DidDismiss; } }
+        public override void DidDismiss(StoreKit.SKCloudServiceSetupViewController cloudServiceSetupViewController)
+        {
+            _DidDismiss.OnNext(cloudServiceSetupViewController);
+        }
+
+    }
     public abstract partial class SKProductsRequestDelegateRx : SKProductsRequestDelegate
     {
         readonly SingleAwaitSubject<Tuple<StoreKit.SKProductsRequest, StoreKit.SKProductsResponse>> _ReceivedResponse = new SingleAwaitSubject<Tuple<StoreKit.SKProductsRequest, StoreKit.SKProductsResponse>>();
@@ -6577,36 +6628,733 @@ namespace StoreKit.Rx
 
     }
 }
-namespace CoreData.Rx
+namespace CoreLocation.Rx
 {
-    public  partial class NSFetchedResultsControllerDelegateRx : NSFetchedResultsControllerDelegate
+    public  partial class CLLocationManagerDelegateRx : CLLocationManagerDelegate
     {
-        readonly SingleAwaitSubject<CoreData.NSFetchedResultsController> _DidChangeContent = new SingleAwaitSubject<CoreData.NSFetchedResultsController>();
-        public IObservable<CoreData.NSFetchedResultsController> DidChangeContentObs { get { return _DidChangeContent; } }
-        public override void DidChangeContent(CoreData.NSFetchedResultsController controller)
+        readonly SingleAwaitSubject<CoreLocation.CLLocationManager> _LocationUpdatesPaused = new SingleAwaitSubject<CoreLocation.CLLocationManager>();
+        public IObservable<CoreLocation.CLLocationManager> LocationUpdatesPausedObs { get { return _LocationUpdatesPaused; } }
+        public override void LocationUpdatesPaused(CoreLocation.CLLocationManager manager)
         {
-            _DidChangeContent.OnNext(controller);
+            _LocationUpdatesPaused.OnNext(manager);
         }
 
-        readonly SingleAwaitSubject<CoreData.NSFetchedResultsController> _WillChangeContent = new SingleAwaitSubject<CoreData.NSFetchedResultsController>();
-        public IObservable<CoreData.NSFetchedResultsController> WillChangeContentObs { get { return _WillChangeContent; } }
-        public override void WillChangeContent(CoreData.NSFetchedResultsController controller)
+        readonly SingleAwaitSubject<CoreLocation.CLLocationManager> _LocationUpdatesResumed = new SingleAwaitSubject<CoreLocation.CLLocationManager>();
+        public IObservable<CoreLocation.CLLocationManager> LocationUpdatesResumedObs { get { return _LocationUpdatesResumed; } }
+        public override void LocationUpdatesResumed(CoreLocation.CLLocationManager manager)
         {
-            _WillChangeContent.OnNext(controller);
+            _LocationUpdatesResumed.OnNext(manager);
         }
 
-        readonly SingleAwaitSubject<Tuple<CoreData.NSFetchedResultsController, Foundation.NSObject, Foundation.NSIndexPath, CoreData.NSFetchedResultsChangeType, Foundation.NSIndexPath>> _DidChangeObject = new SingleAwaitSubject<Tuple<CoreData.NSFetchedResultsController, Foundation.NSObject, Foundation.NSIndexPath, CoreData.NSFetchedResultsChangeType, Foundation.NSIndexPath>>();
-        public IObservable<Tuple<CoreData.NSFetchedResultsController, Foundation.NSObject, Foundation.NSIndexPath, CoreData.NSFetchedResultsChangeType, Foundation.NSIndexPath>> DidChangeObjectObs { get { return _DidChangeObject; } }
-        public override void DidChangeObject(CoreData.NSFetchedResultsController controller, Foundation.NSObject anObject, Foundation.NSIndexPath indexPath, CoreData.NSFetchedResultsChangeType type, Foundation.NSIndexPath newIndexPath)
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLAuthorizationStatus>> _AuthorizationChanged = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLAuthorizationStatus>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLAuthorizationStatus>> AuthorizationChangedObs { get { return _AuthorizationChanged; } }
+        public override void AuthorizationChanged(CoreLocation.CLLocationManager manager, CoreLocation.CLAuthorizationStatus status)
         {
-            _DidChangeObject.OnNext(Tuple.Create(controller, anObject, indexPath, type, newIndexPath));
+            _AuthorizationChanged.OnNext(Tuple.Create(manager, status));
         }
 
-        readonly SingleAwaitSubject<Tuple<CoreData.NSFetchedResultsController, CoreData.INSFetchedResultsSectionInfo, System.nuint, CoreData.NSFetchedResultsChangeType>> _DidChangeSection = new SingleAwaitSubject<Tuple<CoreData.NSFetchedResultsController, CoreData.INSFetchedResultsSectionInfo, System.nuint, CoreData.NSFetchedResultsChangeType>>();
-        public IObservable<Tuple<CoreData.NSFetchedResultsController, CoreData.INSFetchedResultsSectionInfo, System.nuint, CoreData.NSFetchedResultsChangeType>> DidChangeSectionObs { get { return _DidChangeSection; } }
-        public override void DidChangeSection(CoreData.NSFetchedResultsController controller, CoreData.INSFetchedResultsSectionInfo sectionInfo, System.nuint sectionIndex, CoreData.NSFetchedResultsChangeType type)
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>> _DeferredUpdatesFinished = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>> DeferredUpdatesFinishedObs { get { return _DeferredUpdatesFinished; } }
+        public override void DeferredUpdatesFinished(CoreLocation.CLLocationManager manager, Foundation.NSError error)
         {
-            _DidChangeSection.OnNext(Tuple.Create(controller, sectionInfo, sectionIndex, type));
+            _DeferredUpdatesFinished.OnNext(Tuple.Create(manager, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegionState, CoreLocation.CLRegion>> _DidDetermineState = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegionState, CoreLocation.CLRegion>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegionState, CoreLocation.CLRegion>> DidDetermineStateObs { get { return _DidDetermineState; } }
+        public override void DidDetermineState(CoreLocation.CLLocationManager manager, CoreLocation.CLRegionState state, CoreLocation.CLRegion region)
+        {
+            _DidDetermineState.OnNext(Tuple.Create(manager, state, region));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeacon[], CoreLocation.CLBeaconRegion>> _DidRangeBeacons = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeacon[], CoreLocation.CLBeaconRegion>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeacon[], CoreLocation.CLBeaconRegion>> DidRangeBeaconsObs { get { return _DidRangeBeacons; } }
+        public override void DidRangeBeacons(CoreLocation.CLLocationManager manager, CoreLocation.CLBeacon[] beacons, CoreLocation.CLBeaconRegion region)
+        {
+            _DidRangeBeacons.OnNext(Tuple.Create(manager, beacons, region));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> _DidStartMonitoringForRegion = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> DidStartMonitoringForRegionObs { get { return _DidStartMonitoringForRegion; } }
+        public override void DidStartMonitoringForRegion(CoreLocation.CLLocationManager manager, CoreLocation.CLRegion region)
+        {
+            _DidStartMonitoringForRegion.OnNext(Tuple.Create(manager, region));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLVisit>> _DidVisit = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLVisit>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLVisit>> DidVisitObs { get { return _DidVisit; } }
+        public override void DidVisit(CoreLocation.CLLocationManager manager, CoreLocation.CLVisit visit)
+        {
+            _DidVisit.OnNext(Tuple.Create(manager, visit));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>> _Failed = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>> FailedObs { get { return _Failed; } }
+        public override void Failed(CoreLocation.CLLocationManager manager, Foundation.NSError error)
+        {
+            _Failed.OnNext(Tuple.Create(manager, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation[]>> _LocationsUpdated = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation[]>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation[]>> LocationsUpdatedObs { get { return _LocationsUpdated; } }
+        public override void LocationsUpdated(CoreLocation.CLLocationManager manager, CoreLocation.CLLocation[] locations)
+        {
+            _LocationsUpdated.OnNext(Tuple.Create(manager, locations));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion, Foundation.NSError>> _MonitoringFailed = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion, Foundation.NSError>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion, Foundation.NSError>> MonitoringFailedObs { get { return _MonitoringFailed; } }
+        public override void MonitoringFailed(CoreLocation.CLLocationManager manager, CoreLocation.CLRegion region, Foundation.NSError error)
+        {
+            _MonitoringFailed.OnNext(Tuple.Create(manager, region, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeaconRegion, Foundation.NSError>> _RangingBeaconsDidFailForRegion = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeaconRegion, Foundation.NSError>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeaconRegion, Foundation.NSError>> RangingBeaconsDidFailForRegionObs { get { return _RangingBeaconsDidFailForRegion; } }
+        public override void RangingBeaconsDidFailForRegion(CoreLocation.CLLocationManager manager, CoreLocation.CLBeaconRegion region, Foundation.NSError error)
+        {
+            _RangingBeaconsDidFailForRegion.OnNext(Tuple.Create(manager, region, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> _RegionEntered = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> RegionEnteredObs { get { return _RegionEntered; } }
+        public override void RegionEntered(CoreLocation.CLLocationManager manager, CoreLocation.CLRegion region)
+        {
+            _RegionEntered.OnNext(Tuple.Create(manager, region));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> _RegionLeft = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> RegionLeftObs { get { return _RegionLeft; } }
+        public override void RegionLeft(CoreLocation.CLLocationManager manager, CoreLocation.CLRegion region)
+        {
+            _RegionLeft.OnNext(Tuple.Create(manager, region));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLHeading>> _UpdatedHeading = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLHeading>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLHeading>> UpdatedHeadingObs { get { return _UpdatedHeading; } }
+        public override void UpdatedHeading(CoreLocation.CLLocationManager manager, CoreLocation.CLHeading newHeading)
+        {
+            _UpdatedHeading.OnNext(Tuple.Create(manager, newHeading));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation, CoreLocation.CLLocation>> _UpdatedLocation = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation, CoreLocation.CLLocation>>();
+        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation, CoreLocation.CLLocation>> UpdatedLocationObs { get { return _UpdatedLocation; } }
+        public override void UpdatedLocation(CoreLocation.CLLocationManager manager, CoreLocation.CLLocation newLocation, CoreLocation.CLLocation oldLocation)
+        {
+            _UpdatedLocation.OnNext(Tuple.Create(manager, newLocation, oldLocation));
+        }
+
+    }
+}
+namespace CoreSpotlight.Rx
+{
+    public abstract partial class CSSearchableIndexDelegateRx : CSSearchableIndexDelegate
+    {
+        readonly SingleAwaitSubject<CoreSpotlight.CSSearchableIndex> _DidFinishThrottle = new SingleAwaitSubject<CoreSpotlight.CSSearchableIndex>();
+        public IObservable<CoreSpotlight.CSSearchableIndex> DidFinishThrottleObs { get { return _DidFinishThrottle; } }
+        public override void DidFinishThrottle(CoreSpotlight.CSSearchableIndex searchableIndex)
+        {
+            _DidFinishThrottle.OnNext(searchableIndex);
+        }
+
+        readonly SingleAwaitSubject<CoreSpotlight.CSSearchableIndex> _DidThrottle = new SingleAwaitSubject<CoreSpotlight.CSSearchableIndex>();
+        public IObservable<CoreSpotlight.CSSearchableIndex> DidThrottleObs { get { return _DidThrottle; } }
+        public override void DidThrottle(CoreSpotlight.CSSearchableIndex searchableIndex)
+        {
+            _DidThrottle.OnNext(searchableIndex);
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreSpotlight.CSSearchableIndex, System.Action>> _ReindexAllSearchableItems = new SingleAwaitSubject<Tuple<CoreSpotlight.CSSearchableIndex, System.Action>>();
+        public IObservable<Tuple<CoreSpotlight.CSSearchableIndex, System.Action>> ReindexAllSearchableItemsObs { get { return _ReindexAllSearchableItems; } }
+        public override void ReindexAllSearchableItems(CoreSpotlight.CSSearchableIndex searchableIndex, System.Action acknowledgementHandler)
+        {
+            _ReindexAllSearchableItems.OnNext(Tuple.Create(searchableIndex, acknowledgementHandler));
+        }
+
+        readonly SingleAwaitSubject<Tuple<CoreSpotlight.CSSearchableIndex, string[], System.Action>> _ReindexSearchableItems = new SingleAwaitSubject<Tuple<CoreSpotlight.CSSearchableIndex, string[], System.Action>>();
+        public IObservable<Tuple<CoreSpotlight.CSSearchableIndex, string[], System.Action>> ReindexSearchableItemsObs { get { return _ReindexSearchableItems; } }
+        public override void ReindexSearchableItems(CoreSpotlight.CSSearchableIndex searchableIndex, string[] identifiers, System.Action acknowledgementHandler)
+        {
+            _ReindexSearchableItems.OnNext(Tuple.Create(searchableIndex, identifiers, acknowledgementHandler));
+        }
+
+    }
+}
+namespace EventKitUI.Rx
+{
+    public  partial class EKCalendarChooserDelegateRx : EKCalendarChooserDelegate
+    {
+        readonly SingleAwaitSubject<EventKitUI.EKCalendarChooser> _Cancelled = new SingleAwaitSubject<EventKitUI.EKCalendarChooser>();
+        public IObservable<EventKitUI.EKCalendarChooser> CancelledObs { get { return _Cancelled; } }
+        public override void Cancelled(EventKitUI.EKCalendarChooser calendarChooser)
+        {
+            _Cancelled.OnNext(calendarChooser);
+        }
+
+        readonly SingleAwaitSubject<EventKitUI.EKCalendarChooser> _Finished = new SingleAwaitSubject<EventKitUI.EKCalendarChooser>();
+        public IObservable<EventKitUI.EKCalendarChooser> FinishedObs { get { return _Finished; } }
+        public override void Finished(EventKitUI.EKCalendarChooser calendarChooser)
+        {
+            _Finished.OnNext(calendarChooser);
+        }
+
+        readonly SingleAwaitSubject<EventKitUI.EKCalendarChooser> _SelectionChanged = new SingleAwaitSubject<EventKitUI.EKCalendarChooser>();
+        public IObservable<EventKitUI.EKCalendarChooser> SelectionChangedObs { get { return _SelectionChanged; } }
+        public override void SelectionChanged(EventKitUI.EKCalendarChooser calendarChooser)
+        {
+            _SelectionChanged.OnNext(calendarChooser);
+        }
+
+    }
+    public abstract partial class EKEventEditViewDelegateRx : EKEventEditViewDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<EventKitUI.EKEventEditViewController, EventKitUI.EKEventEditViewAction>> _Completed = new SingleAwaitSubject<Tuple<EventKitUI.EKEventEditViewController, EventKitUI.EKEventEditViewAction>>();
+        public IObservable<Tuple<EventKitUI.EKEventEditViewController, EventKitUI.EKEventEditViewAction>> CompletedObs { get { return _Completed; } }
+        public override void Completed(EventKitUI.EKEventEditViewController controller, EventKitUI.EKEventEditViewAction action)
+        {
+            _Completed.OnNext(Tuple.Create(controller, action));
+        }
+
+    }
+    public abstract partial class EKEventViewDelegateRx : EKEventViewDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<EventKitUI.EKEventViewController, EventKitUI.EKEventViewAction>> _Completed = new SingleAwaitSubject<Tuple<EventKitUI.EKEventViewController, EventKitUI.EKEventViewAction>>();
+        public IObservable<Tuple<EventKitUI.EKEventViewController, EventKitUI.EKEventViewAction>> CompletedObs { get { return _Completed; } }
+        public override void Completed(EventKitUI.EKEventViewController controller, EventKitUI.EKEventViewAction action)
+        {
+            _Completed.OnNext(Tuple.Create(controller, action));
+        }
+
+    }
+}
+namespace ExternalAccessory.Rx
+{
+    public  partial class EAAccessoryDelegateRx : EAAccessoryDelegate
+    {
+        readonly SingleAwaitSubject<ExternalAccessory.EAAccessory> _Disconnected = new SingleAwaitSubject<ExternalAccessory.EAAccessory>();
+        public IObservable<ExternalAccessory.EAAccessory> DisconnectedObs { get { return _Disconnected; } }
+        public override void Disconnected(ExternalAccessory.EAAccessory accessory)
+        {
+            _Disconnected.OnNext(accessory);
+        }
+
+    }
+    public abstract partial class EAWiFiUnconfiguredAccessoryBrowserDelegateRx : EAWiFiUnconfiguredAccessoryBrowserDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>> _DidFindUnconfiguredAccessories = new SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>>();
+        public IObservable<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>> DidFindUnconfiguredAccessoriesObs { get { return _DidFindUnconfiguredAccessories; } }
+        public override void DidFindUnconfiguredAccessories(ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser browser, Foundation.NSSet accessories)
+        {
+            _DidFindUnconfiguredAccessories.OnNext(Tuple.Create(browser, accessories));
+        }
+
+        readonly SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessory, ExternalAccessory.EAWiFiUnconfiguredAccessoryConfigurationStatus>> _DidFinishConfiguringAccessory = new SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessory, ExternalAccessory.EAWiFiUnconfiguredAccessoryConfigurationStatus>>();
+        public IObservable<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessory, ExternalAccessory.EAWiFiUnconfiguredAccessoryConfigurationStatus>> DidFinishConfiguringAccessoryObs { get { return _DidFinishConfiguringAccessory; } }
+        public override void DidFinishConfiguringAccessory(ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser browser, ExternalAccessory.EAWiFiUnconfiguredAccessory accessory, ExternalAccessory.EAWiFiUnconfiguredAccessoryConfigurationStatus status)
+        {
+            _DidFinishConfiguringAccessory.OnNext(Tuple.Create(browser, accessory, status));
+        }
+
+        readonly SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>> _DidRemoveUnconfiguredAccessories = new SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>>();
+        public IObservable<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>> DidRemoveUnconfiguredAccessoriesObs { get { return _DidRemoveUnconfiguredAccessories; } }
+        public override void DidRemoveUnconfiguredAccessories(ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser browser, Foundation.NSSet accessories)
+        {
+            _DidRemoveUnconfiguredAccessories.OnNext(Tuple.Create(browser, accessories));
+        }
+
+        readonly SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserState>> _DidUpdateState = new SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserState>>();
+        public IObservable<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserState>> DidUpdateStateObs { get { return _DidUpdateState; } }
+        public override void DidUpdateState(ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser browser, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserState state)
+        {
+            _DidUpdateState.OnNext(Tuple.Create(browser, state));
+        }
+
+    }
+}
+namespace Foundation.Rx
+{
+    public  partial class NSCacheDelegateRx : NSCacheDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<Foundation.NSCache, Foundation.NSObject>> _WillEvictObject = new SingleAwaitSubject<Tuple<Foundation.NSCache, Foundation.NSObject>>();
+        public IObservable<Tuple<Foundation.NSCache, Foundation.NSObject>> WillEvictObjectObs { get { return _WillEvictObject; } }
+        public override void WillEvictObject(Foundation.NSCache cache, Foundation.NSObject obj)
+        {
+            _WillEvictObject.OnNext(Tuple.Create(cache, obj));
+        }
+
+    }
+    public  partial class NSKeyedArchiverDelegateRx : NSKeyedArchiverDelegate
+    {
+        readonly SingleAwaitSubject<Foundation.NSKeyedArchiver> _Finished = new SingleAwaitSubject<Foundation.NSKeyedArchiver>();
+        public IObservable<Foundation.NSKeyedArchiver> FinishedObs { get { return _Finished; } }
+        public override void Finished(Foundation.NSKeyedArchiver archiver)
+        {
+            _Finished.OnNext(archiver);
+        }
+
+        readonly SingleAwaitSubject<Foundation.NSKeyedArchiver> _Finishing = new SingleAwaitSubject<Foundation.NSKeyedArchiver>();
+        public IObservable<Foundation.NSKeyedArchiver> FinishingObs { get { return _Finishing; } }
+        public override void Finishing(Foundation.NSKeyedArchiver archiver)
+        {
+            _Finishing.OnNext(archiver);
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject>> _EncodedObject = new SingleAwaitSubject<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject>>();
+        public IObservable<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject>> EncodedObjectObs { get { return _EncodedObject; } }
+        public override void EncodedObject(Foundation.NSKeyedArchiver archiver, Foundation.NSObject obj)
+        {
+            _EncodedObject.OnNext(Tuple.Create(archiver, obj));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject, Foundation.NSObject>> _ReplacingObject = new SingleAwaitSubject<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject, Foundation.NSObject>>();
+        public IObservable<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject, Foundation.NSObject>> ReplacingObjectObs { get { return _ReplacingObject; } }
+        public override void ReplacingObject(Foundation.NSKeyedArchiver archiver, Foundation.NSObject oldObject, Foundation.NSObject newObject)
+        {
+            _ReplacingObject.OnNext(Tuple.Create(archiver, oldObject, newObject));
+        }
+
+    }
+    public  partial class NSKeyedUnarchiverDelegateRx : NSKeyedUnarchiverDelegate
+    {
+        readonly SingleAwaitSubject<Foundation.NSKeyedUnarchiver> _Finished = new SingleAwaitSubject<Foundation.NSKeyedUnarchiver>();
+        public IObservable<Foundation.NSKeyedUnarchiver> FinishedObs { get { return _Finished; } }
+        public override void Finished(Foundation.NSKeyedUnarchiver unarchiver)
+        {
+            _Finished.OnNext(unarchiver);
+        }
+
+        readonly SingleAwaitSubject<Foundation.NSKeyedUnarchiver> _Finishing = new SingleAwaitSubject<Foundation.NSKeyedUnarchiver>();
+        public IObservable<Foundation.NSKeyedUnarchiver> FinishingObs { get { return _Finishing; } }
+        public override void Finishing(Foundation.NSKeyedUnarchiver unarchiver)
+        {
+            _Finishing.OnNext(unarchiver);
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSKeyedUnarchiver, Foundation.NSObject, Foundation.NSObject>> _ReplacingObject = new SingleAwaitSubject<Tuple<Foundation.NSKeyedUnarchiver, Foundation.NSObject, Foundation.NSObject>>();
+        public IObservable<Tuple<Foundation.NSKeyedUnarchiver, Foundation.NSObject, Foundation.NSObject>> ReplacingObjectObs { get { return _ReplacingObject; } }
+        public override void ReplacingObject(Foundation.NSKeyedUnarchiver unarchiver, Foundation.NSObject oldObject, Foundation.NSObject newObject)
+        {
+            _ReplacingObject.OnNext(Tuple.Create(unarchiver, oldObject, newObject));
+        }
+
+    }
+    public  partial class NSMachPortDelegateRx : NSMachPortDelegate
+    {
+        readonly SingleAwaitSubject<System.IntPtr> _MachMessageReceived = new SingleAwaitSubject<System.IntPtr>();
+        public IObservable<System.IntPtr> MachMessageReceivedObs { get { return _MachMessageReceived; } }
+        public override void MachMessageReceived(System.IntPtr msgHeader)
+        {
+            _MachMessageReceived.OnNext(msgHeader);
+        }
+
+    }
+    public  partial class NSStreamDelegateRx : NSStreamDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<Foundation.NSStream, Foundation.NSStreamEvent>> _HandleEvent = new SingleAwaitSubject<Tuple<Foundation.NSStream, Foundation.NSStreamEvent>>();
+        public IObservable<Tuple<Foundation.NSStream, Foundation.NSStreamEvent>> HandleEventObs { get { return _HandleEvent; } }
+        public override void HandleEvent(Foundation.NSStream theStream, Foundation.NSStreamEvent streamEvent)
+        {
+            _HandleEvent.OnNext(Tuple.Create(theStream, streamEvent));
+        }
+
+    }
+    public  partial class NSNetServiceBrowserDelegateRx : NSNetServiceBrowserDelegate
+    {
+        readonly SingleAwaitSubject<Foundation.NSNetServiceBrowser> _SearchStarted = new SingleAwaitSubject<Foundation.NSNetServiceBrowser>();
+        public IObservable<Foundation.NSNetServiceBrowser> SearchStartedObs { get { return _SearchStarted; } }
+        public override void SearchStarted(Foundation.NSNetServiceBrowser sender)
+        {
+            _SearchStarted.OnNext(sender);
+        }
+
+        readonly SingleAwaitSubject<Foundation.NSNetServiceBrowser> _SearchStopped = new SingleAwaitSubject<Foundation.NSNetServiceBrowser>();
+        public IObservable<Foundation.NSNetServiceBrowser> SearchStoppedObs { get { return _SearchStopped; } }
+        public override void SearchStopped(Foundation.NSNetServiceBrowser sender)
+        {
+            _SearchStopped.OnNext(sender);
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>> _DomainRemoved = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>>();
+        public IObservable<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>> DomainRemovedObs { get { return _DomainRemoved; } }
+        public override void DomainRemoved(Foundation.NSNetServiceBrowser sender, string domain, System.Boolean moreComing)
+        {
+            _DomainRemoved.OnNext(Tuple.Create(sender, domain, moreComing));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>> _FoundDomain = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>>();
+        public IObservable<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>> FoundDomainObs { get { return _FoundDomain; } }
+        public override void FoundDomain(Foundation.NSNetServiceBrowser sender, string domain, System.Boolean moreComing)
+        {
+            _FoundDomain.OnNext(Tuple.Create(sender, domain, moreComing));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>> _FoundService = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>>();
+        public IObservable<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>> FoundServiceObs { get { return _FoundService; } }
+        public override void FoundService(Foundation.NSNetServiceBrowser sender, Foundation.NSNetService service, System.Boolean moreComing)
+        {
+            _FoundService.OnNext(Tuple.Create(sender, service, moreComing));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSDictionary>> _NotSearched = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSDictionary>>();
+        public IObservable<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSDictionary>> NotSearchedObs { get { return _NotSearched; } }
+        public override void NotSearched(Foundation.NSNetServiceBrowser sender, Foundation.NSDictionary errors)
+        {
+            _NotSearched.OnNext(Tuple.Create(sender, errors));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>> _ServiceRemoved = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>>();
+        public IObservable<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>> ServiceRemovedObs { get { return _ServiceRemoved; } }
+        public override void ServiceRemoved(Foundation.NSNetServiceBrowser sender, Foundation.NSNetService service, System.Boolean moreComing)
+        {
+            _ServiceRemoved.OnNext(Tuple.Create(sender, service, moreComing));
+        }
+
+    }
+    public  partial class NSNetServiceDelegateRx : NSNetServiceDelegate
+    {
+        readonly SingleAwaitSubject<Foundation.NSNetService> _AddressResolved = new SingleAwaitSubject<Foundation.NSNetService>();
+        public IObservable<Foundation.NSNetService> AddressResolvedObs { get { return _AddressResolved; } }
+        public override void AddressResolved(Foundation.NSNetService sender)
+        {
+            _AddressResolved.OnNext(sender);
+        }
+
+        readonly SingleAwaitSubject<Foundation.NSNetService> _Published = new SingleAwaitSubject<Foundation.NSNetService>();
+        public IObservable<Foundation.NSNetService> PublishedObs { get { return _Published; } }
+        public override void Published(Foundation.NSNetService sender)
+        {
+            _Published.OnNext(sender);
+        }
+
+        readonly SingleAwaitSubject<Foundation.NSNetService> _Stopped = new SingleAwaitSubject<Foundation.NSNetService>();
+        public IObservable<Foundation.NSNetService> StoppedObs { get { return _Stopped; } }
+        public override void Stopped(Foundation.NSNetService sender)
+        {
+            _Stopped.OnNext(sender);
+        }
+
+        readonly SingleAwaitSubject<Foundation.NSNetService> _WillPublish = new SingleAwaitSubject<Foundation.NSNetService>();
+        public IObservable<Foundation.NSNetService> WillPublishObs { get { return _WillPublish; } }
+        public override void WillPublish(Foundation.NSNetService sender)
+        {
+            _WillPublish.OnNext(sender);
+        }
+
+        readonly SingleAwaitSubject<Foundation.NSNetService> _WillResolve = new SingleAwaitSubject<Foundation.NSNetService>();
+        public IObservable<Foundation.NSNetService> WillResolveObs { get { return _WillResolve; } }
+        public override void WillResolve(Foundation.NSNetService sender)
+        {
+            _WillResolve.OnNext(sender);
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSInputStream, Foundation.NSOutputStream>> _DidAcceptConnection = new SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSInputStream, Foundation.NSOutputStream>>();
+        public IObservable<Tuple<Foundation.NSNetService, Foundation.NSInputStream, Foundation.NSOutputStream>> DidAcceptConnectionObs { get { return _DidAcceptConnection; } }
+        public override void DidAcceptConnection(Foundation.NSNetService sender, Foundation.NSInputStream inputStream, Foundation.NSOutputStream outputStream)
+        {
+            _DidAcceptConnection.OnNext(Tuple.Create(sender, inputStream, outputStream));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSDictionary>> _PublishFailure = new SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSDictionary>>();
+        public IObservable<Tuple<Foundation.NSNetService, Foundation.NSDictionary>> PublishFailureObs { get { return _PublishFailure; } }
+        public override void PublishFailure(Foundation.NSNetService sender, Foundation.NSDictionary errors)
+        {
+            _PublishFailure.OnNext(Tuple.Create(sender, errors));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSDictionary>> _ResolveFailure = new SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSDictionary>>();
+        public IObservable<Tuple<Foundation.NSNetService, Foundation.NSDictionary>> ResolveFailureObs { get { return _ResolveFailure; } }
+        public override void ResolveFailure(Foundation.NSNetService sender, Foundation.NSDictionary errors)
+        {
+            _ResolveFailure.OnNext(Tuple.Create(sender, errors));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSData>> _UpdatedTxtRecordData = new SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSData>>();
+        public IObservable<Tuple<Foundation.NSNetService, Foundation.NSData>> UpdatedTxtRecordDataObs { get { return _UpdatedTxtRecordData; } }
+        public override void UpdatedTxtRecordData(Foundation.NSNetService sender, Foundation.NSData data)
+        {
+            _UpdatedTxtRecordData.OnNext(Tuple.Create(sender, data));
+        }
+
+    }
+    public  partial class NSPortDelegateRx : NSPortDelegate
+    {
+        readonly SingleAwaitSubject<Foundation.NSPortMessage> _MessageReceived = new SingleAwaitSubject<Foundation.NSPortMessage>();
+        public IObservable<Foundation.NSPortMessage> MessageReceivedObs { get { return _MessageReceived; } }
+        public override void MessageReceived(Foundation.NSPortMessage message)
+        {
+            _MessageReceived.OnNext(message);
+        }
+
+    }
+    public  partial class NSUrlSessionDataDelegateRx : NSUrlSessionDataDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionDownloadTask>> _DidBecomeDownloadTask = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionDownloadTask>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionDownloadTask>> DidBecomeDownloadTaskObs { get { return _DidBecomeDownloadTask; } }
+        public override void DidBecomeDownloadTask(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSUrlSessionDownloadTask downloadTask)
+        {
+            _DidBecomeDownloadTask.OnNext(Tuple.Create(session, dataTask, downloadTask));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionStreamTask>> _DidBecomeStreamTask = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionStreamTask>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionStreamTask>> DidBecomeStreamTaskObs { get { return _DidBecomeStreamTask; } }
+        public override void DidBecomeStreamTask(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSUrlSessionStreamTask streamTask)
+        {
+            _DidBecomeStreamTask.OnNext(Tuple.Create(session, dataTask, streamTask));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSData>> _DidReceiveData = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSData>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSData>> DidReceiveDataObs { get { return _DidReceiveData; } }
+        public override void DidReceiveData(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSData data)
+        {
+            _DidReceiveData.OnNext(Tuple.Create(session, dataTask, data));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlResponse, System.Action<Foundation.NSUrlSessionResponseDisposition>>> _DidReceiveResponse = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlResponse, System.Action<Foundation.NSUrlSessionResponseDisposition>>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlResponse, System.Action<Foundation.NSUrlSessionResponseDisposition>>> DidReceiveResponseObs { get { return _DidReceiveResponse; } }
+        public override void DidReceiveResponse(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSUrlResponse response, System.Action<Foundation.NSUrlSessionResponseDisposition> completionHandler)
+        {
+            _DidReceiveResponse.OnNext(Tuple.Create(session, dataTask, response, completionHandler));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSCachedUrlResponse, System.Action<Foundation.NSCachedUrlResponse>>> _WillCacheResponse = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSCachedUrlResponse, System.Action<Foundation.NSCachedUrlResponse>>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSCachedUrlResponse, System.Action<Foundation.NSCachedUrlResponse>>> WillCacheResponseObs { get { return _WillCacheResponse; } }
+        public override void WillCacheResponse(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSCachedUrlResponse proposedResponse, System.Action<Foundation.NSCachedUrlResponse> completionHandler)
+        {
+            _WillCacheResponse.OnNext(Tuple.Create(session, dataTask, proposedResponse, completionHandler));
+        }
+
+    }
+    public  partial class NSUrlSessionDelegateRx : NSUrlSessionDelegate
+    {
+        readonly SingleAwaitSubject<Foundation.NSUrlSession> _DidFinishEventsForBackgroundSession = new SingleAwaitSubject<Foundation.NSUrlSession>();
+        public IObservable<Foundation.NSUrlSession> DidFinishEventsForBackgroundSessionObs { get { return _DidFinishEventsForBackgroundSession; } }
+        public override void DidFinishEventsForBackgroundSession(Foundation.NSUrlSession session)
+        {
+            _DidFinishEventsForBackgroundSession.OnNext(session);
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSError>> _DidBecomeInvalid = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSError>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSError>> DidBecomeInvalidObs { get { return _DidBecomeInvalid; } }
+        public override void DidBecomeInvalid(Foundation.NSUrlSession session, Foundation.NSError error)
+        {
+            _DidBecomeInvalid.OnNext(Tuple.Create(session, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> _DidReceiveChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> DidReceiveChallengeObs { get { return _DidReceiveChallenge; } }
+        public override void DidReceiveChallenge(Foundation.NSUrlSession session, Foundation.NSUrlAuthenticationChallenge challenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential> completionHandler)
+        {
+            _DidReceiveChallenge.OnNext(Tuple.Create(session, challenge, completionHandler));
+        }
+
+    }
+    public  partial class NSUserActivityDelegateRx : NSUserActivityDelegate
+    {
+        readonly SingleAwaitSubject<Foundation.NSUserActivity> _UserActivityWasContinued = new SingleAwaitSubject<Foundation.NSUserActivity>();
+        public IObservable<Foundation.NSUserActivity> UserActivityWasContinuedObs { get { return _UserActivityWasContinued; } }
+        public override void UserActivityWasContinued(Foundation.NSUserActivity userActivity)
+        {
+            _UserActivityWasContinued.OnNext(userActivity);
+        }
+
+        readonly SingleAwaitSubject<Foundation.NSUserActivity> _UserActivityWillSave = new SingleAwaitSubject<Foundation.NSUserActivity>();
+        public IObservable<Foundation.NSUserActivity> UserActivityWillSaveObs { get { return _UserActivityWillSave; } }
+        public override void UserActivityWillSave(Foundation.NSUserActivity userActivity)
+        {
+            _UserActivityWillSave.OnNext(userActivity);
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUserActivity, Foundation.NSInputStream, Foundation.NSOutputStream>> _UserActivityReceivedData = new SingleAwaitSubject<Tuple<Foundation.NSUserActivity, Foundation.NSInputStream, Foundation.NSOutputStream>>();
+        public IObservable<Tuple<Foundation.NSUserActivity, Foundation.NSInputStream, Foundation.NSOutputStream>> UserActivityReceivedDataObs { get { return _UserActivityReceivedData; } }
+        public override void UserActivityReceivedData(Foundation.NSUserActivity userActivity, Foundation.NSInputStream inputStream, Foundation.NSOutputStream outputStream)
+        {
+            _UserActivityReceivedData.OnNext(Tuple.Create(userActivity, inputStream, outputStream));
+        }
+
+    }
+    public abstract partial class NSUrlSessionDownloadDelegateRx : NSUrlSessionDownloadDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, Foundation.NSUrl>> _DidFinishDownloading = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, Foundation.NSUrl>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, Foundation.NSUrl>> DidFinishDownloadingObs { get { return _DidFinishDownloading; } }
+        public override void DidFinishDownloading(Foundation.NSUrlSession session, Foundation.NSUrlSessionDownloadTask downloadTask, Foundation.NSUrl location)
+        {
+            _DidFinishDownloading.OnNext(Tuple.Create(session, downloadTask, location));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64>> _DidResume = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64>> DidResumeObs { get { return _DidResume; } }
+        public override void DidResume(Foundation.NSUrlSession session, Foundation.NSUrlSessionDownloadTask downloadTask, System.Int64 resumeFileOffset, System.Int64 expectedTotalBytes)
+        {
+            _DidResume.OnNext(Tuple.Create(session, downloadTask, resumeFileOffset, expectedTotalBytes));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64, System.Int64>> _DidWriteData = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64, System.Int64>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64, System.Int64>> DidWriteDataObs { get { return _DidWriteData; } }
+        public override void DidWriteData(Foundation.NSUrlSession session, Foundation.NSUrlSessionDownloadTask downloadTask, System.Int64 bytesWritten, System.Int64 totalBytesWritten, System.Int64 totalBytesExpectedToWrite)
+        {
+            _DidWriteData.OnNext(Tuple.Create(session, downloadTask, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite));
+        }
+
+    }
+    public  partial class NSUrlSessionStreamDelegateRx : NSUrlSessionStreamDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> _BetterRouteDiscovered = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> BetterRouteDiscoveredObs { get { return _BetterRouteDiscovered; } }
+        public override void BetterRouteDiscovered(Foundation.NSUrlSession session, Foundation.NSUrlSessionStreamTask streamTask)
+        {
+            _BetterRouteDiscovered.OnNext(Tuple.Create(session, streamTask));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask, Foundation.NSInputStream, Foundation.NSOutputStream>> _CompletedTaskCaptureStreams = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask, Foundation.NSInputStream, Foundation.NSOutputStream>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask, Foundation.NSInputStream, Foundation.NSOutputStream>> CompletedTaskCaptureStreamsObs { get { return _CompletedTaskCaptureStreams; } }
+        public override void CompletedTaskCaptureStreams(Foundation.NSUrlSession session, Foundation.NSUrlSessionStreamTask streamTask, Foundation.NSInputStream inputStream, Foundation.NSOutputStream outputStream)
+        {
+            _CompletedTaskCaptureStreams.OnNext(Tuple.Create(session, streamTask, inputStream, outputStream));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> _ReadClosed = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> ReadClosedObs { get { return _ReadClosed; } }
+        public override void ReadClosed(Foundation.NSUrlSession session, Foundation.NSUrlSessionStreamTask streamTask)
+        {
+            _ReadClosed.OnNext(Tuple.Create(session, streamTask));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> _WriteClosed = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> WriteClosedObs { get { return _WriteClosed; } }
+        public override void WriteClosed(Foundation.NSUrlSession session, Foundation.NSUrlSessionStreamTask streamTask)
+        {
+            _WriteClosed.OnNext(Tuple.Create(session, streamTask));
+        }
+
+    }
+    public  partial class NSUrlSessionTaskDelegateRx : NSUrlSessionTaskDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>> _DidCompleteWithError = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>> DidCompleteWithErrorObs { get { return _DidCompleteWithError; } }
+        public override void DidCompleteWithError(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSError error)
+        {
+            _DidCompleteWithError.OnNext(Tuple.Create(session, task, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>> _DidFinishCollectingMetrics = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>> DidFinishCollectingMetricsObs { get { return _DidFinishCollectingMetrics; } }
+        public override void DidFinishCollectingMetrics(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSUrlSessionTaskMetrics metrics)
+        {
+            _DidFinishCollectingMetrics.OnNext(Tuple.Create(session, task, metrics));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> _DidReceiveChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> DidReceiveChallengeObs { get { return _DidReceiveChallenge; } }
+        public override void DidReceiveChallenge(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSUrlAuthenticationChallenge challenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential> completionHandler)
+        {
+            _DidReceiveChallenge.OnNext(Tuple.Create(session, task, challenge, completionHandler));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>> _DidSendBodyData = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>> DidSendBodyDataObs { get { return _DidSendBodyData; } }
+        public override void DidSendBodyData(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, System.Int64 bytesSent, System.Int64 totalBytesSent, System.Int64 totalBytesExpectedToSend)
+        {
+            _DidSendBodyData.OnNext(Tuple.Create(session, task, bytesSent, totalBytesSent, totalBytesExpectedToSend));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>> _NeedNewBodyStream = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>> NeedNewBodyStreamObs { get { return _NeedNewBodyStream; } }
+        public override void NeedNewBodyStream(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, System.Action<Foundation.NSInputStream> completionHandler)
+        {
+            _NeedNewBodyStream.OnNext(Tuple.Create(session, task, completionHandler));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>> _WillPerformHttpRedirection = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>>();
+        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>> WillPerformHttpRedirectionObs { get { return _WillPerformHttpRedirection; } }
+        public override void WillPerformHttpRedirection(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSHttpUrlResponse response, Foundation.NSUrlRequest newRequest, System.Action<Foundation.NSUrlRequest> completionHandler)
+        {
+            _WillPerformHttpRedirection.OnNext(Tuple.Create(session, task, response, newRequest, completionHandler));
+        }
+
+    }
+    public  partial class NSUrlConnectionDataDelegateRx : NSUrlConnectionDataDelegate
+    {
+        readonly SingleAwaitSubject<Foundation.NSUrlConnection> _FinishedLoading = new SingleAwaitSubject<Foundation.NSUrlConnection>();
+        public IObservable<Foundation.NSUrlConnection> FinishedLoadingObs { get { return _FinishedLoading; } }
+        public override void FinishedLoading(Foundation.NSUrlConnection connection)
+        {
+            _FinishedLoading.OnNext(connection);
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSData>> _ReceivedData = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSData>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSData>> ReceivedDataObs { get { return _ReceivedData; } }
+        public override void ReceivedData(Foundation.NSUrlConnection connection, Foundation.NSData data)
+        {
+            _ReceivedData.OnNext(Tuple.Create(connection, data));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlResponse>> _ReceivedResponse = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlResponse>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlResponse>> ReceivedResponseObs { get { return _ReceivedResponse; } }
+        public override void ReceivedResponse(Foundation.NSUrlConnection connection, Foundation.NSUrlResponse response)
+        {
+            _ReceivedResponse.OnNext(Tuple.Create(connection, response));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.nint, System.nint, System.nint>> _SentBodyData = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.nint, System.nint, System.nint>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, System.nint, System.nint, System.nint>> SentBodyDataObs { get { return _SentBodyData; } }
+        public override void SentBodyData(Foundation.NSUrlConnection connection, System.nint bytesWritten, System.nint totalBytesWritten, System.nint totalBytesExpectedToWrite)
+        {
+            _SentBodyData.OnNext(Tuple.Create(connection, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite));
+        }
+
+    }
+    public  partial class NSUrlConnectionDelegateRx : NSUrlConnectionDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> _CanceledAuthenticationChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> CanceledAuthenticationChallengeObs { get { return _CanceledAuthenticationChallenge; } }
+        public override void CanceledAuthenticationChallenge(Foundation.NSUrlConnection connection, Foundation.NSUrlAuthenticationChallenge challenge)
+        {
+            _CanceledAuthenticationChallenge.OnNext(Tuple.Create(connection, challenge));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSError>> _FailedWithError = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSError>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSError>> FailedWithErrorObs { get { return _FailedWithError; } }
+        public override void FailedWithError(Foundation.NSUrlConnection connection, Foundation.NSError error)
+        {
+            _FailedWithError.OnNext(Tuple.Create(connection, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> _ReceivedAuthenticationChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> ReceivedAuthenticationChallengeObs { get { return _ReceivedAuthenticationChallenge; } }
+        public override void ReceivedAuthenticationChallenge(Foundation.NSUrlConnection connection, Foundation.NSUrlAuthenticationChallenge challenge)
+        {
+            _ReceivedAuthenticationChallenge.OnNext(Tuple.Create(connection, challenge));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> _WillSendRequestForAuthenticationChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> WillSendRequestForAuthenticationChallengeObs { get { return _WillSendRequestForAuthenticationChallenge; } }
+        public override void WillSendRequestForAuthenticationChallenge(Foundation.NSUrlConnection connection, Foundation.NSUrlAuthenticationChallenge challenge)
+        {
+            _WillSendRequestForAuthenticationChallenge.OnNext(Tuple.Create(connection, challenge));
+        }
+
+    }
+    public abstract partial class NSUrlConnectionDownloadDelegateRx : NSUrlConnectionDownloadDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrl>> _FinishedDownloading = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrl>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrl>> FinishedDownloadingObs { get { return _FinishedDownloading; } }
+        public override void FinishedDownloading(Foundation.NSUrlConnection connection, Foundation.NSUrl destinationUrl)
+        {
+            _FinishedDownloading.OnNext(Tuple.Create(connection, destinationUrl));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64>> _ResumedDownloading = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64>> ResumedDownloadingObs { get { return _ResumedDownloading; } }
+        public override void ResumedDownloading(Foundation.NSUrlConnection connection, System.Int64 totalBytesWritten, System.Int64 expectedTotalBytes)
+        {
+            _ResumedDownloading.OnNext(Tuple.Create(connection, totalBytesWritten, expectedTotalBytes));
+        }
+
+        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64, System.Int64>> _WroteData = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64, System.Int64>>();
+        public IObservable<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64, System.Int64>> WroteDataObs { get { return _WroteData; } }
+        public override void WroteData(Foundation.NSUrlConnection connection, System.Int64 bytesWritten, System.Int64 totalBytesWritten, System.Int64 expectedTotalBytes)
+        {
+            _WroteData.OnNext(Tuple.Create(connection, bytesWritten, totalBytesWritten, expectedTotalBytes));
         }
 
     }
@@ -6784,760 +7532,6 @@ namespace MapKit.Rx
 
     }
 }
-namespace CoreSpotlight.Rx
-{
-    public abstract partial class CSSearchableIndexDelegateRx : CSSearchableIndexDelegate
-    {
-        readonly SingleAwaitSubject<CoreSpotlight.CSSearchableIndex> _DidFinishThrottle = new SingleAwaitSubject<CoreSpotlight.CSSearchableIndex>();
-        public IObservable<CoreSpotlight.CSSearchableIndex> DidFinishThrottleObs { get { return _DidFinishThrottle; } }
-        public override void DidFinishThrottle(CoreSpotlight.CSSearchableIndex searchableIndex)
-        {
-            _DidFinishThrottle.OnNext(searchableIndex);
-        }
-
-        readonly SingleAwaitSubject<CoreSpotlight.CSSearchableIndex> _DidThrottle = new SingleAwaitSubject<CoreSpotlight.CSSearchableIndex>();
-        public IObservable<CoreSpotlight.CSSearchableIndex> DidThrottleObs { get { return _DidThrottle; } }
-        public override void DidThrottle(CoreSpotlight.CSSearchableIndex searchableIndex)
-        {
-            _DidThrottle.OnNext(searchableIndex);
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreSpotlight.CSSearchableIndex, System.Action>> _ReindexAllSearchableItems = new SingleAwaitSubject<Tuple<CoreSpotlight.CSSearchableIndex, System.Action>>();
-        public IObservable<Tuple<CoreSpotlight.CSSearchableIndex, System.Action>> ReindexAllSearchableItemsObs { get { return _ReindexAllSearchableItems; } }
-        public override void ReindexAllSearchableItems(CoreSpotlight.CSSearchableIndex searchableIndex, System.Action acknowledgementHandler)
-        {
-            _ReindexAllSearchableItems.OnNext(Tuple.Create(searchableIndex, acknowledgementHandler));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreSpotlight.CSSearchableIndex, string[], System.Action>> _ReindexSearchableItems = new SingleAwaitSubject<Tuple<CoreSpotlight.CSSearchableIndex, string[], System.Action>>();
-        public IObservable<Tuple<CoreSpotlight.CSSearchableIndex, string[], System.Action>> ReindexSearchableItemsObs { get { return _ReindexSearchableItems; } }
-        public override void ReindexSearchableItems(CoreSpotlight.CSSearchableIndex searchableIndex, string[] identifiers, System.Action acknowledgementHandler)
-        {
-            _ReindexSearchableItems.OnNext(Tuple.Create(searchableIndex, identifiers, acknowledgementHandler));
-        }
-
-    }
-}
-namespace CoreLocation.Rx
-{
-    public  partial class CLLocationManagerDelegateRx : CLLocationManagerDelegate
-    {
-        readonly SingleAwaitSubject<CoreLocation.CLLocationManager> _LocationUpdatesPaused = new SingleAwaitSubject<CoreLocation.CLLocationManager>();
-        public IObservable<CoreLocation.CLLocationManager> LocationUpdatesPausedObs { get { return _LocationUpdatesPaused; } }
-        public override void LocationUpdatesPaused(CoreLocation.CLLocationManager manager)
-        {
-            _LocationUpdatesPaused.OnNext(manager);
-        }
-
-        readonly SingleAwaitSubject<CoreLocation.CLLocationManager> _LocationUpdatesResumed = new SingleAwaitSubject<CoreLocation.CLLocationManager>();
-        public IObservable<CoreLocation.CLLocationManager> LocationUpdatesResumedObs { get { return _LocationUpdatesResumed; } }
-        public override void LocationUpdatesResumed(CoreLocation.CLLocationManager manager)
-        {
-            _LocationUpdatesResumed.OnNext(manager);
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLAuthorizationStatus>> _AuthorizationChanged = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLAuthorizationStatus>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLAuthorizationStatus>> AuthorizationChangedObs { get { return _AuthorizationChanged; } }
-        public override void AuthorizationChanged(CoreLocation.CLLocationManager manager, CoreLocation.CLAuthorizationStatus status)
-        {
-            _AuthorizationChanged.OnNext(Tuple.Create(manager, status));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>> _DeferredUpdatesFinished = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>> DeferredUpdatesFinishedObs { get { return _DeferredUpdatesFinished; } }
-        public override void DeferredUpdatesFinished(CoreLocation.CLLocationManager manager, Foundation.NSError error)
-        {
-            _DeferredUpdatesFinished.OnNext(Tuple.Create(manager, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegionState, CoreLocation.CLRegion>> _DidDetermineState = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegionState, CoreLocation.CLRegion>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegionState, CoreLocation.CLRegion>> DidDetermineStateObs { get { return _DidDetermineState; } }
-        public override void DidDetermineState(CoreLocation.CLLocationManager manager, CoreLocation.CLRegionState state, CoreLocation.CLRegion region)
-        {
-            _DidDetermineState.OnNext(Tuple.Create(manager, state, region));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeacon[], CoreLocation.CLBeaconRegion>> _DidRangeBeacons = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeacon[], CoreLocation.CLBeaconRegion>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeacon[], CoreLocation.CLBeaconRegion>> DidRangeBeaconsObs { get { return _DidRangeBeacons; } }
-        public override void DidRangeBeacons(CoreLocation.CLLocationManager manager, CoreLocation.CLBeacon[] beacons, CoreLocation.CLBeaconRegion region)
-        {
-            _DidRangeBeacons.OnNext(Tuple.Create(manager, beacons, region));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> _DidStartMonitoringForRegion = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> DidStartMonitoringForRegionObs { get { return _DidStartMonitoringForRegion; } }
-        public override void DidStartMonitoringForRegion(CoreLocation.CLLocationManager manager, CoreLocation.CLRegion region)
-        {
-            _DidStartMonitoringForRegion.OnNext(Tuple.Create(manager, region));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLVisit>> _DidVisit = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLVisit>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLVisit>> DidVisitObs { get { return _DidVisit; } }
-        public override void DidVisit(CoreLocation.CLLocationManager manager, CoreLocation.CLVisit visit)
-        {
-            _DidVisit.OnNext(Tuple.Create(manager, visit));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>> _Failed = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, Foundation.NSError>> FailedObs { get { return _Failed; } }
-        public override void Failed(CoreLocation.CLLocationManager manager, Foundation.NSError error)
-        {
-            _Failed.OnNext(Tuple.Create(manager, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation[]>> _LocationsUpdated = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation[]>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation[]>> LocationsUpdatedObs { get { return _LocationsUpdated; } }
-        public override void LocationsUpdated(CoreLocation.CLLocationManager manager, CoreLocation.CLLocation[] locations)
-        {
-            _LocationsUpdated.OnNext(Tuple.Create(manager, locations));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion, Foundation.NSError>> _MonitoringFailed = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion, Foundation.NSError>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion, Foundation.NSError>> MonitoringFailedObs { get { return _MonitoringFailed; } }
-        public override void MonitoringFailed(CoreLocation.CLLocationManager manager, CoreLocation.CLRegion region, Foundation.NSError error)
-        {
-            _MonitoringFailed.OnNext(Tuple.Create(manager, region, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeaconRegion, Foundation.NSError>> _RangingBeaconsDidFailForRegion = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeaconRegion, Foundation.NSError>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLBeaconRegion, Foundation.NSError>> RangingBeaconsDidFailForRegionObs { get { return _RangingBeaconsDidFailForRegion; } }
-        public override void RangingBeaconsDidFailForRegion(CoreLocation.CLLocationManager manager, CoreLocation.CLBeaconRegion region, Foundation.NSError error)
-        {
-            _RangingBeaconsDidFailForRegion.OnNext(Tuple.Create(manager, region, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> _RegionEntered = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> RegionEnteredObs { get { return _RegionEntered; } }
-        public override void RegionEntered(CoreLocation.CLLocationManager manager, CoreLocation.CLRegion region)
-        {
-            _RegionEntered.OnNext(Tuple.Create(manager, region));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> _RegionLeft = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLRegion>> RegionLeftObs { get { return _RegionLeft; } }
-        public override void RegionLeft(CoreLocation.CLLocationManager manager, CoreLocation.CLRegion region)
-        {
-            _RegionLeft.OnNext(Tuple.Create(manager, region));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLHeading>> _UpdatedHeading = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLHeading>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLHeading>> UpdatedHeadingObs { get { return _UpdatedHeading; } }
-        public override void UpdatedHeading(CoreLocation.CLLocationManager manager, CoreLocation.CLHeading newHeading)
-        {
-            _UpdatedHeading.OnNext(Tuple.Create(manager, newHeading));
-        }
-
-        readonly SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation, CoreLocation.CLLocation>> _UpdatedLocation = new SingleAwaitSubject<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation, CoreLocation.CLLocation>>();
-        public IObservable<Tuple<CoreLocation.CLLocationManager, CoreLocation.CLLocation, CoreLocation.CLLocation>> UpdatedLocationObs { get { return _UpdatedLocation; } }
-        public override void UpdatedLocation(CoreLocation.CLLocationManager manager, CoreLocation.CLLocation newLocation, CoreLocation.CLLocation oldLocation)
-        {
-            _UpdatedLocation.OnNext(Tuple.Create(manager, newLocation, oldLocation));
-        }
-
-    }
-}
-namespace Foundation.Rx
-{
-    public  partial class NSCacheDelegateRx : NSCacheDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<Foundation.NSCache, Foundation.NSObject>> _WillEvictObject = new SingleAwaitSubject<Tuple<Foundation.NSCache, Foundation.NSObject>>();
-        public IObservable<Tuple<Foundation.NSCache, Foundation.NSObject>> WillEvictObjectObs { get { return _WillEvictObject; } }
-        public override void WillEvictObject(Foundation.NSCache cache, Foundation.NSObject obj)
-        {
-            _WillEvictObject.OnNext(Tuple.Create(cache, obj));
-        }
-
-    }
-    public  partial class NSKeyedArchiverDelegateRx : NSKeyedArchiverDelegate
-    {
-        readonly SingleAwaitSubject<Foundation.NSKeyedArchiver> _Finished = new SingleAwaitSubject<Foundation.NSKeyedArchiver>();
-        public IObservable<Foundation.NSKeyedArchiver> FinishedObs { get { return _Finished; } }
-        public override void Finished(Foundation.NSKeyedArchiver archiver)
-        {
-            _Finished.OnNext(archiver);
-        }
-
-        readonly SingleAwaitSubject<Foundation.NSKeyedArchiver> _Finishing = new SingleAwaitSubject<Foundation.NSKeyedArchiver>();
-        public IObservable<Foundation.NSKeyedArchiver> FinishingObs { get { return _Finishing; } }
-        public override void Finishing(Foundation.NSKeyedArchiver archiver)
-        {
-            _Finishing.OnNext(archiver);
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject>> _EncodedObject = new SingleAwaitSubject<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject>>();
-        public IObservable<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject>> EncodedObjectObs { get { return _EncodedObject; } }
-        public override void EncodedObject(Foundation.NSKeyedArchiver archiver, Foundation.NSObject obj)
-        {
-            _EncodedObject.OnNext(Tuple.Create(archiver, obj));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject, Foundation.NSObject>> _ReplacingObject = new SingleAwaitSubject<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject, Foundation.NSObject>>();
-        public IObservable<Tuple<Foundation.NSKeyedArchiver, Foundation.NSObject, Foundation.NSObject>> ReplacingObjectObs { get { return _ReplacingObject; } }
-        public override void ReplacingObject(Foundation.NSKeyedArchiver archiver, Foundation.NSObject oldObject, Foundation.NSObject newObject)
-        {
-            _ReplacingObject.OnNext(Tuple.Create(archiver, oldObject, newObject));
-        }
-
-    }
-    public  partial class NSKeyedUnarchiverDelegateRx : NSKeyedUnarchiverDelegate
-    {
-        readonly SingleAwaitSubject<Foundation.NSKeyedUnarchiver> _Finished = new SingleAwaitSubject<Foundation.NSKeyedUnarchiver>();
-        public IObservable<Foundation.NSKeyedUnarchiver> FinishedObs { get { return _Finished; } }
-        public override void Finished(Foundation.NSKeyedUnarchiver unarchiver)
-        {
-            _Finished.OnNext(unarchiver);
-        }
-
-        readonly SingleAwaitSubject<Foundation.NSKeyedUnarchiver> _Finishing = new SingleAwaitSubject<Foundation.NSKeyedUnarchiver>();
-        public IObservable<Foundation.NSKeyedUnarchiver> FinishingObs { get { return _Finishing; } }
-        public override void Finishing(Foundation.NSKeyedUnarchiver unarchiver)
-        {
-            _Finishing.OnNext(unarchiver);
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSKeyedUnarchiver, Foundation.NSObject, Foundation.NSObject>> _ReplacingObject = new SingleAwaitSubject<Tuple<Foundation.NSKeyedUnarchiver, Foundation.NSObject, Foundation.NSObject>>();
-        public IObservable<Tuple<Foundation.NSKeyedUnarchiver, Foundation.NSObject, Foundation.NSObject>> ReplacingObjectObs { get { return _ReplacingObject; } }
-        public override void ReplacingObject(Foundation.NSKeyedUnarchiver unarchiver, Foundation.NSObject oldObject, Foundation.NSObject newObject)
-        {
-            _ReplacingObject.OnNext(Tuple.Create(unarchiver, oldObject, newObject));
-        }
-
-    }
-    public  partial class NSMachPortDelegateRx : NSMachPortDelegate
-    {
-        readonly SingleAwaitSubject<System.IntPtr> _MachMessageReceived = new SingleAwaitSubject<System.IntPtr>();
-        public IObservable<System.IntPtr> MachMessageReceivedObs { get { return _MachMessageReceived; } }
-        public override void MachMessageReceived(System.IntPtr msgHeader)
-        {
-            _MachMessageReceived.OnNext(msgHeader);
-        }
-
-    }
-    public  partial class NSNetServiceBrowserDelegateRx : NSNetServiceBrowserDelegate
-    {
-        readonly SingleAwaitSubject<Foundation.NSNetServiceBrowser> _SearchStarted = new SingleAwaitSubject<Foundation.NSNetServiceBrowser>();
-        public IObservable<Foundation.NSNetServiceBrowser> SearchStartedObs { get { return _SearchStarted; } }
-        public override void SearchStarted(Foundation.NSNetServiceBrowser sender)
-        {
-            _SearchStarted.OnNext(sender);
-        }
-
-        readonly SingleAwaitSubject<Foundation.NSNetServiceBrowser> _SearchStopped = new SingleAwaitSubject<Foundation.NSNetServiceBrowser>();
-        public IObservable<Foundation.NSNetServiceBrowser> SearchStoppedObs { get { return _SearchStopped; } }
-        public override void SearchStopped(Foundation.NSNetServiceBrowser sender)
-        {
-            _SearchStopped.OnNext(sender);
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>> _DomainRemoved = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>>();
-        public IObservable<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>> DomainRemovedObs { get { return _DomainRemoved; } }
-        public override void DomainRemoved(Foundation.NSNetServiceBrowser sender, string domain, System.Boolean moreComing)
-        {
-            _DomainRemoved.OnNext(Tuple.Create(sender, domain, moreComing));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>> _FoundDomain = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>>();
-        public IObservable<Tuple<Foundation.NSNetServiceBrowser, string, System.Boolean>> FoundDomainObs { get { return _FoundDomain; } }
-        public override void FoundDomain(Foundation.NSNetServiceBrowser sender, string domain, System.Boolean moreComing)
-        {
-            _FoundDomain.OnNext(Tuple.Create(sender, domain, moreComing));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>> _FoundService = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>>();
-        public IObservable<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>> FoundServiceObs { get { return _FoundService; } }
-        public override void FoundService(Foundation.NSNetServiceBrowser sender, Foundation.NSNetService service, System.Boolean moreComing)
-        {
-            _FoundService.OnNext(Tuple.Create(sender, service, moreComing));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSDictionary>> _NotSearched = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSDictionary>>();
-        public IObservable<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSDictionary>> NotSearchedObs { get { return _NotSearched; } }
-        public override void NotSearched(Foundation.NSNetServiceBrowser sender, Foundation.NSDictionary errors)
-        {
-            _NotSearched.OnNext(Tuple.Create(sender, errors));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>> _ServiceRemoved = new SingleAwaitSubject<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>>();
-        public IObservable<Tuple<Foundation.NSNetServiceBrowser, Foundation.NSNetService, System.Boolean>> ServiceRemovedObs { get { return _ServiceRemoved; } }
-        public override void ServiceRemoved(Foundation.NSNetServiceBrowser sender, Foundation.NSNetService service, System.Boolean moreComing)
-        {
-            _ServiceRemoved.OnNext(Tuple.Create(sender, service, moreComing));
-        }
-
-    }
-    public  partial class NSNetServiceDelegateRx : NSNetServiceDelegate
-    {
-        readonly SingleAwaitSubject<Foundation.NSNetService> _AddressResolved = new SingleAwaitSubject<Foundation.NSNetService>();
-        public IObservable<Foundation.NSNetService> AddressResolvedObs { get { return _AddressResolved; } }
-        public override void AddressResolved(Foundation.NSNetService sender)
-        {
-            _AddressResolved.OnNext(sender);
-        }
-
-        readonly SingleAwaitSubject<Foundation.NSNetService> _Published = new SingleAwaitSubject<Foundation.NSNetService>();
-        public IObservable<Foundation.NSNetService> PublishedObs { get { return _Published; } }
-        public override void Published(Foundation.NSNetService sender)
-        {
-            _Published.OnNext(sender);
-        }
-
-        readonly SingleAwaitSubject<Foundation.NSNetService> _Stopped = new SingleAwaitSubject<Foundation.NSNetService>();
-        public IObservable<Foundation.NSNetService> StoppedObs { get { return _Stopped; } }
-        public override void Stopped(Foundation.NSNetService sender)
-        {
-            _Stopped.OnNext(sender);
-        }
-
-        readonly SingleAwaitSubject<Foundation.NSNetService> _WillPublish = new SingleAwaitSubject<Foundation.NSNetService>();
-        public IObservable<Foundation.NSNetService> WillPublishObs { get { return _WillPublish; } }
-        public override void WillPublish(Foundation.NSNetService sender)
-        {
-            _WillPublish.OnNext(sender);
-        }
-
-        readonly SingleAwaitSubject<Foundation.NSNetService> _WillResolve = new SingleAwaitSubject<Foundation.NSNetService>();
-        public IObservable<Foundation.NSNetService> WillResolveObs { get { return _WillResolve; } }
-        public override void WillResolve(Foundation.NSNetService sender)
-        {
-            _WillResolve.OnNext(sender);
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSInputStream, Foundation.NSOutputStream>> _DidAcceptConnection = new SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSInputStream, Foundation.NSOutputStream>>();
-        public IObservable<Tuple<Foundation.NSNetService, Foundation.NSInputStream, Foundation.NSOutputStream>> DidAcceptConnectionObs { get { return _DidAcceptConnection; } }
-        public override void DidAcceptConnection(Foundation.NSNetService sender, Foundation.NSInputStream inputStream, Foundation.NSOutputStream outputStream)
-        {
-            _DidAcceptConnection.OnNext(Tuple.Create(sender, inputStream, outputStream));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSDictionary>> _PublishFailure = new SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSDictionary>>();
-        public IObservable<Tuple<Foundation.NSNetService, Foundation.NSDictionary>> PublishFailureObs { get { return _PublishFailure; } }
-        public override void PublishFailure(Foundation.NSNetService sender, Foundation.NSDictionary errors)
-        {
-            _PublishFailure.OnNext(Tuple.Create(sender, errors));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSDictionary>> _ResolveFailure = new SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSDictionary>>();
-        public IObservable<Tuple<Foundation.NSNetService, Foundation.NSDictionary>> ResolveFailureObs { get { return _ResolveFailure; } }
-        public override void ResolveFailure(Foundation.NSNetService sender, Foundation.NSDictionary errors)
-        {
-            _ResolveFailure.OnNext(Tuple.Create(sender, errors));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSData>> _UpdatedTxtRecordData = new SingleAwaitSubject<Tuple<Foundation.NSNetService, Foundation.NSData>>();
-        public IObservable<Tuple<Foundation.NSNetService, Foundation.NSData>> UpdatedTxtRecordDataObs { get { return _UpdatedTxtRecordData; } }
-        public override void UpdatedTxtRecordData(Foundation.NSNetService sender, Foundation.NSData data)
-        {
-            _UpdatedTxtRecordData.OnNext(Tuple.Create(sender, data));
-        }
-
-    }
-    public  partial class NSStreamDelegateRx : NSStreamDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<Foundation.NSStream, Foundation.NSStreamEvent>> _HandleEvent = new SingleAwaitSubject<Tuple<Foundation.NSStream, Foundation.NSStreamEvent>>();
-        public IObservable<Tuple<Foundation.NSStream, Foundation.NSStreamEvent>> HandleEventObs { get { return _HandleEvent; } }
-        public override void HandleEvent(Foundation.NSStream theStream, Foundation.NSStreamEvent streamEvent)
-        {
-            _HandleEvent.OnNext(Tuple.Create(theStream, streamEvent));
-        }
-
-    }
-    public  partial class NSPortDelegateRx : NSPortDelegate
-    {
-        readonly SingleAwaitSubject<Foundation.NSPortMessage> _MessageReceived = new SingleAwaitSubject<Foundation.NSPortMessage>();
-        public IObservable<Foundation.NSPortMessage> MessageReceivedObs { get { return _MessageReceived; } }
-        public override void MessageReceived(Foundation.NSPortMessage message)
-        {
-            _MessageReceived.OnNext(message);
-        }
-
-    }
-    public  partial class NSUrlSessionTaskDelegateRx : NSUrlSessionTaskDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>> _DidCompleteWithError = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSError>> DidCompleteWithErrorObs { get { return _DidCompleteWithError; } }
-        public override void DidCompleteWithError(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSError error)
-        {
-            _DidCompleteWithError.OnNext(Tuple.Create(session, task, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>> _DidFinishCollectingMetrics = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlSessionTaskMetrics>> DidFinishCollectingMetricsObs { get { return _DidFinishCollectingMetrics; } }
-        public override void DidFinishCollectingMetrics(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSUrlSessionTaskMetrics metrics)
-        {
-            _DidFinishCollectingMetrics.OnNext(Tuple.Create(session, task, metrics));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> _DidReceiveChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> DidReceiveChallengeObs { get { return _DidReceiveChallenge; } }
-        public override void DidReceiveChallenge(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSUrlAuthenticationChallenge challenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential> completionHandler)
-        {
-            _DidReceiveChallenge.OnNext(Tuple.Create(session, task, challenge, completionHandler));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>> _DidSendBodyData = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Int64, System.Int64, System.Int64>> DidSendBodyDataObs { get { return _DidSendBodyData; } }
-        public override void DidSendBodyData(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, System.Int64 bytesSent, System.Int64 totalBytesSent, System.Int64 totalBytesExpectedToSend)
-        {
-            _DidSendBodyData.OnNext(Tuple.Create(session, task, bytesSent, totalBytesSent, totalBytesExpectedToSend));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>> _NeedNewBodyStream = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, System.Action<Foundation.NSInputStream>>> NeedNewBodyStreamObs { get { return _NeedNewBodyStream; } }
-        public override void NeedNewBodyStream(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, System.Action<Foundation.NSInputStream> completionHandler)
-        {
-            _NeedNewBodyStream.OnNext(Tuple.Create(session, task, completionHandler));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>> _WillPerformHttpRedirection = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionTask, Foundation.NSHttpUrlResponse, Foundation.NSUrlRequest, System.Action<Foundation.NSUrlRequest>>> WillPerformHttpRedirectionObs { get { return _WillPerformHttpRedirection; } }
-        public override void WillPerformHttpRedirection(Foundation.NSUrlSession session, Foundation.NSUrlSessionTask task, Foundation.NSHttpUrlResponse response, Foundation.NSUrlRequest newRequest, System.Action<Foundation.NSUrlRequest> completionHandler)
-        {
-            _WillPerformHttpRedirection.OnNext(Tuple.Create(session, task, response, newRequest, completionHandler));
-        }
-
-    }
-    public  partial class NSUserActivityDelegateRx : NSUserActivityDelegate
-    {
-        readonly SingleAwaitSubject<Foundation.NSUserActivity> _UserActivityWasContinued = new SingleAwaitSubject<Foundation.NSUserActivity>();
-        public IObservable<Foundation.NSUserActivity> UserActivityWasContinuedObs { get { return _UserActivityWasContinued; } }
-        public override void UserActivityWasContinued(Foundation.NSUserActivity userActivity)
-        {
-            _UserActivityWasContinued.OnNext(userActivity);
-        }
-
-        readonly SingleAwaitSubject<Foundation.NSUserActivity> _UserActivityWillSave = new SingleAwaitSubject<Foundation.NSUserActivity>();
-        public IObservable<Foundation.NSUserActivity> UserActivityWillSaveObs { get { return _UserActivityWillSave; } }
-        public override void UserActivityWillSave(Foundation.NSUserActivity userActivity)
-        {
-            _UserActivityWillSave.OnNext(userActivity);
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUserActivity, Foundation.NSInputStream, Foundation.NSOutputStream>> _UserActivityReceivedData = new SingleAwaitSubject<Tuple<Foundation.NSUserActivity, Foundation.NSInputStream, Foundation.NSOutputStream>>();
-        public IObservable<Tuple<Foundation.NSUserActivity, Foundation.NSInputStream, Foundation.NSOutputStream>> UserActivityReceivedDataObs { get { return _UserActivityReceivedData; } }
-        public override void UserActivityReceivedData(Foundation.NSUserActivity userActivity, Foundation.NSInputStream inputStream, Foundation.NSOutputStream outputStream)
-        {
-            _UserActivityReceivedData.OnNext(Tuple.Create(userActivity, inputStream, outputStream));
-        }
-
-    }
-    public  partial class NSUrlConnectionDataDelegateRx : NSUrlConnectionDataDelegate
-    {
-        readonly SingleAwaitSubject<Foundation.NSUrlConnection> _FinishedLoading = new SingleAwaitSubject<Foundation.NSUrlConnection>();
-        public IObservable<Foundation.NSUrlConnection> FinishedLoadingObs { get { return _FinishedLoading; } }
-        public override void FinishedLoading(Foundation.NSUrlConnection connection)
-        {
-            _FinishedLoading.OnNext(connection);
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSData>> _ReceivedData = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSData>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSData>> ReceivedDataObs { get { return _ReceivedData; } }
-        public override void ReceivedData(Foundation.NSUrlConnection connection, Foundation.NSData data)
-        {
-            _ReceivedData.OnNext(Tuple.Create(connection, data));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlResponse>> _ReceivedResponse = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlResponse>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlResponse>> ReceivedResponseObs { get { return _ReceivedResponse; } }
-        public override void ReceivedResponse(Foundation.NSUrlConnection connection, Foundation.NSUrlResponse response)
-        {
-            _ReceivedResponse.OnNext(Tuple.Create(connection, response));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.nint, System.nint, System.nint>> _SentBodyData = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.nint, System.nint, System.nint>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, System.nint, System.nint, System.nint>> SentBodyDataObs { get { return _SentBodyData; } }
-        public override void SentBodyData(Foundation.NSUrlConnection connection, System.nint bytesWritten, System.nint totalBytesWritten, System.nint totalBytesExpectedToWrite)
-        {
-            _SentBodyData.OnNext(Tuple.Create(connection, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite));
-        }
-
-    }
-    public  partial class NSUrlConnectionDelegateRx : NSUrlConnectionDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> _CanceledAuthenticationChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> CanceledAuthenticationChallengeObs { get { return _CanceledAuthenticationChallenge; } }
-        public override void CanceledAuthenticationChallenge(Foundation.NSUrlConnection connection, Foundation.NSUrlAuthenticationChallenge challenge)
-        {
-            _CanceledAuthenticationChallenge.OnNext(Tuple.Create(connection, challenge));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSError>> _FailedWithError = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSError>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSError>> FailedWithErrorObs { get { return _FailedWithError; } }
-        public override void FailedWithError(Foundation.NSUrlConnection connection, Foundation.NSError error)
-        {
-            _FailedWithError.OnNext(Tuple.Create(connection, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> _ReceivedAuthenticationChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> ReceivedAuthenticationChallengeObs { get { return _ReceivedAuthenticationChallenge; } }
-        public override void ReceivedAuthenticationChallenge(Foundation.NSUrlConnection connection, Foundation.NSUrlAuthenticationChallenge challenge)
-        {
-            _ReceivedAuthenticationChallenge.OnNext(Tuple.Create(connection, challenge));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> _WillSendRequestForAuthenticationChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrlAuthenticationChallenge>> WillSendRequestForAuthenticationChallengeObs { get { return _WillSendRequestForAuthenticationChallenge; } }
-        public override void WillSendRequestForAuthenticationChallenge(Foundation.NSUrlConnection connection, Foundation.NSUrlAuthenticationChallenge challenge)
-        {
-            _WillSendRequestForAuthenticationChallenge.OnNext(Tuple.Create(connection, challenge));
-        }
-
-    }
-    public abstract partial class NSUrlConnectionDownloadDelegateRx : NSUrlConnectionDownloadDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrl>> _FinishedDownloading = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, Foundation.NSUrl>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, Foundation.NSUrl>> FinishedDownloadingObs { get { return _FinishedDownloading; } }
-        public override void FinishedDownloading(Foundation.NSUrlConnection connection, Foundation.NSUrl destinationUrl)
-        {
-            _FinishedDownloading.OnNext(Tuple.Create(connection, destinationUrl));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64>> _ResumedDownloading = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64>> ResumedDownloadingObs { get { return _ResumedDownloading; } }
-        public override void ResumedDownloading(Foundation.NSUrlConnection connection, System.Int64 totalBytesWritten, System.Int64 expectedTotalBytes)
-        {
-            _ResumedDownloading.OnNext(Tuple.Create(connection, totalBytesWritten, expectedTotalBytes));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64, System.Int64>> _WroteData = new SingleAwaitSubject<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64, System.Int64>>();
-        public IObservable<Tuple<Foundation.NSUrlConnection, System.Int64, System.Int64, System.Int64>> WroteDataObs { get { return _WroteData; } }
-        public override void WroteData(Foundation.NSUrlConnection connection, System.Int64 bytesWritten, System.Int64 totalBytesWritten, System.Int64 expectedTotalBytes)
-        {
-            _WroteData.OnNext(Tuple.Create(connection, bytesWritten, totalBytesWritten, expectedTotalBytes));
-        }
-
-    }
-    public  partial class NSUrlSessionDataDelegateRx : NSUrlSessionDataDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionDownloadTask>> _DidBecomeDownloadTask = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionDownloadTask>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionDownloadTask>> DidBecomeDownloadTaskObs { get { return _DidBecomeDownloadTask; } }
-        public override void DidBecomeDownloadTask(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSUrlSessionDownloadTask downloadTask)
-        {
-            _DidBecomeDownloadTask.OnNext(Tuple.Create(session, dataTask, downloadTask));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionStreamTask>> _DidBecomeStreamTask = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionStreamTask>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlSessionStreamTask>> DidBecomeStreamTaskObs { get { return _DidBecomeStreamTask; } }
-        public override void DidBecomeStreamTask(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSUrlSessionStreamTask streamTask)
-        {
-            _DidBecomeStreamTask.OnNext(Tuple.Create(session, dataTask, streamTask));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSData>> _DidReceiveData = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSData>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSData>> DidReceiveDataObs { get { return _DidReceiveData; } }
-        public override void DidReceiveData(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSData data)
-        {
-            _DidReceiveData.OnNext(Tuple.Create(session, dataTask, data));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlResponse, System.Action<Foundation.NSUrlSessionResponseDisposition>>> _DidReceiveResponse = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlResponse, System.Action<Foundation.NSUrlSessionResponseDisposition>>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSUrlResponse, System.Action<Foundation.NSUrlSessionResponseDisposition>>> DidReceiveResponseObs { get { return _DidReceiveResponse; } }
-        public override void DidReceiveResponse(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSUrlResponse response, System.Action<Foundation.NSUrlSessionResponseDisposition> completionHandler)
-        {
-            _DidReceiveResponse.OnNext(Tuple.Create(session, dataTask, response, completionHandler));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSCachedUrlResponse, System.Action<Foundation.NSCachedUrlResponse>>> _WillCacheResponse = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSCachedUrlResponse, System.Action<Foundation.NSCachedUrlResponse>>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDataTask, Foundation.NSCachedUrlResponse, System.Action<Foundation.NSCachedUrlResponse>>> WillCacheResponseObs { get { return _WillCacheResponse; } }
-        public override void WillCacheResponse(Foundation.NSUrlSession session, Foundation.NSUrlSessionDataTask dataTask, Foundation.NSCachedUrlResponse proposedResponse, System.Action<Foundation.NSCachedUrlResponse> completionHandler)
-        {
-            _WillCacheResponse.OnNext(Tuple.Create(session, dataTask, proposedResponse, completionHandler));
-        }
-
-    }
-    public  partial class NSUrlSessionDelegateRx : NSUrlSessionDelegate
-    {
-        readonly SingleAwaitSubject<Foundation.NSUrlSession> _DidFinishEventsForBackgroundSession = new SingleAwaitSubject<Foundation.NSUrlSession>();
-        public IObservable<Foundation.NSUrlSession> DidFinishEventsForBackgroundSessionObs { get { return _DidFinishEventsForBackgroundSession; } }
-        public override void DidFinishEventsForBackgroundSession(Foundation.NSUrlSession session)
-        {
-            _DidFinishEventsForBackgroundSession.OnNext(session);
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSError>> _DidBecomeInvalid = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSError>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSError>> DidBecomeInvalidObs { get { return _DidBecomeInvalid; } }
-        public override void DidBecomeInvalid(Foundation.NSUrlSession session, Foundation.NSError error)
-        {
-            _DidBecomeInvalid.OnNext(Tuple.Create(session, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> _DidReceiveChallenge = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlAuthenticationChallenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential>>> DidReceiveChallengeObs { get { return _DidReceiveChallenge; } }
-        public override void DidReceiveChallenge(Foundation.NSUrlSession session, Foundation.NSUrlAuthenticationChallenge challenge, System.Action<Foundation.NSUrlSessionAuthChallengeDisposition,Foundation.NSUrlCredential> completionHandler)
-        {
-            _DidReceiveChallenge.OnNext(Tuple.Create(session, challenge, completionHandler));
-        }
-
-    }
-    public abstract partial class NSUrlSessionDownloadDelegateRx : NSUrlSessionDownloadDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, Foundation.NSUrl>> _DidFinishDownloading = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, Foundation.NSUrl>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, Foundation.NSUrl>> DidFinishDownloadingObs { get { return _DidFinishDownloading; } }
-        public override void DidFinishDownloading(Foundation.NSUrlSession session, Foundation.NSUrlSessionDownloadTask downloadTask, Foundation.NSUrl location)
-        {
-            _DidFinishDownloading.OnNext(Tuple.Create(session, downloadTask, location));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64>> _DidResume = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64>> DidResumeObs { get { return _DidResume; } }
-        public override void DidResume(Foundation.NSUrlSession session, Foundation.NSUrlSessionDownloadTask downloadTask, System.Int64 resumeFileOffset, System.Int64 expectedTotalBytes)
-        {
-            _DidResume.OnNext(Tuple.Create(session, downloadTask, resumeFileOffset, expectedTotalBytes));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64, System.Int64>> _DidWriteData = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64, System.Int64>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionDownloadTask, System.Int64, System.Int64, System.Int64>> DidWriteDataObs { get { return _DidWriteData; } }
-        public override void DidWriteData(Foundation.NSUrlSession session, Foundation.NSUrlSessionDownloadTask downloadTask, System.Int64 bytesWritten, System.Int64 totalBytesWritten, System.Int64 totalBytesExpectedToWrite)
-        {
-            _DidWriteData.OnNext(Tuple.Create(session, downloadTask, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite));
-        }
-
-    }
-    public  partial class NSUrlSessionStreamDelegateRx : NSUrlSessionStreamDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> _BetterRouteDiscovered = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> BetterRouteDiscoveredObs { get { return _BetterRouteDiscovered; } }
-        public override void BetterRouteDiscovered(Foundation.NSUrlSession session, Foundation.NSUrlSessionStreamTask streamTask)
-        {
-            _BetterRouteDiscovered.OnNext(Tuple.Create(session, streamTask));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask, Foundation.NSInputStream, Foundation.NSOutputStream>> _CompletedTaskCaptureStreams = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask, Foundation.NSInputStream, Foundation.NSOutputStream>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask, Foundation.NSInputStream, Foundation.NSOutputStream>> CompletedTaskCaptureStreamsObs { get { return _CompletedTaskCaptureStreams; } }
-        public override void CompletedTaskCaptureStreams(Foundation.NSUrlSession session, Foundation.NSUrlSessionStreamTask streamTask, Foundation.NSInputStream inputStream, Foundation.NSOutputStream outputStream)
-        {
-            _CompletedTaskCaptureStreams.OnNext(Tuple.Create(session, streamTask, inputStream, outputStream));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> _ReadClosed = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> ReadClosedObs { get { return _ReadClosed; } }
-        public override void ReadClosed(Foundation.NSUrlSession session, Foundation.NSUrlSessionStreamTask streamTask)
-        {
-            _ReadClosed.OnNext(Tuple.Create(session, streamTask));
-        }
-
-        readonly SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> _WriteClosed = new SingleAwaitSubject<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>>();
-        public IObservable<Tuple<Foundation.NSUrlSession, Foundation.NSUrlSessionStreamTask>> WriteClosedObs { get { return _WriteClosed; } }
-        public override void WriteClosed(Foundation.NSUrlSession session, Foundation.NSUrlSessionStreamTask streamTask)
-        {
-            _WriteClosed.OnNext(Tuple.Create(session, streamTask));
-        }
-
-    }
-}
-namespace EventKitUI.Rx
-{
-    public  partial class EKCalendarChooserDelegateRx : EKCalendarChooserDelegate
-    {
-        readonly SingleAwaitSubject<EventKitUI.EKCalendarChooser> _Cancelled = new SingleAwaitSubject<EventKitUI.EKCalendarChooser>();
-        public IObservable<EventKitUI.EKCalendarChooser> CancelledObs { get { return _Cancelled; } }
-        public override void Cancelled(EventKitUI.EKCalendarChooser calendarChooser)
-        {
-            _Cancelled.OnNext(calendarChooser);
-        }
-
-        readonly SingleAwaitSubject<EventKitUI.EKCalendarChooser> _Finished = new SingleAwaitSubject<EventKitUI.EKCalendarChooser>();
-        public IObservable<EventKitUI.EKCalendarChooser> FinishedObs { get { return _Finished; } }
-        public override void Finished(EventKitUI.EKCalendarChooser calendarChooser)
-        {
-            _Finished.OnNext(calendarChooser);
-        }
-
-        readonly SingleAwaitSubject<EventKitUI.EKCalendarChooser> _SelectionChanged = new SingleAwaitSubject<EventKitUI.EKCalendarChooser>();
-        public IObservable<EventKitUI.EKCalendarChooser> SelectionChangedObs { get { return _SelectionChanged; } }
-        public override void SelectionChanged(EventKitUI.EKCalendarChooser calendarChooser)
-        {
-            _SelectionChanged.OnNext(calendarChooser);
-        }
-
-    }
-    public abstract partial class EKEventEditViewDelegateRx : EKEventEditViewDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<EventKitUI.EKEventEditViewController, EventKitUI.EKEventEditViewAction>> _Completed = new SingleAwaitSubject<Tuple<EventKitUI.EKEventEditViewController, EventKitUI.EKEventEditViewAction>>();
-        public IObservable<Tuple<EventKitUI.EKEventEditViewController, EventKitUI.EKEventEditViewAction>> CompletedObs { get { return _Completed; } }
-        public override void Completed(EventKitUI.EKEventEditViewController controller, EventKitUI.EKEventEditViewAction action)
-        {
-            _Completed.OnNext(Tuple.Create(controller, action));
-        }
-
-    }
-    public abstract partial class EKEventViewDelegateRx : EKEventViewDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<EventKitUI.EKEventViewController, EventKitUI.EKEventViewAction>> _Completed = new SingleAwaitSubject<Tuple<EventKitUI.EKEventViewController, EventKitUI.EKEventViewAction>>();
-        public IObservable<Tuple<EventKitUI.EKEventViewController, EventKitUI.EKEventViewAction>> CompletedObs { get { return _Completed; } }
-        public override void Completed(EventKitUI.EKEventViewController controller, EventKitUI.EKEventViewAction action)
-        {
-            _Completed.OnNext(Tuple.Create(controller, action));
-        }
-
-    }
-}
-namespace ExternalAccessory.Rx
-{
-    public  partial class EAAccessoryDelegateRx : EAAccessoryDelegate
-    {
-        readonly SingleAwaitSubject<ExternalAccessory.EAAccessory> _Disconnected = new SingleAwaitSubject<ExternalAccessory.EAAccessory>();
-        public IObservable<ExternalAccessory.EAAccessory> DisconnectedObs { get { return _Disconnected; } }
-        public override void Disconnected(ExternalAccessory.EAAccessory accessory)
-        {
-            _Disconnected.OnNext(accessory);
-        }
-
-    }
-    public abstract partial class EAWiFiUnconfiguredAccessoryBrowserDelegateRx : EAWiFiUnconfiguredAccessoryBrowserDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>> _DidFindUnconfiguredAccessories = new SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>>();
-        public IObservable<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>> DidFindUnconfiguredAccessoriesObs { get { return _DidFindUnconfiguredAccessories; } }
-        public override void DidFindUnconfiguredAccessories(ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser browser, Foundation.NSSet accessories)
-        {
-            _DidFindUnconfiguredAccessories.OnNext(Tuple.Create(browser, accessories));
-        }
-
-        readonly SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessory, ExternalAccessory.EAWiFiUnconfiguredAccessoryConfigurationStatus>> _DidFinishConfiguringAccessory = new SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessory, ExternalAccessory.EAWiFiUnconfiguredAccessoryConfigurationStatus>>();
-        public IObservable<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessory, ExternalAccessory.EAWiFiUnconfiguredAccessoryConfigurationStatus>> DidFinishConfiguringAccessoryObs { get { return _DidFinishConfiguringAccessory; } }
-        public override void DidFinishConfiguringAccessory(ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser browser, ExternalAccessory.EAWiFiUnconfiguredAccessory accessory, ExternalAccessory.EAWiFiUnconfiguredAccessoryConfigurationStatus status)
-        {
-            _DidFinishConfiguringAccessory.OnNext(Tuple.Create(browser, accessory, status));
-        }
-
-        readonly SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>> _DidRemoveUnconfiguredAccessories = new SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>>();
-        public IObservable<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, Foundation.NSSet>> DidRemoveUnconfiguredAccessoriesObs { get { return _DidRemoveUnconfiguredAccessories; } }
-        public override void DidRemoveUnconfiguredAccessories(ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser browser, Foundation.NSSet accessories)
-        {
-            _DidRemoveUnconfiguredAccessories.OnNext(Tuple.Create(browser, accessories));
-        }
-
-        readonly SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserState>> _DidUpdateState = new SingleAwaitSubject<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserState>>();
-        public IObservable<Tuple<ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserState>> DidUpdateStateObs { get { return _DidUpdateState; } }
-        public override void DidUpdateState(ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowser browser, ExternalAccessory.EAWiFiUnconfiguredAccessoryBrowserState state)
-        {
-            _DidUpdateState.OnNext(Tuple.Create(browser, state));
-        }
-
-    }
-}
-namespace MessageUI.Rx
-{
-    public  partial class MFMailComposeViewControllerDelegateRx : MFMailComposeViewControllerDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<MessageUI.MFMailComposeViewController, MessageUI.MFMailComposeResult, Foundation.NSError>> _Finished = new SingleAwaitSubject<Tuple<MessageUI.MFMailComposeViewController, MessageUI.MFMailComposeResult, Foundation.NSError>>();
-        public IObservable<Tuple<MessageUI.MFMailComposeViewController, MessageUI.MFMailComposeResult, Foundation.NSError>> FinishedObs { get { return _Finished; } }
-        public override void Finished(MessageUI.MFMailComposeViewController controller, MessageUI.MFMailComposeResult result, Foundation.NSError error)
-        {
-            _Finished.OnNext(Tuple.Create(controller, result, error));
-        }
-
-    }
-    public abstract partial class MFMessageComposeViewControllerDelegateRx : MFMessageComposeViewControllerDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<MessageUI.MFMessageComposeViewController, MessageUI.MessageComposeResult>> _Finished = new SingleAwaitSubject<Tuple<MessageUI.MFMessageComposeViewController, MessageUI.MessageComposeResult>>();
-        public IObservable<Tuple<MessageUI.MFMessageComposeViewController, MessageUI.MessageComposeResult>> FinishedObs { get { return _Finished; } }
-        public override void Finished(MessageUI.MFMessageComposeViewController controller, MessageUI.MessageComposeResult result)
-        {
-            _Finished.OnNext(Tuple.Create(controller, result));
-        }
-
-    }
-}
 namespace GLKit.Rx
 {
     public abstract partial class GLKViewControllerDelegateRx : GLKViewControllerDelegate
@@ -7568,6 +7562,29 @@ namespace GLKit.Rx
 
     }
 }
+namespace MessageUI.Rx
+{
+    public  partial class MFMailComposeViewControllerDelegateRx : MFMailComposeViewControllerDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<MessageUI.MFMailComposeViewController, MessageUI.MFMailComposeResult, Foundation.NSError>> _Finished = new SingleAwaitSubject<Tuple<MessageUI.MFMailComposeViewController, MessageUI.MFMailComposeResult, Foundation.NSError>>();
+        public IObservable<Tuple<MessageUI.MFMailComposeViewController, MessageUI.MFMailComposeResult, Foundation.NSError>> FinishedObs { get { return _Finished; } }
+        public override void Finished(MessageUI.MFMailComposeViewController controller, MessageUI.MFMailComposeResult result, Foundation.NSError error)
+        {
+            _Finished.OnNext(Tuple.Create(controller, result, error));
+        }
+
+    }
+    public abstract partial class MFMessageComposeViewControllerDelegateRx : MFMessageComposeViewControllerDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<MessageUI.MFMessageComposeViewController, MessageUI.MessageComposeResult>> _Finished = new SingleAwaitSubject<Tuple<MessageUI.MFMessageComposeViewController, MessageUI.MessageComposeResult>>();
+        public IObservable<Tuple<MessageUI.MFMessageComposeViewController, MessageUI.MessageComposeResult>> FinishedObs { get { return _Finished; } }
+        public override void Finished(MessageUI.MFMessageComposeViewController controller, MessageUI.MessageComposeResult result)
+        {
+            _Finished.OnNext(Tuple.Create(controller, result));
+        }
+
+    }
+}
 namespace MetalKit.Rx
 {
     public abstract partial class MTKViewDelegateRx : MTKViewDelegate
@@ -7590,30 +7607,6 @@ namespace MetalKit.Rx
 }
 namespace MultipeerConnectivity.Rx
 {
-    public abstract partial class MCNearbyServiceBrowserDelegateRx : MCNearbyServiceBrowserDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, Foundation.NSError>> _DidNotStartBrowsingForPeers = new SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, Foundation.NSError>>();
-        public IObservable<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, Foundation.NSError>> DidNotStartBrowsingForPeersObs { get { return _DidNotStartBrowsingForPeers; } }
-        public override void DidNotStartBrowsingForPeers(MultipeerConnectivity.MCNearbyServiceBrowser browser, Foundation.NSError error)
-        {
-            _DidNotStartBrowsingForPeers.OnNext(Tuple.Create(browser, error));
-        }
-
-        readonly SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID, Foundation.NSDictionary>> _FoundPeer = new SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID, Foundation.NSDictionary>>();
-        public IObservable<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID, Foundation.NSDictionary>> FoundPeerObs { get { return _FoundPeer; } }
-        public override void FoundPeer(MultipeerConnectivity.MCNearbyServiceBrowser browser, MultipeerConnectivity.MCPeerID peerID, Foundation.NSDictionary info)
-        {
-            _FoundPeer.OnNext(Tuple.Create(browser, peerID, info));
-        }
-
-        readonly SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID>> _LostPeer = new SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID>>();
-        public IObservable<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID>> LostPeerObs { get { return _LostPeer; } }
-        public override void LostPeer(MultipeerConnectivity.MCNearbyServiceBrowser browser, MultipeerConnectivity.MCPeerID peerID)
-        {
-            _LostPeer.OnNext(Tuple.Create(browser, peerID));
-        }
-
-    }
     public abstract partial class MCSessionDelegateRx : MCSessionDelegate
     {
         readonly SingleAwaitSubject<Tuple<MultipeerConnectivity.MCSession, MultipeerConnectivity.MCPeerID, MultipeerConnectivity.MCSessionState>> _DidChangeState = new SingleAwaitSubject<Tuple<MultipeerConnectivity.MCSession, MultipeerConnectivity.MCPeerID, MultipeerConnectivity.MCSessionState>>();
@@ -7703,23 +7696,102 @@ namespace MultipeerConnectivity.Rx
         }
 
     }
+    public abstract partial class MCNearbyServiceBrowserDelegateRx : MCNearbyServiceBrowserDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, Foundation.NSError>> _DidNotStartBrowsingForPeers = new SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, Foundation.NSError>>();
+        public IObservable<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, Foundation.NSError>> DidNotStartBrowsingForPeersObs { get { return _DidNotStartBrowsingForPeers; } }
+        public override void DidNotStartBrowsingForPeers(MultipeerConnectivity.MCNearbyServiceBrowser browser, Foundation.NSError error)
+        {
+            _DidNotStartBrowsingForPeers.OnNext(Tuple.Create(browser, error));
+        }
+
+        readonly SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID, Foundation.NSDictionary>> _FoundPeer = new SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID, Foundation.NSDictionary>>();
+        public IObservable<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID, Foundation.NSDictionary>> FoundPeerObs { get { return _FoundPeer; } }
+        public override void FoundPeer(MultipeerConnectivity.MCNearbyServiceBrowser browser, MultipeerConnectivity.MCPeerID peerID, Foundation.NSDictionary info)
+        {
+            _FoundPeer.OnNext(Tuple.Create(browser, peerID, info));
+        }
+
+        readonly SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID>> _LostPeer = new SingleAwaitSubject<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID>>();
+        public IObservable<Tuple<MultipeerConnectivity.MCNearbyServiceBrowser, MultipeerConnectivity.MCPeerID>> LostPeerObs { get { return _LostPeer; } }
+        public override void LostPeer(MultipeerConnectivity.MCNearbyServiceBrowser browser, MultipeerConnectivity.MCPeerID peerID)
+        {
+            _LostPeer.OnNext(Tuple.Create(browser, peerID));
+        }
+
+    }
+}
+namespace NetworkExtension.Rx
+{
+    public  partial class NWTcpConnectionAuthenticationDelegateRx : NWTcpConnectionAuthenticationDelegate
+    {
+        readonly SingleAwaitSubject<Tuple<NetworkExtension.NWTcpConnection, Foundation.NSArray, System.Action<Security.SecTrust>>> _EvaluateTrust = new SingleAwaitSubject<Tuple<NetworkExtension.NWTcpConnection, Foundation.NSArray, System.Action<Security.SecTrust>>>();
+        public IObservable<Tuple<NetworkExtension.NWTcpConnection, Foundation.NSArray, System.Action<Security.SecTrust>>> EvaluateTrustObs { get { return _EvaluateTrust; } }
+        public override void EvaluateTrust(NetworkExtension.NWTcpConnection connection, Foundation.NSArray peerCertificateChain, System.Action<Security.SecTrust> completion)
+        {
+            _EvaluateTrust.OnNext(Tuple.Create(connection, peerCertificateChain, completion));
+        }
+
+        readonly SingleAwaitSubject<Tuple<NetworkExtension.NWTcpConnection, System.Action<Security.SecIdentity,Foundation.NSArray>>> _ProvideIdentity = new SingleAwaitSubject<Tuple<NetworkExtension.NWTcpConnection, System.Action<Security.SecIdentity,Foundation.NSArray>>>();
+        public IObservable<Tuple<NetworkExtension.NWTcpConnection, System.Action<Security.SecIdentity,Foundation.NSArray>>> ProvideIdentityObs { get { return _ProvideIdentity; } }
+        public override void ProvideIdentity(NetworkExtension.NWTcpConnection connection, System.Action<Security.SecIdentity,Foundation.NSArray> completion)
+        {
+            _ProvideIdentity.OnNext(Tuple.Create(connection, completion));
+        }
+
+    }
 }
 namespace PassKit.Rx
 {
-    public abstract partial class PKAddPaymentPassViewControllerDelegateRx : PKAddPaymentPassViewControllerDelegate
+    public abstract partial class PKPaymentAuthorizationViewControllerDelegateRx : PKPaymentAuthorizationViewControllerDelegate
     {
-        readonly SingleAwaitSubject<Tuple<PassKit.PKAddPaymentPassViewController, PassKit.PKPaymentPass, Foundation.NSError>> _DidFinishAddingPaymentPass = new SingleAwaitSubject<Tuple<PassKit.PKAddPaymentPassViewController, PassKit.PKPaymentPass, Foundation.NSError>>();
-        public IObservable<Tuple<PassKit.PKAddPaymentPassViewController, PassKit.PKPaymentPass, Foundation.NSError>> DidFinishAddingPaymentPassObs { get { return _DidFinishAddingPaymentPass; } }
-        public override void DidFinishAddingPaymentPass(PassKit.PKAddPaymentPassViewController controller, PassKit.PKPaymentPass pass, Foundation.NSError error)
+        readonly SingleAwaitSubject<PassKit.PKPaymentAuthorizationViewController> _PaymentAuthorizationViewControllerDidFinish = new SingleAwaitSubject<PassKit.PKPaymentAuthorizationViewController>();
+        public IObservable<PassKit.PKPaymentAuthorizationViewController> PaymentAuthorizationViewControllerDidFinishObs { get { return _PaymentAuthorizationViewControllerDidFinish; } }
+        public override void PaymentAuthorizationViewControllerDidFinish(PassKit.PKPaymentAuthorizationViewController controller)
         {
-            _DidFinishAddingPaymentPass.OnNext(Tuple.Create(controller, pass, error));
+            _PaymentAuthorizationViewControllerDidFinish.OnNext(controller);
         }
 
-        readonly SingleAwaitSubject<Tuple<PassKit.PKAddPaymentPassViewController, Foundation.NSData[], Foundation.NSData, Foundation.NSData, System.Action<PassKit.PKAddPaymentPassRequest>>> _GenerateRequestWithCertificateChain = new SingleAwaitSubject<Tuple<PassKit.PKAddPaymentPassViewController, Foundation.NSData[], Foundation.NSData, Foundation.NSData, System.Action<PassKit.PKAddPaymentPassRequest>>>();
-        public IObservable<Tuple<PassKit.PKAddPaymentPassViewController, Foundation.NSData[], Foundation.NSData, Foundation.NSData, System.Action<PassKit.PKAddPaymentPassRequest>>> GenerateRequestWithCertificateChainObs { get { return _GenerateRequestWithCertificateChain; } }
-        public override void GenerateRequestWithCertificateChain(PassKit.PKAddPaymentPassViewController controller, Foundation.NSData[] certificates, Foundation.NSData nonce, Foundation.NSData nonceSignature, System.Action<PassKit.PKAddPaymentPassRequest> handler)
+        readonly SingleAwaitSubject<PassKit.PKPaymentAuthorizationViewController> _WillAuthorizePayment = new SingleAwaitSubject<PassKit.PKPaymentAuthorizationViewController>();
+        public IObservable<PassKit.PKPaymentAuthorizationViewController> WillAuthorizePaymentObs { get { return _WillAuthorizePayment; } }
+        public override void WillAuthorizePayment(PassKit.PKPaymentAuthorizationViewController controller)
         {
-            _GenerateRequestWithCertificateChain.OnNext(Tuple.Create(controller, certificates, nonce, nonceSignature, handler));
+            _WillAuthorizePayment.OnNext(controller);
+        }
+
+        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPayment, System.Action<PassKit.PKPaymentAuthorizationStatus>>> _DidAuthorizePayment = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPayment, System.Action<PassKit.PKPaymentAuthorizationStatus>>>();
+        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPayment, System.Action<PassKit.PKPaymentAuthorizationStatus>>> DidAuthorizePaymentObs { get { return _DidAuthorizePayment; } }
+        public override void DidAuthorizePayment(PassKit.PKPaymentAuthorizationViewController controller, PassKit.PKPayment payment, System.Action<PassKit.PKPaymentAuthorizationStatus> completion)
+        {
+            _DidAuthorizePayment.OnNext(Tuple.Create(controller, payment, completion));
+        }
+
+        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPaymentMethod, System.Action<PassKit.PKPaymentSummaryItem[]>>> _DidSelectPaymentMethod = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPaymentMethod, System.Action<PassKit.PKPaymentSummaryItem[]>>>();
+        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPaymentMethod, System.Action<PassKit.PKPaymentSummaryItem[]>>> DidSelectPaymentMethodObs { get { return _DidSelectPaymentMethod; } }
+        public override void DidSelectPaymentMethod(PassKit.PKPaymentAuthorizationViewController controller, PassKit.PKPaymentMethod paymentMethod, System.Action<PassKit.PKPaymentSummaryItem[]> completion)
+        {
+            _DidSelectPaymentMethod.OnNext(Tuple.Create(controller, paymentMethod, completion));
+        }
+
+        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, AddressBook.ABRecord, PassKit.PKPaymentShippingAddressSelected>> _DidSelectShippingAddress = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, AddressBook.ABRecord, PassKit.PKPaymentShippingAddressSelected>>();
+        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, AddressBook.ABRecord, PassKit.PKPaymentShippingAddressSelected>> DidSelectShippingAddressObs { get { return _DidSelectShippingAddress; } }
+        public override void DidSelectShippingAddress(PassKit.PKPaymentAuthorizationViewController controller, AddressBook.ABRecord address, PassKit.PKPaymentShippingAddressSelected completion)
+        {
+            _DidSelectShippingAddress.OnNext(Tuple.Create(controller, address, completion));
+        }
+
+        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKContact, PassKit.PKPaymentShippingAddressSelected>> _DidSelectShippingContact = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKContact, PassKit.PKPaymentShippingAddressSelected>>();
+        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKContact, PassKit.PKPaymentShippingAddressSelected>> DidSelectShippingContactObs { get { return _DidSelectShippingContact; } }
+        public override void DidSelectShippingContact(PassKit.PKPaymentAuthorizationViewController controller, PassKit.PKContact contact, PassKit.PKPaymentShippingAddressSelected completion)
+        {
+            _DidSelectShippingContact.OnNext(Tuple.Create(controller, contact, completion));
+        }
+
+        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKShippingMethod, PassKit.PKPaymentShippingMethodSelected>> _DidSelectShippingMethod = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKShippingMethod, PassKit.PKPaymentShippingMethodSelected>>();
+        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKShippingMethod, PassKit.PKPaymentShippingMethodSelected>> DidSelectShippingMethodObs { get { return _DidSelectShippingMethod; } }
+        public override void DidSelectShippingMethod(PassKit.PKPaymentAuthorizationViewController controller, PassKit.PKShippingMethod shippingMethod, PassKit.PKPaymentShippingMethodSelected completion)
+        {
+            _DidSelectShippingMethod.OnNext(Tuple.Create(controller, shippingMethod, completion));
         }
 
     }
@@ -7778,75 +7850,20 @@ namespace PassKit.Rx
         }
 
     }
-    public abstract partial class PKPaymentAuthorizationViewControllerDelegateRx : PKPaymentAuthorizationViewControllerDelegate
+    public abstract partial class PKAddPaymentPassViewControllerDelegateRx : PKAddPaymentPassViewControllerDelegate
     {
-        readonly SingleAwaitSubject<PassKit.PKPaymentAuthorizationViewController> _PaymentAuthorizationViewControllerDidFinish = new SingleAwaitSubject<PassKit.PKPaymentAuthorizationViewController>();
-        public IObservable<PassKit.PKPaymentAuthorizationViewController> PaymentAuthorizationViewControllerDidFinishObs { get { return _PaymentAuthorizationViewControllerDidFinish; } }
-        public override void PaymentAuthorizationViewControllerDidFinish(PassKit.PKPaymentAuthorizationViewController controller)
+        readonly SingleAwaitSubject<Tuple<PassKit.PKAddPaymentPassViewController, PassKit.PKPaymentPass, Foundation.NSError>> _DidFinishAddingPaymentPass = new SingleAwaitSubject<Tuple<PassKit.PKAddPaymentPassViewController, PassKit.PKPaymentPass, Foundation.NSError>>();
+        public IObservable<Tuple<PassKit.PKAddPaymentPassViewController, PassKit.PKPaymentPass, Foundation.NSError>> DidFinishAddingPaymentPassObs { get { return _DidFinishAddingPaymentPass; } }
+        public override void DidFinishAddingPaymentPass(PassKit.PKAddPaymentPassViewController controller, PassKit.PKPaymentPass pass, Foundation.NSError error)
         {
-            _PaymentAuthorizationViewControllerDidFinish.OnNext(controller);
+            _DidFinishAddingPaymentPass.OnNext(Tuple.Create(controller, pass, error));
         }
 
-        readonly SingleAwaitSubject<PassKit.PKPaymentAuthorizationViewController> _WillAuthorizePayment = new SingleAwaitSubject<PassKit.PKPaymentAuthorizationViewController>();
-        public IObservable<PassKit.PKPaymentAuthorizationViewController> WillAuthorizePaymentObs { get { return _WillAuthorizePayment; } }
-        public override void WillAuthorizePayment(PassKit.PKPaymentAuthorizationViewController controller)
+        readonly SingleAwaitSubject<Tuple<PassKit.PKAddPaymentPassViewController, Foundation.NSData[], Foundation.NSData, Foundation.NSData, System.Action<PassKit.PKAddPaymentPassRequest>>> _GenerateRequestWithCertificateChain = new SingleAwaitSubject<Tuple<PassKit.PKAddPaymentPassViewController, Foundation.NSData[], Foundation.NSData, Foundation.NSData, System.Action<PassKit.PKAddPaymentPassRequest>>>();
+        public IObservable<Tuple<PassKit.PKAddPaymentPassViewController, Foundation.NSData[], Foundation.NSData, Foundation.NSData, System.Action<PassKit.PKAddPaymentPassRequest>>> GenerateRequestWithCertificateChainObs { get { return _GenerateRequestWithCertificateChain; } }
+        public override void GenerateRequestWithCertificateChain(PassKit.PKAddPaymentPassViewController controller, Foundation.NSData[] certificates, Foundation.NSData nonce, Foundation.NSData nonceSignature, System.Action<PassKit.PKAddPaymentPassRequest> handler)
         {
-            _WillAuthorizePayment.OnNext(controller);
-        }
-
-        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPayment, System.Action<PassKit.PKPaymentAuthorizationStatus>>> _DidAuthorizePayment = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPayment, System.Action<PassKit.PKPaymentAuthorizationStatus>>>();
-        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPayment, System.Action<PassKit.PKPaymentAuthorizationStatus>>> DidAuthorizePaymentObs { get { return _DidAuthorizePayment; } }
-        public override void DidAuthorizePayment(PassKit.PKPaymentAuthorizationViewController controller, PassKit.PKPayment payment, System.Action<PassKit.PKPaymentAuthorizationStatus> completion)
-        {
-            _DidAuthorizePayment.OnNext(Tuple.Create(controller, payment, completion));
-        }
-
-        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPaymentMethod, System.Action<PassKit.PKPaymentSummaryItem[]>>> _DidSelectPaymentMethod = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPaymentMethod, System.Action<PassKit.PKPaymentSummaryItem[]>>>();
-        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKPaymentMethod, System.Action<PassKit.PKPaymentSummaryItem[]>>> DidSelectPaymentMethodObs { get { return _DidSelectPaymentMethod; } }
-        public override void DidSelectPaymentMethod(PassKit.PKPaymentAuthorizationViewController controller, PassKit.PKPaymentMethod paymentMethod, System.Action<PassKit.PKPaymentSummaryItem[]> completion)
-        {
-            _DidSelectPaymentMethod.OnNext(Tuple.Create(controller, paymentMethod, completion));
-        }
-
-        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, AddressBook.ABRecord, PassKit.PKPaymentShippingAddressSelected>> _DidSelectShippingAddress = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, AddressBook.ABRecord, PassKit.PKPaymentShippingAddressSelected>>();
-        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, AddressBook.ABRecord, PassKit.PKPaymentShippingAddressSelected>> DidSelectShippingAddressObs { get { return _DidSelectShippingAddress; } }
-        public override void DidSelectShippingAddress(PassKit.PKPaymentAuthorizationViewController controller, AddressBook.ABRecord address, PassKit.PKPaymentShippingAddressSelected completion)
-        {
-            _DidSelectShippingAddress.OnNext(Tuple.Create(controller, address, completion));
-        }
-
-        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKContact, PassKit.PKPaymentShippingAddressSelected>> _DidSelectShippingContact = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKContact, PassKit.PKPaymentShippingAddressSelected>>();
-        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKContact, PassKit.PKPaymentShippingAddressSelected>> DidSelectShippingContactObs { get { return _DidSelectShippingContact; } }
-        public override void DidSelectShippingContact(PassKit.PKPaymentAuthorizationViewController controller, PassKit.PKContact contact, PassKit.PKPaymentShippingAddressSelected completion)
-        {
-            _DidSelectShippingContact.OnNext(Tuple.Create(controller, contact, completion));
-        }
-
-        readonly SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKShippingMethod, PassKit.PKPaymentShippingMethodSelected>> _DidSelectShippingMethod = new SingleAwaitSubject<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKShippingMethod, PassKit.PKPaymentShippingMethodSelected>>();
-        public IObservable<Tuple<PassKit.PKPaymentAuthorizationViewController, PassKit.PKShippingMethod, PassKit.PKPaymentShippingMethodSelected>> DidSelectShippingMethodObs { get { return _DidSelectShippingMethod; } }
-        public override void DidSelectShippingMethod(PassKit.PKPaymentAuthorizationViewController controller, PassKit.PKShippingMethod shippingMethod, PassKit.PKPaymentShippingMethodSelected completion)
-        {
-            _DidSelectShippingMethod.OnNext(Tuple.Create(controller, shippingMethod, completion));
-        }
-
-    }
-}
-namespace NetworkExtension.Rx
-{
-    public  partial class NWTcpConnectionAuthenticationDelegateRx : NWTcpConnectionAuthenticationDelegate
-    {
-        readonly SingleAwaitSubject<Tuple<NetworkExtension.NWTcpConnection, Foundation.NSArray, System.Action<Security.SecTrust>>> _EvaluateTrust = new SingleAwaitSubject<Tuple<NetworkExtension.NWTcpConnection, Foundation.NSArray, System.Action<Security.SecTrust>>>();
-        public IObservable<Tuple<NetworkExtension.NWTcpConnection, Foundation.NSArray, System.Action<Security.SecTrust>>> EvaluateTrustObs { get { return _EvaluateTrust; } }
-        public override void EvaluateTrust(NetworkExtension.NWTcpConnection connection, Foundation.NSArray peerCertificateChain, System.Action<Security.SecTrust> completion)
-        {
-            _EvaluateTrust.OnNext(Tuple.Create(connection, peerCertificateChain, completion));
-        }
-
-        readonly SingleAwaitSubject<Tuple<NetworkExtension.NWTcpConnection, System.Action<Security.SecIdentity,Foundation.NSArray>>> _ProvideIdentity = new SingleAwaitSubject<Tuple<NetworkExtension.NWTcpConnection, System.Action<Security.SecIdentity,Foundation.NSArray>>>();
-        public IObservable<Tuple<NetworkExtension.NWTcpConnection, System.Action<Security.SecIdentity,Foundation.NSArray>>> ProvideIdentityObs { get { return _ProvideIdentity; } }
-        public override void ProvideIdentity(NetworkExtension.NWTcpConnection connection, System.Action<Security.SecIdentity,Foundation.NSArray> completion)
-        {
-            _ProvideIdentity.OnNext(Tuple.Create(connection, completion));
+            _GenerateRequestWithCertificateChain.OnNext(Tuple.Create(controller, certificates, nonce, nonceSignature, handler));
         }
 
     }
@@ -7983,6 +8000,44 @@ namespace VideoSubscriberAccount.Rx
 }
 namespace WebKit.Rx
 {
+    public  partial class WKUIDelegateRx : WKUIDelegate
+    {
+        readonly SingleAwaitSubject<WebKit.WKWebView> _DidClose = new SingleAwaitSubject<WebKit.WKWebView>();
+        public IObservable<WebKit.WKWebView> DidCloseObs { get { return _DidClose; } }
+        public override void DidClose(WebKit.WKWebView webView)
+        {
+            _DidClose.OnNext(webView);
+        }
+
+        readonly SingleAwaitSubject<Tuple<WebKit.WKWebView, UIKit.UIViewController>> _CommitPreviewingViewController = new SingleAwaitSubject<Tuple<WebKit.WKWebView, UIKit.UIViewController>>();
+        public IObservable<Tuple<WebKit.WKWebView, UIKit.UIViewController>> CommitPreviewingViewControllerObs { get { return _CommitPreviewingViewController; } }
+        public override void CommitPreviewingViewController(WebKit.WKWebView webView, UIKit.UIViewController previewingViewController)
+        {
+            _CommitPreviewingViewController.OnNext(Tuple.Create(webView, previewingViewController));
+        }
+
+        readonly SingleAwaitSubject<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action>> _RunJavaScriptAlertPanel = new SingleAwaitSubject<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action>>();
+        public IObservable<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action>> RunJavaScriptAlertPanelObs { get { return _RunJavaScriptAlertPanel; } }
+        public override void RunJavaScriptAlertPanel(WebKit.WKWebView webView, string message, WebKit.WKFrameInfo frame, System.Action completionHandler)
+        {
+            _RunJavaScriptAlertPanel.OnNext(Tuple.Create(webView, message, frame, completionHandler));
+        }
+
+        readonly SingleAwaitSubject<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action<System.Boolean>>> _RunJavaScriptConfirmPanel = new SingleAwaitSubject<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action<System.Boolean>>>();
+        public IObservable<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action<System.Boolean>>> RunJavaScriptConfirmPanelObs { get { return _RunJavaScriptConfirmPanel; } }
+        public override void RunJavaScriptConfirmPanel(WebKit.WKWebView webView, string message, WebKit.WKFrameInfo frame, System.Action<System.Boolean> completionHandler)
+        {
+            _RunJavaScriptConfirmPanel.OnNext(Tuple.Create(webView, message, frame, completionHandler));
+        }
+
+        readonly SingleAwaitSubject<Tuple<WebKit.WKWebView, string, string, WebKit.WKFrameInfo, System.Action<string>>> _RunJavaScriptTextInputPanel = new SingleAwaitSubject<Tuple<WebKit.WKWebView, string, string, WebKit.WKFrameInfo, System.Action<string>>>();
+        public IObservable<Tuple<WebKit.WKWebView, string, string, WebKit.WKFrameInfo, System.Action<string>>> RunJavaScriptTextInputPanelObs { get { return _RunJavaScriptTextInputPanel; } }
+        public override void RunJavaScriptTextInputPanel(WebKit.WKWebView webView, string prompt, string defaultText, WebKit.WKFrameInfo frame, System.Action<string> completionHandler)
+        {
+            _RunJavaScriptTextInputPanel.OnNext(Tuple.Create(webView, prompt, defaultText, frame, completionHandler));
+        }
+
+    }
     public  partial class WKNavigationDelegateRx : WKNavigationDelegate
     {
         readonly SingleAwaitSubject<WebKit.WKWebView> _ContentProcessDidTerminate = new SingleAwaitSubject<WebKit.WKWebView>();
@@ -8046,44 +8101,6 @@ namespace WebKit.Rx
         public override void DidStartProvisionalNavigation(WebKit.WKWebView webView, WebKit.WKNavigation navigation)
         {
             _DidStartProvisionalNavigation.OnNext(Tuple.Create(webView, navigation));
-        }
-
-    }
-    public  partial class WKUIDelegateRx : WKUIDelegate
-    {
-        readonly SingleAwaitSubject<WebKit.WKWebView> _DidClose = new SingleAwaitSubject<WebKit.WKWebView>();
-        public IObservable<WebKit.WKWebView> DidCloseObs { get { return _DidClose; } }
-        public override void DidClose(WebKit.WKWebView webView)
-        {
-            _DidClose.OnNext(webView);
-        }
-
-        readonly SingleAwaitSubject<Tuple<WebKit.WKWebView, UIKit.UIViewController>> _CommitPreviewingViewController = new SingleAwaitSubject<Tuple<WebKit.WKWebView, UIKit.UIViewController>>();
-        public IObservable<Tuple<WebKit.WKWebView, UIKit.UIViewController>> CommitPreviewingViewControllerObs { get { return _CommitPreviewingViewController; } }
-        public override void CommitPreviewingViewController(WebKit.WKWebView webView, UIKit.UIViewController previewingViewController)
-        {
-            _CommitPreviewingViewController.OnNext(Tuple.Create(webView, previewingViewController));
-        }
-
-        readonly SingleAwaitSubject<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action>> _RunJavaScriptAlertPanel = new SingleAwaitSubject<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action>>();
-        public IObservable<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action>> RunJavaScriptAlertPanelObs { get { return _RunJavaScriptAlertPanel; } }
-        public override void RunJavaScriptAlertPanel(WebKit.WKWebView webView, string message, WebKit.WKFrameInfo frame, System.Action completionHandler)
-        {
-            _RunJavaScriptAlertPanel.OnNext(Tuple.Create(webView, message, frame, completionHandler));
-        }
-
-        readonly SingleAwaitSubject<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action<System.Boolean>>> _RunJavaScriptConfirmPanel = new SingleAwaitSubject<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action<System.Boolean>>>();
-        public IObservable<Tuple<WebKit.WKWebView, string, WebKit.WKFrameInfo, System.Action<System.Boolean>>> RunJavaScriptConfirmPanelObs { get { return _RunJavaScriptConfirmPanel; } }
-        public override void RunJavaScriptConfirmPanel(WebKit.WKWebView webView, string message, WebKit.WKFrameInfo frame, System.Action<System.Boolean> completionHandler)
-        {
-            _RunJavaScriptConfirmPanel.OnNext(Tuple.Create(webView, message, frame, completionHandler));
-        }
-
-        readonly SingleAwaitSubject<Tuple<WebKit.WKWebView, string, string, WebKit.WKFrameInfo, System.Action<string>>> _RunJavaScriptTextInputPanel = new SingleAwaitSubject<Tuple<WebKit.WKWebView, string, string, WebKit.WKFrameInfo, System.Action<string>>>();
-        public IObservable<Tuple<WebKit.WKWebView, string, string, WebKit.WKFrameInfo, System.Action<string>>> RunJavaScriptTextInputPanelObs { get { return _RunJavaScriptTextInputPanel; } }
-        public override void RunJavaScriptTextInputPanel(WebKit.WKWebView webView, string prompt, string defaultText, WebKit.WKFrameInfo frame, System.Action<string> completionHandler)
-        {
-            _RunJavaScriptTextInputPanel.OnNext(Tuple.Create(webView, prompt, defaultText, frame, completionHandler));
         }
 
     }
